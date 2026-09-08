@@ -1,0 +1,17 @@
+**/bin/
+**/obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.dll
+*.exe
+*.pdb
+*.log
+*.zip
+stardewvalley.targets
+Saves/
+save-backups/
+.env
+.env.*
+!.env.example
