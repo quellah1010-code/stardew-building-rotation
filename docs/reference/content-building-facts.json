@@ -1,0 +1,1665 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "uploadedName": "Content (unpacked).zip",
+    "archiveSha256": "0ed623c117ef23cd98b0c0c14fe616973ea14ea757fb443a49eed7572f18528d",
+    "buildingsJsonSha256": "d53f2c590d249d8cb8b6da73c3aeff40d697f5a19c2fc12e3479293cbc44fd20",
+    "buildingCount": 25,
+    "gameVersion": null,
+    "runtimePatchedDataVerified": false
+  },
+  "buildings": {
+    "Junimo Hut": {
+      "Size": {
+        "X": 3,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Junimo Hut",
+        "pngSize": {
+          "Width": 256,
+          "Height": 64
+        },
+        "pngSha256": "3682ef588240ead104440aa5efcb6e15a68cab0748cb96b685211cc9d7ec9b6b",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Earth Obelisk": {
+      "Size": {
+        "X": 3,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Earth Obelisk",
+        "pngSize": {
+          "Width": 48,
+          "Height": 128
+        },
+        "pngSha256": "b83fa981cf1ccdfc8ba461cbef31eadbefbbed81f3c89fa8ebfc9595f8b9b3ec",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Water Obelisk": {
+      "Size": {
+        "X": 3,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Water Obelisk",
+        "pngSize": {
+          "Width": 48,
+          "Height": 128
+        },
+        "pngSha256": "0d42d6c22048e3c35c2c0e6120a7703d86a3c6886b3ca812c4877f7aa5c458d3",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Desert Obelisk": {
+      "Size": {
+        "X": 3,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Desert Obelisk",
+        "pngSize": {
+          "Width": 48,
+          "Height": 128
+        },
+        "pngSha256": "029ce3eb06d752db55648ac44868e15dd39d8bdb74b422da79585356128da280",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Island Obelisk": {
+      "Size": {
+        "X": 3,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Island Obelisk",
+        "pngSize": {
+          "Width": 48,
+          "Height": 128
+        },
+        "pngSha256": "462ce93958df1429859a42b5653a231f5a00130f3c2345dbe2d74fdc3ffd6940",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Gold Clock": {
+      "Size": {
+        "X": 3,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Gold Clock",
+        "pngSize": {
+          "Width": 48,
+          "Height": 80
+        },
+        "pngSha256": "08f3423115dd6b76577e666f5fad137b6af726410d81860c0e552faba14c5f95",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Coop": {
+      "Size": {
+        "X": 6,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": 1,
+        "Y": 2
+      },
+      "AnimalDoor": {
+        "X": 2,
+        "Y": 2,
+        "Width": 1,
+        "Height": 1
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Coop",
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Coop",
+        "pngSize": {
+          "Width": 96,
+          "Height": 128
+        },
+        "pngSha256": "8d4535e8f84d00e14c8c40848b6bfc93b5d11bcffc03198edbd1968441b082e1",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 96,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_AnimalDoor",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 16,
+              "Height": 16
+            },
+            "DrawPosition": "32, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -13
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open",
+            "SourceRect": {
+              "X": 16,
+              "Y": 112,
+              "Width": 16,
+              "Height": 16
+            },
+            "DrawPosition": "32, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Barn": {
+      "Size": {
+        "X": 7,
+        "Y": 4
+      },
+      "HumanDoor": {
+        "X": 1,
+        "Y": 3
+      },
+      "AnimalDoor": {
+        "X": 3,
+        "Y": 3,
+        "Width": 2,
+        "Height": 1
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Barn",
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Barn",
+        "pngSize": {
+          "Width": 112,
+          "Height": 128
+        },
+        "pngSha256": "f95d5b19ce1f16581afba7571a6a5f4fcbfc0d30bb14a6b29af865bcdcfa0d0b",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 112,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_AnimalDoor_Bottom",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "48, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -19
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Top",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 32,
+              "Height": 12
+            },
+            "DrawPosition": "48, 84",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -19
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open_Top",
+            "SourceRect": {
+              "X": 32,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "48, 80",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open_Bottom",
+            "SourceRect": {
+              "X": 64,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "48, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Well": {
+      "Size": {
+        "X": 3,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Well",
+        "pngSize": {
+          "Width": 48,
+          "Height": 80
+        },
+        "pngSha256": "5502c456df5f281860f3a6ab90307ee284428cd5d8cd475bd95654880f3fddcc",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Silo": {
+      "Size": {
+        "X": 3,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Silo",
+        "pngSize": {
+          "Width": 48,
+          "Height": 128
+        },
+        "pngSha256": "7cb92b5b4312b6c1df6e533ba585b559e46770fef1b915f87fc92f5335a19e18",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Mill": {
+      "Size": {
+        "X": 4,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Mill",
+        "pngSize": {
+          "Width": 224,
+          "Height": 128
+        },
+        "pngSha256": "afa3ad92238aee09f649e48e45326805a8d8de72ca195df7fb8a293297376004",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 64,
+          "Height": 128
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_WindSails",
+            "SourceRect": {
+              "X": 64,
+              "Y": 0,
+              "Width": 32,
+              "Height": 32
+            },
+            "DrawPosition": "8, 1",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          },
+          {
+            "Id": "Default_Shaft",
+            "SourceRect": {
+              "X": 64,
+              "Y": 73,
+              "Width": 21,
+              "Height": 7
+            },
+            "DrawPosition": "13, 70",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Shed": {
+      "Size": {
+        "X": 7,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": 3,
+        "Y": 2
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Shed",
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Shed",
+        "pngSize": {
+          "Width": 112,
+          "Height": 128
+        },
+        "pngSha256": "c4f4c8150b14138e74996633b30b18825d6ed3ae803f900ccd59fbd4f563e9be",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Fish Pond": {
+      "Size": {
+        "X": 5,
+        "Y": 5
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Fish Pond",
+        "pngSize": {
+          "Width": 160,
+          "Height": 176
+        },
+        "pngSha256": "9b88582bac8894d459a217212c2eaf97b449c538e5892512d087bfe557080ffc",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Cabin": {
+      "Size": {
+        "X": 5,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": 2,
+        "Y": 1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "FarmHouse",
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "explicit",
+        "normalizedRows": [
+          "XXXXX",
+          "XXXXX",
+          "OOOOX"
+        ],
+        "rowLengths": [
+          5,
+          5,
+          5
+        ],
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Stone Cabin",
+        "pngSize": {
+          "Width": 240,
+          "Height": 112
+        },
+        "pngSha256": "38d8f47867b54287380811f40721f0652791d4db1523f1299a16c0f98484afdc",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 80,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 1.0,
+        "DrawLayers": []
+      }
+    },
+    "Pet Bowl": {
+      "Size": {
+        "X": 2,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "explicit",
+        "normalizedRows": [
+          "OX",
+          "OO"
+        ],
+        "rowLengths": [
+          2,
+          2
+        ],
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Pet Bowl",
+        "pngSize": {
+          "Width": 96,
+          "Height": 128
+        },
+        "pngSha256": "dcc9d5c95a1663e98b5b741bfd0b292223793c5cd295f91add2d1307d3468697",
+        "SourceRect": {
+          "X": 32,
+          "Y": 0,
+          "Width": 32,
+          "Height": 32
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 32
+        },
+        "SortTileOffset": 1.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_Background",
+            "SourceRect": {
+              "X": 0,
+              "Y": 0,
+              "Width": 32,
+              "Height": 32
+            },
+            "DrawPosition": "0, 0",
+            "DrawInBackground": true,
+            "SortTileOffset": 0.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Stable": {
+      "Size": {
+        "X": 4,
+        "Y": 2
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "explicit",
+        "normalizedRows": [
+          "XXXX",
+          "XOOX"
+        ],
+        "rowLengths": [
+          4,
+          4
+        ],
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Stable",
+        "pngSize": {
+          "Width": 64,
+          "Height": 96
+        },
+        "pngSha256": "09fa072d073cb856b3efe98e62636524c80b2328b939a93f7494518c784c9f8f",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 1.0,
+        "DrawLayers": []
+      }
+    },
+    "Slime Hutch": {
+      "Size": {
+        "X": 7,
+        "Y": 4
+      },
+      "HumanDoor": {
+        "X": 3,
+        "Y": 3
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "SlimeHutch",
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Slime Hutch",
+        "pngSize": {
+          "Width": 112,
+          "Height": 112
+        },
+        "pngSha256": "3862ddd32fd02e1ea1c8e1bf115da4f069d5e7d105bbe028127516b5ad5fc21d",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 112,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Big Coop": {
+      "Size": {
+        "X": 6,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": 1,
+        "Y": 2
+      },
+      "AnimalDoor": {
+        "X": 2,
+        "Y": 2,
+        "Width": 1,
+        "Height": 1
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Coop2",
+      "BuildingToUpgrade": "Coop",
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Big Coop",
+        "pngSize": {
+          "Width": 96,
+          "Height": 128
+        },
+        "pngSha256": "6b7fc5b41558e3fad2ea28a31cc391a4ea18297e07295d236bb25b29f1b0a49a",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 96,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_AnimalDoor",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 16,
+              "Height": 16
+            },
+            "DrawPosition": "32, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -13
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open",
+            "SourceRect": {
+              "X": 16,
+              "Y": 112,
+              "Width": 16,
+              "Height": 16
+            },
+            "DrawPosition": "32, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Deluxe Coop": {
+      "Size": {
+        "X": 6,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": 1,
+        "Y": 2
+      },
+      "AnimalDoor": {
+        "X": 2,
+        "Y": 2,
+        "Width": 1,
+        "Height": 1
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Coop3",
+      "BuildingToUpgrade": "Big Coop",
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Deluxe Coop",
+        "pngSize": {
+          "Width": 96,
+          "Height": 128
+        },
+        "pngSha256": "8c8c3ca33e4419ad59cc1fea7a6c3604f13b8b68080a208a86c151e56489077e",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 96,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_AnimalDoor",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 16,
+              "Height": 16
+            },
+            "DrawPosition": "32, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -13
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open",
+            "SourceRect": {
+              "X": 16,
+              "Y": 112,
+              "Width": 16,
+              "Height": 16
+            },
+            "DrawPosition": "32, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Big Barn": {
+      "Size": {
+        "X": 7,
+        "Y": 4
+      },
+      "HumanDoor": {
+        "X": 1,
+        "Y": 3
+      },
+      "AnimalDoor": {
+        "X": 4,
+        "Y": 3,
+        "Width": 2,
+        "Height": 1
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Barn2",
+      "BuildingToUpgrade": "Barn",
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Big Barn",
+        "pngSize": {
+          "Width": 112,
+          "Height": 128
+        },
+        "pngSha256": "36c457c351e070bc91566ec3272b166ab7529a2e157688ab205e1c2c7770e586",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 112,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_AnimalDoor_Bottom",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "64, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -19
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Top",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 32,
+              "Height": 12
+            },
+            "DrawPosition": "64, 84",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -19
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open_Top",
+            "SourceRect": {
+              "X": 32,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "64, 80",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open_Bottom",
+            "SourceRect": {
+              "X": 64,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "64, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Deluxe Barn": {
+      "Size": {
+        "X": 7,
+        "Y": 4
+      },
+      "HumanDoor": {
+        "X": 1,
+        "Y": 3
+      },
+      "AnimalDoor": {
+        "X": 4,
+        "Y": 3,
+        "Width": 2,
+        "Height": 1
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Barn3",
+      "BuildingToUpgrade": "Big Barn",
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Deluxe Barn",
+        "pngSize": {
+          "Width": 112,
+          "Height": 128
+        },
+        "pngSha256": "a2d13d71d8ce869395f251b2bac0ffa5bf16bde3056dbc92f995f087ce8d4dce",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 112,
+          "Height": 112
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_AnimalDoor_Bottom",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "64, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -19
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Top",
+            "SourceRect": {
+              "X": 0,
+              "Y": 112,
+              "Width": 32,
+              "Height": 12
+            },
+            "DrawPosition": "64, 84",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.02,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": -19
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open_Top",
+            "SourceRect": {
+              "X": 32,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "64, 80",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          },
+          {
+            "Id": "Default_AnimalDoor_Open_Bottom",
+            "SourceRect": {
+              "X": 64,
+              "Y": 112,
+              "Width": 32,
+              "Height": 16
+            },
+            "DrawPosition": "64, 96",
+            "DrawInBackground": false,
+            "SortTileOffset": 1.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Big Shed": {
+      "Size": {
+        "X": 7,
+        "Y": 3
+      },
+      "HumanDoor": {
+        "X": 3,
+        "Y": 2
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": "Shed2",
+      "BuildingToUpgrade": "Shed",
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Big Shed",
+        "pngSize": {
+          "Width": 112,
+          "Height": 128
+        },
+        "pngSha256": "cac9c9fc6caf60950e66ee79be317a95b88fc4c30061b1fe120bf9604d79750d",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Shipping Bin": {
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HumanDoor": {
+        "X": -1,
+        "Y": -1
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": null,
+      "AdditionalTilePropertyRadius": 0,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Shipping Bin",
+        "pngSize": {
+          "Width": 32,
+          "Height": 32
+        },
+        "pngSha256": "78d738f6bb11c011138dcfbcd83698810fc890874c8bb48e0f1d799f860707dd",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 0,
+          "Height": 0
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    },
+    "Farmhouse": {
+      "Size": {
+        "X": 9,
+        "Y": 5
+      },
+      "HumanDoor": {
+        "X": 5,
+        "Y": 2
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": [
+        {
+          "TileArea": {
+            "X": 9,
+            "Y": 4,
+            "Width": 1,
+            "Height": 1
+          },
+          "OnlyNeedsToBePassable": false
+        },
+        {
+          "TileArea": {
+            "X": 5,
+            "Y": 5,
+            "Width": 1,
+            "Height": 1
+          },
+          "OnlyNeedsToBePassable": true
+        }
+      ],
+      "AdditionalTilePropertyRadius": 1,
+      "IndoorMap": null,
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "explicit",
+        "normalizedRows": [
+          "XXXXXXXXX",
+          "XXXXXXXXX",
+          "XXXXXXXXX",
+          "XOOOOOOOX",
+          "XXXXOOOXXX"
+        ],
+        "rowLengths": [
+          9,
+          9,
+          9,
+          9,
+          10
+        ],
+        "blockedOutsideFootprint": [
+          {
+            "X": 9,
+            "Y": 4
+          }
+        ]
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\houses",
+        "pngSize": {
+          "Width": 272,
+          "Height": 432
+        },
+        "pngSha256": "6cee3034a269383cf60444124003cfc060af4c61e0d2013d41badccd10cfd73f",
+        "SourceRect": {
+          "X": 0,
+          "Y": 0,
+          "Width": 160,
+          "Height": 144
+        },
+        "DrawOffset": "-16, 2",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 2.0,
+        "DrawLayers": [
+          {
+            "Id": "Default_Mailbox",
+            "SourceRect": {
+              "X": 0,
+              "Y": 0,
+              "Width": 16,
+              "Height": 32
+            },
+            "DrawPosition": "146, 112",
+            "DrawInBackground": false,
+            "SortTileOffset": 0.0,
+            "AnimalDoorOffset": {
+              "X": 0,
+              "Y": 0
+            }
+          }
+        ]
+      }
+    },
+    "Greenhouse": {
+      "Size": {
+        "X": 7,
+        "Y": 6
+      },
+      "HumanDoor": {
+        "X": 3,
+        "Y": 5
+      },
+      "AnimalDoor": {
+        "X": -1,
+        "Y": -1,
+        "Width": 0,
+        "Height": 0
+      },
+      "AdditionalPlacementTiles": [
+        {
+          "TileArea": {
+            "X": 2,
+            "Y": 6,
+            "Width": 3,
+            "Height": 2
+          },
+          "OnlyNeedsToBePassable": true
+        }
+      ],
+      "AdditionalTilePropertyRadius": 2,
+      "IndoorMap": "Greenhouse",
+      "BuildingToUpgrade": null,
+      "Collision": {
+        "mode": "solid",
+        "normalizedRows": null,
+        "rowLengths": null,
+        "blockedOutsideFootprint": []
+      },
+      "Sprite": {
+        "textureAsset": "Buildings\\Greenhouse",
+        "pngSize": {
+          "Width": 240,
+          "Height": 320
+        },
+        "pngSha256": "e2b297f266c76f27896611d061b36ca41331dae6343dc413ae35ac507e3ed7b8",
+        "SourceRect": {
+          "X": 0,
+          "Y": 160,
+          "Width": 112,
+          "Height": 160
+        },
+        "DrawOffset": "0, 0",
+        "SeasonOffset": {
+          "X": 0,
+          "Y": 0
+        },
+        "SortTileOffset": 0.0,
+        "DrawLayers": []
+      }
+    }
+  },
+  "maps": {
+    "Barn": {
+      "width": 18,
+      "height": 15,
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "rawWarpProperty": "11 15 Farm 14 11",
+      "sha256": "8e817682d284388a2cb5bf33602977a5c8f9b6f157d3bb21071fdb4fc76ee10c"
+    },
+    "Barn2": {
+      "width": 22,
+      "height": 15,
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "rawWarpProperty": "11 15 Farm 14 11",
+      "sha256": "b7192b0cdf6b60ffbd05db96841fed1b1e12893d2bd0e1da1ebdb5dff645e63e"
+    },
+    "Barn3": {
+      "width": 25,
+      "height": 15,
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "rawWarpProperty": "11 15 Farm 14 11",
+      "sha256": "11cd99f03797c24b0ac6142970198fba3aaf6b8ec11dbcad45c2984d437ab66d"
+    },
+    "Shed": {
+      "width": 13,
+      "height": 14,
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "rawWarpProperty": "6 14 Farm 21 22",
+      "sha256": "60aaf39512ac7555033c2e88e30985e7eeca570ccfd74c7166330474b71bf71f"
+    },
+    "Shed2": {
+      "width": 19,
+      "height": 17,
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "rawWarpProperty": "9 17 Farm 21 22",
+      "sha256": "4fa8649629edd4908825832bcc10ca66b26cdaff93ce24a334af43b3614cc83b"
+    },
+    "Farm": {
+      "width": 80,
+      "height": 65,
+      "tileWidth": 16,
+      "tileHeight": 16,
+      "rawWarpProperty": "80 15 BusStop 11 23 80 18 BusStop 11 24 80 16 BusStop 11 23 80 17 BusStop 11 23 40 65 Forest 68 0 41 65 Forest 68 0 42 65 Forest 68 0 40 -1 Backwoods 14 39 41 -1 Backwoods 14 39 34 5 FarmCave 8 11",
+      "sha256": "7f6e81139ea460ae7d86f5757619d34f326fd5b28d02dbd5c468de9769c454a0"
+    }
+  }
+}

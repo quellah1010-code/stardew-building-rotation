@@ -15,6 +15,7 @@
 - [原型接入与验证计划](docs/development.md)：当前能做什么、下一步验证什么，以及参考 mod 的接入风险。
 - [建筑碰撞与人物寻路调查](docs/collision-and-pathfinding.md)：已查到的通行数据、角色碰撞与寻路差异，以及四向入口仍需接入的行为。
 - [碰撞布局与门区核心接口](docs/layout-core.md)：逐格阻挡、框外区域、多格门、实例隔离与经外部检查的出门落点。
+- [上传 Content 的核对记录](docs/content-audit.md)：已取得的真实建筑字段与贴图尺寸、数据映射差异，以及农场规划器参考。
 - [继续开发时从这里接](docs/continuation.md)：本轮完成情况、验证方式和下一步真实依赖。
 - `src/BuildingRotation.Core`：四向格子／区域坐标、逐格碰撞布局、多格门与门外落点、编辑草稿，以及由外部移动状态驱动的鼠标手势入口。
 - `tests/BuildingRotation.Core.SelfTest`：无第三方测试包的 C# 自检程序，覆盖几何、取消、非法放置、移动模式切换与防误触场景；不是游戏内测试。
