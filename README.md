@@ -16,8 +16,12 @@
 - [建筑碰撞与人物寻路调查](docs/collision-and-pathfinding.md)：已查到的通行数据、角色碰撞与寻路差异，以及四向入口仍需接入的行为。
 - [碰撞布局与门区核心接口](docs/layout-core.md)：逐格阻挡、框外区域、多格门、实例隔离与经外部检查的出门落点。
 - [上传 Content 的核对记录](docs/content-audit.md)：已取得的真实建筑字段与贴图尺寸、数据映射差异，以及农场规划器参考。
+- [真实数据读取与映射](docs/content-mapping.md)：ZIP／摘要读取、带类型的放置区域、明确拒绝的布局，以及复现命令。
+- [四向素材对齐底稿](docs/art/README.md)：Barn／Shed／Stable 的 12 方向地面、门口与画布锚点；尚非成品像素画。
 - [继续开发时从这里接](docs/continuation.md)：本轮完成情况、验证方式和下一步真实依赖。
 - `src/BuildingRotation.Core`：四向格子／区域坐标、逐格碰撞布局、多格门与门外落点、编辑草稿，以及由外部移动状态驱动的鼠标手势入口。
+- `src/BuildingRotation.Data`：不可变的真实字段快照、原始碰撞文本规范化、布局映射与素材坐标模型。
+- `tools/BuildingRotation.ContentAudit`：读取上传 ZIP 或事实摘要的离线检查工具，不是游戏入口。
 - `tests/BuildingRotation.Core.SelfTest`：无第三方测试包的 C# 自检程序，覆盖几何、取消、非法放置、移动模式切换与防误触场景；不是游戏内测试。
 
 ## 运行基础自检
@@ -28,9 +32,9 @@
 dotnet run --project tests/BuildingRotation.Core.SelfTest/BuildingRotation.Core.SelfTest.csproj
 ```
 
-核心库暂用 `netstandard2.1`，自检程序用 `net8.0`。它们不引用游戏程序集，也不读写游戏存档。实际 SMAPI 工程和版本依赖将在确认本机游戏环境后添加。
+核心库和数据层使用 `netstandard2.1`，自检及离线检查工具用 `net8.0`。它们不引用游戏程序集，也不读写存档。实际 SMAPI 工程和版本依赖仍待游戏环境核验。
 
-已使用 .NET SDK 8.0.424 随附的 Roslyn 直接编译当前 C# 源码，并在 .NET 8.0.30 执行自检：**63/63 通过**。当前环境的进程信息接口不兼容标准 `dotnet` CLI / MSBuild 构建，完整项目构建链仍待正常开发环境复核；详见[验证记录](docs/development.md#验证记录)。游戏内兼容性尚未验证。
+2026-09-09 已完成 .NET SDK 8.0.424 的标准 MSBuild 构建：零警告、零错误。无需游戏资产的自检 **88/88 通过**；加 `-- --content-zip /path/to/Content-unpacked.zip` 后验证原始上传包，**89/89 通过**。直接 Roslyn 编译也通过。CLI 启动仍有间歇性环境限制，可直接运行标准构建产物，详见[验证记录](docs/development.md#验证记录)。这仍不代表实机兼容或可安装游玩。
 
 ## 参考与代码边界
 

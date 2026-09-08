@@ -10,12 +10,16 @@ namespace BuildingRotation.Core
         public CollisionMask Collision { get; }
         public IReadOnlyDictionary<string, DoorRegion> SourceDoors { get; }
         public IReadOnlyList<TileRectangle> SourceClearance { get; }
+        public IReadOnlyList<PlacementRequirement> SourcePlacementRequirements { get; }
+        public int AdditionalTilePropertyRadius { get; }
         private readonly Dictionary<Facing, IReadOnlyDictionary<string, DoorRegion>> doorOverrides;
 
         public BuildingLayoutDefinition(CollisionMask collision,
             IReadOnlyDictionary<string, DoorRegion>? sourceDoors = null,
             IEnumerable<TileRectangle>? sourceClearance = null,
-            IReadOnlyDictionary<Facing, IReadOnlyDictionary<string, DoorRegion>>? orientedDoorOverrides = null)
+            IReadOnlyDictionary<Facing, IReadOnlyDictionary<string, DoorRegion>>? orientedDoorOverrides = null,
+            IEnumerable<PlacementRequirement>? sourcePlacementRequirements = null,
+            int additionalTilePropertyRadius = 0)
         {
             Collision = collision ?? throw new ArgumentNullException(nameof(collision));
             SourceDoors = CopyDoors(sourceDoors ?? new Dictionary<string, DoorRegion>());
@@ -24,6 +28,15 @@ namespace BuildingRotation.Core
                 foreach (TileRectangle area in sourceClearance)
                     clearance.Add(area ?? throw new ArgumentException("Clearance areas cannot be null.", nameof(sourceClearance)));
             SourceClearance = clearance.AsReadOnly();
+
+            if (additionalTilePropertyRadius < 0)
+                throw new ArgumentOutOfRangeException(nameof(additionalTilePropertyRadius));
+            AdditionalTilePropertyRadius = additionalTilePropertyRadius;
+            var requirements = new List<PlacementRequirement>();
+            if (sourcePlacementRequirements != null)
+                foreach (var requirement in sourcePlacementRequirements)
+                    requirements.Add(requirement ?? throw new ArgumentException("Placement requirements cannot be null.", nameof(sourcePlacementRequirements)));
+            SourcePlacementRequirements = requirements.AsReadOnly();
 
             doorOverrides = new Dictionary<Facing, IReadOnlyDictionary<string, DoorRegion>>();
             if (orientedDoorOverrides != null)

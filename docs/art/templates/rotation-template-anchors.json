@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "sourceBuildingsJsonSha256": "d53f2c590d249d8cb8b6da73c3aeff40d697f5a19c2fc12e3479293cbc44fd20",
+  "status": "ground-plane-guides-only; no production raster or verified game draw transform",
+  "canvasPolicy": "16 source pixels per tile; fixed upper margin inferred from the south source crop; redraw each elevation",
+  "layers": [
+    "ground-guide",
+    "shadow",
+    "base-outline",
+    "upper-occluder",
+    "human-door-and-sign",
+    "animal-door-moving-parts"
+  ],
+  "revealPolicy": "north only; upper-occluder can fade; door, sign and base stay legible; parameters not selected",
+  "buildings": [
+    {
+      "id": "Barn",
+      "textureAsset": "Buildings\\Barn",
+      "png": {
+        "Width": 112,
+        "Height": 128,
+        "Sha256": "f95d5b19ce1f16581afba7571a6a5f4fcbfc0d30bb14a6b29af865bcdcfa0d0b"
+      },
+      "sourceRegion": {
+        "X": 0,
+        "Y": 0,
+        "Width": 112,
+        "Height": 112,
+        "Right": 112,
+        "Bottom": 112
+      },
+      "rawDrawOffset": {
+        "X": 0,
+        "Y": 0
+      },
+      "rawSortTileOffset": 0,
+      "sourceFrameLayers": [
+        {
+          "Id": "Default_AnimalDoor_Bottom",
+          "Texture": null,
+          "SourceRect": {
+            "X": 0,
+            "Y": 112,
+            "Width": 32,
+            "Height": 16,
+            "IsAllZero": false
+          },
+          "DrawPosition": {
+            "X": 48,
+            "Y": 96
+          },
+          "AnimalDoorOffset": {
+            "X": 0,
+            "Y": -19
+          },
+          "DrawInBackground": false,
+          "SortTileOffset": 0.02
+        },
+        {
+          "Id": "Default_AnimalDoor_Top",
+          "Texture": null,
+          "SourceRect": {
+            "X": 0,
+            "Y": 112,
+            "Width": 32,
+            "Height": 12,
+            "IsAllZero": false
+          },
+          "DrawPosition": {
+            "X": 48,
+            "Y": 84
+          },
+          "AnimalDoorOffset": {
+            "X": 0,
+            "Y": -19
+          },
+          "DrawInBackground": false,
+          "SortTileOffset": 0.02
+        },
+        {
+          "Id": "Default_AnimalDoor_Open_Top",
+          "Texture": null,
+          "SourceRect": {
+            "X": 32,
+            "Y": 112,
+            "Width": 32,
+            "Height": 16,
+            "IsAllZero": false
+          },
+          "DrawPosition": {
+            "X": 48,
+            "Y": 80
+          },
+          "AnimalDoorOffset": {
+            "X": 0,
+            "Y": 0
+          },
+          "DrawInBackground": false,
+          "SortTileOffset": 1
+        },
+        {
+          "Id": "Default_AnimalDoor_Open_Bottom",
+          "Texture": null,
+          "SourceRect": {
+            "X": 64,
+            "Y": 112,
+            "Width": 32,
+            "Height": 16,
+            "IsAllZero": false
+          },
+          "DrawPosition": {
+            "X": 48,
+            "Y": 96
+          },
+          "AnimalDoorOffset": {
+            "X": 0,
+            "Y": 0
+          },
+          "DrawInBackground": false,
+          "SortTileOffset": 1
+        }
+      ],
+      "orientations": [
+        {
+          "Facing": "South",
+          "TilePixels": 16,
+          "CanvasWidth": 112,
+          "CanvasHeight": 112,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 48
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 48,
+            "Width": 112,
+            "Height": 64,
+            "Right": 112,
+            "Bottom": 112
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 16,
+                "Y": 96,
+                "Width": 16,
+                "Height": 16,
+                "Right": 32,
+                "Bottom": 112
+              },
+              "Approach": {
+                "X": 16,
+                "Y": 112,
+                "Width": 16,
+                "Height": 16,
+                "Right": 32,
+                "Bottom": 128
+              },
+              "Threshold": {
+                "X": 24,
+                "Y": 112
+              },
+              "Direction": "South"
+            },
+            "animal": {
+              "Area": {
+                "X": 48,
+                "Y": 96,
+                "Width": 32,
+                "Height": 16,
+                "Right": 80,
+                "Bottom": 112
+              },
+              "Approach": {
+                "X": 48,
+                "Y": 112,
+                "Width": 32,
+                "Height": 16,
+                "Right": 80,
+                "Bottom": 128
+              },
+              "Threshold": {
+                "X": 64,
+                "Y": 112
+              },
+              "Direction": "South"
+            }
+          }
+        },
+        {
+          "Facing": "East",
+          "TilePixels": 16,
+          "CanvasWidth": 64,
+          "CanvasHeight": 160,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 48
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 48,
+            "Width": 64,
+            "Height": 112,
+            "Right": 64,
+            "Bottom": 160
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 48,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 144
+              },
+              "Approach": {
+                "X": 64,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 80,
+                "Bottom": 144
+              },
+              "Threshold": {
+                "X": 64,
+                "Y": 136
+              },
+              "Direction": "East"
+            },
+            "animal": {
+              "Area": {
+                "X": 48,
+                "Y": 80,
+                "Width": 16,
+                "Height": 32,
+                "Right": 64,
+                "Bottom": 112
+              },
+              "Approach": {
+                "X": 64,
+                "Y": 80,
+                "Width": 16,
+                "Height": 32,
+                "Right": 80,
+                "Bottom": 112
+              },
+              "Threshold": {
+                "X": 64,
+                "Y": 96
+              },
+              "Direction": "East"
+            }
+          }
+        },
+        {
+          "Facing": "North",
+          "TilePixels": 16,
+          "CanvasWidth": 112,
+          "CanvasHeight": 112,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 48
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 48,
+            "Width": 112,
+            "Height": 64,
+            "Right": 112,
+            "Bottom": 112
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 80,
+                "Y": 48,
+                "Width": 16,
+                "Height": 16,
+                "Right": 96,
+                "Bottom": 64
+              },
+              "Approach": {
+                "X": 80,
+                "Y": 32,
+                "Width": 16,
+                "Height": 16,
+                "Right": 96,
+                "Bottom": 48
+              },
+              "Threshold": {
+                "X": 88,
+                "Y": 48
+              },
+              "Direction": "North"
+            },
+            "animal": {
+              "Area": {
+                "X": 32,
+                "Y": 48,
+                "Width": 32,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 64
+              },
+              "Approach": {
+                "X": 32,
+                "Y": 32,
+                "Width": 32,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 48
+              },
+              "Threshold": {
+                "X": 48,
+                "Y": 48
+              },
+              "Direction": "North"
+            }
+          }
+        },
+        {
+          "Facing": "West",
+          "TilePixels": 16,
+          "CanvasWidth": 64,
+          "CanvasHeight": 160,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 48
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 48,
+            "Width": 64,
+            "Height": 112,
+            "Right": 64,
+            "Bottom": 160
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 0,
+                "Y": 64,
+                "Width": 16,
+                "Height": 16,
+                "Right": 16,
+                "Bottom": 80
+              },
+              "Approach": {
+                "X": -16,
+                "Y": 64,
+                "Width": 16,
+                "Height": 16,
+                "Right": 0,
+                "Bottom": 80
+              },
+              "Threshold": {
+                "X": 0,
+                "Y": 72
+              },
+              "Direction": "West"
+            },
+            "animal": {
+              "Area": {
+                "X": 0,
+                "Y": 96,
+                "Width": 16,
+                "Height": 32,
+                "Right": 16,
+                "Bottom": 128
+              },
+              "Approach": {
+                "X": -16,
+                "Y": 96,
+                "Width": 16,
+                "Height": 32,
+                "Right": 0,
+                "Bottom": 128
+              },
+              "Threshold": {
+                "X": 0,
+                "Y": 112
+              },
+              "Direction": "West"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Shed",
+      "textureAsset": "Buildings\\Shed",
+      "png": {
+        "Width": 112,
+        "Height": 128,
+        "Sha256": "c4f4c8150b14138e74996633b30b18825d6ed3ae803f900ccd59fbd4f563e9be"
+      },
+      "sourceRegion": {
+        "X": 0,
+        "Y": 0,
+        "Width": 112,
+        "Height": 128,
+        "Right": 112,
+        "Bottom": 128
+      },
+      "rawDrawOffset": {
+        "X": 0,
+        "Y": 0
+      },
+      "rawSortTileOffset": 0,
+      "sourceFrameLayers": [],
+      "orientations": [
+        {
+          "Facing": "South",
+          "TilePixels": 16,
+          "CanvasWidth": 112,
+          "CanvasHeight": 128,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 80
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 80,
+            "Width": 112,
+            "Height": 48,
+            "Right": 112,
+            "Bottom": 128
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 48,
+                "Y": 112,
+                "Width": 16,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 128
+              },
+              "Approach": {
+                "X": 48,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 144
+              },
+              "Threshold": {
+                "X": 56,
+                "Y": 128
+              },
+              "Direction": "South"
+            }
+          }
+        },
+        {
+          "Facing": "East",
+          "TilePixels": 16,
+          "CanvasWidth": 48,
+          "CanvasHeight": 192,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 80
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 80,
+            "Width": 48,
+            "Height": 112,
+            "Right": 48,
+            "Bottom": 192
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 32,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 48,
+                "Bottom": 144
+              },
+              "Approach": {
+                "X": 48,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 144
+              },
+              "Threshold": {
+                "X": 48,
+                "Y": 136
+              },
+              "Direction": "East"
+            }
+          }
+        },
+        {
+          "Facing": "North",
+          "TilePixels": 16,
+          "CanvasWidth": 112,
+          "CanvasHeight": 128,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 80
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 80,
+            "Width": 112,
+            "Height": 48,
+            "Right": 112,
+            "Bottom": 128
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 48,
+                "Y": 80,
+                "Width": 16,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 96
+              },
+              "Approach": {
+                "X": 48,
+                "Y": 64,
+                "Width": 16,
+                "Height": 16,
+                "Right": 64,
+                "Bottom": 80
+              },
+              "Threshold": {
+                "X": 56,
+                "Y": 80
+              },
+              "Direction": "North"
+            }
+          }
+        },
+        {
+          "Facing": "West",
+          "TilePixels": 16,
+          "CanvasWidth": 48,
+          "CanvasHeight": 192,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 80
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 80,
+            "Width": 48,
+            "Height": 112,
+            "Right": 48,
+            "Bottom": 192
+          },
+          "Doors": {
+            "human": {
+              "Area": {
+                "X": 0,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 16,
+                "Bottom": 144
+              },
+              "Approach": {
+                "X": -16,
+                "Y": 128,
+                "Width": 16,
+                "Height": 16,
+                "Right": 0,
+                "Bottom": 144
+              },
+              "Threshold": {
+                "X": 0,
+                "Y": 136
+              },
+              "Direction": "West"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Stable",
+      "textureAsset": "Buildings\\Stable",
+      "png": {
+        "Width": 64,
+        "Height": 96,
+        "Sha256": "09fa072d073cb856b3efe98e62636524c80b2328b939a93f7494518c784c9f8f"
+      },
+      "sourceRegion": {
+        "X": 0,
+        "Y": 0,
+        "Width": 64,
+        "Height": 96,
+        "Right": 64,
+        "Bottom": 96
+      },
+      "rawDrawOffset": {
+        "X": 0,
+        "Y": 0
+      },
+      "rawSortTileOffset": 1,
+      "sourceFrameLayers": [],
+      "orientations": [
+        {
+          "Facing": "South",
+          "TilePixels": 16,
+          "CanvasWidth": 64,
+          "CanvasHeight": 96,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 64
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 64,
+            "Width": 64,
+            "Height": 32,
+            "Right": 64,
+            "Bottom": 96
+          },
+          "Doors": {}
+        },
+        {
+          "Facing": "East",
+          "TilePixels": 16,
+          "CanvasWidth": 32,
+          "CanvasHeight": 128,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 64
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 64,
+            "Width": 32,
+            "Height": 64,
+            "Right": 32,
+            "Bottom": 128
+          },
+          "Doors": {}
+        },
+        {
+          "Facing": "North",
+          "TilePixels": 16,
+          "CanvasWidth": 64,
+          "CanvasHeight": 96,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 64
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 64,
+            "Width": 64,
+            "Height": 32,
+            "Right": 64,
+            "Bottom": 96
+          },
+          "Doors": {}
+        },
+        {
+          "Facing": "West",
+          "TilePixels": 16,
+          "CanvasWidth": 32,
+          "CanvasHeight": 128,
+          "GroundOrigin": {
+            "X": 0,
+            "Y": 64
+          },
+          "GroundFootprint": {
+            "X": 0,
+            "Y": 64,
+            "Width": 32,
+            "Height": 64,
+            "Right": 32,
+            "Bottom": 128
+          },
+          "Doors": {}
+        }
+      ]
+    }
+  ]
+}

@@ -11,6 +11,8 @@ namespace BuildingRotation.Core
         public Footprint Footprint { get; }
         public IReadOnlyDictionary<string, DoorRegion> LocalDoors { get; }
         public IReadOnlyList<TileRectangle> LocalClearance { get; }
+        public IReadOnlyList<PlacementRequirement> LocalPlacementRequirements { get; }
+        public int AdditionalTilePropertyRadius => Definition.AdditionalTilePropertyRadius;
 
         internal BuildingLayout(BuildingLayoutDefinition definition, PlacementPose pose)
         {
@@ -22,6 +24,10 @@ namespace BuildingRotation.Core
             foreach (TileRectangle area in definition.SourceClearance)
                 clearance.Add(definition.Collision.Footprint.TransformArea(area, pose.Direction));
             LocalClearance = clearance.AsReadOnly();
+            var requirements = new List<PlacementRequirement>();
+            foreach (var requirement in definition.SourcePlacementRequirements)
+                requirements.Add(requirement.RotateTo(definition.Collision.Footprint, pose.Direction));
+            LocalPlacementRequirements = requirements.AsReadOnly();
         }
 
         public BuildingLayout At(PlacementPose pose) => Definition.CreateLayout(pose);

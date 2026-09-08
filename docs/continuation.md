@@ -1,31 +1,35 @@
 # 继续开发时从这里接
 
-本记录对应碰撞布局和多格门核心完成后的状态。开始续做时先读取仓库最新提交和工作区修改，再核对本文；不要假定临时工作目录、SDK 或已经运行的进程会跨执行保留。
+本记录对应 2026-09-09 真实数据映射和四向素材坐标底稿完成后的状态。开始续做先读取仓库最新提交和工作区修改；不要假定临时目录、SDK 或进程会跨执行保留。
 
 ## 本轮已完成
 
-用户已授权实现路线图第 1–2 项。现已加入不可变阻挡掩码、实例布局、逆变换、框外区域、可选格子锚定、多格／内凹门、按朝向重构门的位置覆盖，以及保留角色碰撞框尺寸的候选落点计算。相关代码在 `src/BuildingRotation.Core`，合同在 [layout-core.md](layout-core.md)。
+原有碰撞布局／多格门核心和 63 项自检保留。本轮新增 `src/BuildingRotation.Data`、`tools/BuildingRotation.ContentAudit`：从上传 ZIP 或事实摘要读取真实字段，映射到不可变核心布局，并生成素材地面锚点。先读 [content-mapping.md](content-mapping.md) 和 [art/README.md](art/README.md)，不要重复实现。
 
-验证结果为 **63/63 通过**：原有 40 项全部保留，新增 `LayoutTests` 13 项和 `DoorRegionTests` 10 项。17 个核心 C# 文件按 C# 8、netstandard2.1 引用直接编译；自检按 C# 12、net8.0 引用直接编译，nullable 和警告视为错误均开启。没有执行游戏内测试，也没有完成标准 MSBuild 构建。
+验证为 **89/89 通过**：原有 63 项、16 项数据检查、9 项素材坐标检查、1 项可选原始 ZIP 全包核对。没有 ZIP 时运行 88 项。直接 Roslyn 编译和标准 MSBuild 构建均已通过；标准构建零警告、零错误，`dotnet run --no-build --no-restore` 执行成功。没有游戏内测试。
 
-随后用户已上传 `Content (unpacked).zip`，现已核对其中 25 个建筑定义、主贴图尺寸及相关室内地图元数据。先读 [content-audit.md](content-audit.md) 和 [content-building-facts.json](reference/content-building-facts.json)：普通牛棚 7×4、Shed 7×3、马厩 4×2；农舍存在框外阻挡，附加放置区带有 `OnlyNeedsToBePassable` 语义。此前测试样例的来源不变，不能改称已经使用实机数据测试。包内没有游戏／SMAPI DLL，精确游戏版本和运行时补丁签名仍未核验。
+本包 25 个定义可读，24 个能映射当前几何布局，不代表实机支持 24 种建筑。Farmhouse 的 (9,4) 框外阻挡完整保留，但核心转换明确拒绝；不能裁掉它。`OnlyNeedsToBePassable` 已进入带类型的附加放置区，四向变换不丢标志；`AdditionalTilePropertyRadius` 保留但还没驱动游戏查询。Barn／Shed／Stable 真实字段及门位测试通过，基础／升级牛棚的动物门 X 差异也已验证。
+
+已生成三种建筑共 12 方向的 SVG 地面／门区指导和锚点 JSON，保存在 `docs/art/templates`，三张预览均已检查。Barn 的 112×112 主体与 112×128 图集分开处理，Shed 的全零源区解析为整张 112×128。画布上部余量属于草稿约定，不是已确认的侧视投影；没有新产出原生分层像素画。包内仍没有游戏／SMAPI DLL，精确版本未核验。
 
 ## 接着做什么
 
-1. 从最新上传内容及已提交事实摘要继续，完成真实字段到核心的读取／映射，先验证 Barn、Shed、Stable。不要重复已完成的核心。规范化 `FromRows` 不是游戏解析器；农舍的框外阻挡不能裁掉，额外放置区的检查类型也不能丢失。暂存上传包路径为 `/workspace/scratch/0dfc15d37142/upload/01-Content-unpacked-.zip`；缓存丢失时从本会话可用附件恢复，或先以带来源哈希的摘要推进数据层。
+1. 继续 Barn 四向原生像素分层稿，以 `docs/art/templates` 的地面原点、门槛及源区为基准；背面屋顶／上墙、墙脚、真实门和标识分别处理。红屋顶概念图是 Shed，不是 Barn。生成器的草稿画布可调整，但必须相应更新明确锚点；不要把指导 SVG 当作已经画完的素材。
 2. 有真实游戏环境后，建立 SMAPI 入口并编译，再适配原版及首个确认兼容的移动流程。移动状态与鼠标输入协调尚未实现，不要因独立手势通过就标记兼容。
-3. 缺少程序集时继续数据映射与美术分层。Barn 的 PNG 总尺寸 112×128，但主体只取 112×112；Shed 红屋顶原图也已找到，不能把其 7×3 占地混作 Barn 的数据。用户提供的农场规划器线索只作交互参考，不另造网站或照搬快捷键。记录具体缺口，不假造游戏签名或实机结果。
+3. 需要扩展到 Farmhouse 时，先实现并验证框外阻挡表示与查询；当前拒绝是有意边界。素材快照仅为首帧子集，完整动画、条件、自定义图层纹理及皮肤要从实际数据补齐后再用于渲染。农场规划器仅作交互参考，不另造网站、照搬快捷键或上传用户存档。
 4. 同步 [roadmap.md](roadmap.md) 与实际提交，说明完成内容、验证方式和剩余依赖。若别的执行已更新仓库，保留并协调其改动，不能强推或覆盖。
 
 首个可玩目标仍是 PC 键鼠、单人、普通空牛棚，可先用占位图；动物出入、NPC 路径、升级、联机和全建筑素材都仍在后续范围。用户不需要替助手写代码或画图。
 
 ## 验证环境恢复
 
-正常开发环境优先执行 README 的 `dotnet run --project tests/BuildingRotation.Core.SelfTest/BuildingRotation.Core.SelfTest.csproj`。
+正常环境优先执行 README 的 `dotnet run --project tests/BuildingRotation.Core.SelfTest/BuildingRotation.Core.SelfTest.csproj`。可加 `-- --content-zip /path/to/Content-unpacked.zip` 做第 89 项全包检查。本次上传缓存路径为 `/workspace/scratch/0dfc15d37142/upload/01-Content-unpacked-.zip`；丢失时用会话可访问附件，或运行已嵌入事实摘要的 88 项测试。
 
-此前临时环境用 .NET SDK 8.0.424、运行时 8.0.30，SDK 在 `/workspace/scratch/0dfc15d37142/tooling/dotnet8`。进程信息接口使标准 CLI / MSBuild 失败，直接调用 `dotnet SDK路径/Roslyn/bincore/csc.dll @响应文件` 可用。`tooling/verification` 下的 `core.rsp` 和 `tests.rsp` 已含当前全部源码引用，随后用 `dotnet BuildingRotation.Core.SelfTest.dll` 执行。
+本轮仍用 SDK 8.0.424、运行时 8.0.30；缓存 SDK 在 `/workspace/scratch/0dfc15d37142/tooling/dotnet8`。旧并行构建／进程问题不应再视为固定阻碍：已用 `dotnet msbuild 项目 -t:Restore -m:1 -nr:false -p:RestoreSources=一个现有本地目录 -p:NuGetAudit=false` 完成仅本地引用包的恢复，然后 `dotnet build 项目 --no-restore -m:1 -nr:false -p:UseSharedCompilation=false` 成功。当前四个项目没有第三方 NuGet 包，不要把关闭审计作为未来外部依赖的默认策略。
 
-这些路径是可丢失的缓存。如果仍在，先检查响应文件是否包含最新源码；如果不在，重新使用可用的正常 SDK 构建，或重建响应文件：核心引用 `NETStandard.Library.Ref/2.1.0/ref/netstandard2.1`，自检引用 `Microsoft.NETCore.App.Ref/8.0.30/ref/net8.0` 和生成的核心 DLL，补齐项目的隐式 using，生成对应 runtimeconfig。不要把源码直接编译描述成完整工程构建成功。
+如标准构建再次受环境限制，执行 `node scripts/verify-direct.mjs /path/to/dotnet-root`，可附加 `--content-zip 路径`。脚本自动生成当前四个工程的响应文件，嵌入事实夹具；不要再复用旧的两个响应文件遗漏新项目。这种后备方式仅代表直接源码编译，本轮另有独立的标准构建成功记录。
+
+注意：复跑时 `dotnet run` 仍偶发 SDK 的 `Process.GetStat`／`StartTime` 启动异常，并未彻底修复。标准构建成功后，可直接执行 `dotnet tests/BuildingRotation.Core.SelfTest/bin/Debug/net8.0/BuildingRotation.Core.SelfTest.dll`（可附 `--content-zip 路径`）；本轮最新标准产物的 88／89 项均以此方式再确认通过。
 
 ## 继续保持的设计边界
 

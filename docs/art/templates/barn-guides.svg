@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="480" viewBox="0 0 800 300" role="img" aria-labelledby="title desc">
+<title id="title">Barn four-direction ground and doorway guides</title>
+<desc id="desc">Construction guides, not building artwork. Gray tiles block. Cyan is a human door; orange is an animal door. Door overlays do not carve collision. Dashed rectangles are one-tile approaches.</desc>
+<rect width="800" height="300" fill="#f8fafc"/><g font-family="sans-serif" fill="#0f172a">
+<text x="24" y="23" font-size="15" font-weight="bold">Barn / art alignment guides / 16 source px per tile</text>
+<g transform="translate(32 64)">
+<text x="0" y="-15" font-size="12">South / 112 x 112</text>
+<rect x="0" y="0" width="112" height="112" fill="#edf2f7" stroke="#94a3b8" stroke-dasharray="3 3"/>
+<rect x="0" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="96" width="16" height="16" fill="#0891b2" fill-opacity="0.25" stroke="#0891b2" stroke-width="1.5"/>
+<rect x="16" y="112" width="16" height="16" fill="none" stroke="#0891b2" stroke-dasharray="3 2"/>
+<circle cx="24" cy="112" r="2" fill="#0891b2"/>
+<rect x="48" y="96" width="32" height="16" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+<rect x="48" y="112" width="32" height="16" fill="none" stroke="#ea580c" stroke-dasharray="3 2"/>
+<circle cx="64" cy="112" r="2" fill="#ea580c"/>
+<circle cx="0" cy="48" r="2" fill="#111827"/>
+</g>
+<g transform="translate(232 64)">
+<text x="0" y="-15" font-size="12">East / 64 x 160</text>
+<rect x="0" y="0" width="64" height="160" fill="#edf2f7" stroke="#94a3b8" stroke-dasharray="3 3"/>
+<rect x="0" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="128" width="16" height="16" fill="#0891b2" fill-opacity="0.25" stroke="#0891b2" stroke-width="1.5"/>
+<rect x="64" y="128" width="16" height="16" fill="none" stroke="#0891b2" stroke-dasharray="3 2"/>
+<circle cx="64" cy="136" r="2" fill="#0891b2"/>
+<rect x="48" y="80" width="16" height="32" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+<rect x="64" y="80" width="16" height="32" fill="none" stroke="#ea580c" stroke-dasharray="3 2"/>
+<circle cx="64" cy="96" r="2" fill="#ea580c"/>
+<circle cx="0" cy="48" r="2" fill="#111827"/>
+</g>
+<g transform="translate(432 64)">
+<text x="0" y="-15" font-size="12">North / 112 x 112</text>
+<rect x="0" y="0" width="112" height="112" fill="#edf2f7" stroke="#94a3b8" stroke-dasharray="3 3"/>
+<rect x="0" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="64" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="96" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="80" y="48" width="16" height="16" fill="#0891b2" fill-opacity="0.25" stroke="#0891b2" stroke-width="1.5"/>
+<rect x="80" y="32" width="16" height="16" fill="none" stroke="#0891b2" stroke-dasharray="3 2"/>
+<circle cx="88" cy="48" r="2" fill="#0891b2"/>
+<rect x="32" y="48" width="32" height="16" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+<rect x="32" y="32" width="32" height="16" fill="none" stroke="#ea580c" stroke-dasharray="3 2"/>
+<circle cx="48" cy="48" r="2" fill="#ea580c"/>
+<circle cx="0" cy="48" r="2" fill="#111827"/>
+</g>
+<g transform="translate(632 64)">
+<text x="0" y="-15" font-size="12">West / 64 x 160</text>
+<rect x="0" y="0" width="64" height="160" fill="#edf2f7" stroke="#94a3b8" stroke-dasharray="3 3"/>
+<rect x="0" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="48" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="64" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="80" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="96" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="112" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="128" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="16" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="32" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="48" y="144" width="16" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="0.5"/>
+<rect x="0" y="64" width="16" height="16" fill="#0891b2" fill-opacity="0.25" stroke="#0891b2" stroke-width="1.5"/>
+<rect x="-16" y="64" width="16" height="16" fill="none" stroke="#0891b2" stroke-dasharray="3 2"/>
+<circle cx="0" cy="72" r="2" fill="#0891b2"/>
+<rect x="0" y="96" width="16" height="32" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+<rect x="-16" y="96" width="16" height="32" fill="none" stroke="#ea580c" stroke-dasharray="3 2"/>
+<circle cx="0" cy="112" r="2" fill="#ea580c"/>
+<circle cx="0" cy="48" r="2" fill="#111827"/>
+</g>
+<text x="24" y="262" font-size="11">Gray: blocked / White: open / Cyan: human door / Orange: animal door / Dot: threshold</text>
+<text x="24" y="282" font-size="11">Ground-plane guides only. Redraw the building elevations; no raster rotation. North reveal must use the real door.</text>
+</g></svg>
