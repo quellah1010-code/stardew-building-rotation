@@ -12,6 +12,7 @@
 
 - [玩法规则与待定事项](docs/design.md)：把已确认决定、工程建议和未决定参数分开。
 - [原型接入与验证计划](docs/development.md)：当前能做什么、下一步验证什么，以及参考 mod 的接入风险。
+- [建筑碰撞与人物寻路调查](docs/collision-and-pathfinding.md)：已查到的通行数据、角色碰撞与寻路差异，以及四向入口仍需接入的行为。
 - `src/BuildingRotation.Core`：四向格子坐标、占地、单格门外落点、编辑草稿，以及由外部移动状态驱动的鼠标手势入口。
 - `tests/BuildingRotation.Core.SelfTest`：无第三方测试包的 C# 自检程序，覆盖几何、取消、非法放置、移动模式切换与防误触场景；不是游戏内测试。
 
