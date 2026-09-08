@@ -1,4 +1,5 @@
 using BuildingRotation.Core;
+using static SelfTestAssert;
 
 var tests = new (string Name, Action Run)[]
 {
@@ -140,6 +141,7 @@ var tests = new (string Name, Action Run)[]
     })
 };
 
+tests = tests.Concat(EditingTests.Cases()).ToArray();
 int failed = 0;
 foreach (var test in tests)
 {
@@ -156,28 +158,3 @@ foreach (var test in tests)
 }
 Console.WriteLine($"{tests.Length - failed}/{tests.Length} checks passed.");
 return failed == 0 ? 0 : 1;
-
-static void Equal<T>(T expected, T actual)
-{
-    if (!EqualityComparer<T>.Default.Equals(expected, actual))
-        throw new InvalidOperationException($"Expected {expected}; got {actual}.");
-}
-
-static void Check(bool condition, string message)
-{
-    if (!condition)
-        throw new InvalidOperationException(message);
-}
-
-static void Throws<TException>(Action action) where TException : Exception
-{
-    try
-    {
-        action();
-    }
-    catch (TException)
-    {
-        return;
-    }
-    throw new InvalidOperationException($"Expected {typeof(TException).Name}.");
-}
