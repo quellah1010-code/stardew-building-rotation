@@ -7,6 +7,7 @@ namespace BuildingRotation.Core
 
     // Feed screen pixels and monotonic real elapsed milliseconds (not game time).
     // No default thresholds: these are prototype parameters supplied by the caller.
+    // Low-level recognizer; game input should go through MoveModeGesture's gate.
     public sealed class EditGesture
     {
         private readonly long holdMilliseconds;
@@ -81,7 +82,7 @@ namespace BuildingRotation.Core
             return intent;
         }
 
-        // Also use on cancellation, menu/location changes and loss of focus.
+        // Also use on cancellation, move-mode/location changes and loss of focus.
         // A late mouse-up after reset must not commit the discarded preview.
         public void Reset()
         {
