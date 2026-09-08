@@ -39,6 +39,6 @@
 
 按实例保存布局，不能直接修改全局同类建筑的数据对象：参考实现的 `GetData()` 从按建筑类型索引的数据表取对象，通行图还会缓存解析结果。应核验实例适配与缓存失效方式，避免转一栋牛棚却影响其他牛棚，或图已改而通行缓存仍旧。[建筑数据访问](https://github.com/Dannode36/StardewValleyDecompiled/blob/5225ef409e42a6159a82cf81200bf6eb315c9961/Stardew%20Valley/StardewValley.Buildings/Building.cs)、[通行图解析与缓存](https://github.com/Dannode36/StardewValleyDecompiled/blob/5225ef409e42a6159a82cf81200bf6eb315c9961/StardewValley.GameData/StardewValley.GameData.Buildings/BuildingData.cs)
 
-现有 `Footprint` 只计算矩形尺寸和内部格子的变换，**没有接入真实 `CollisionMap`、额外区域或 NPC 寻路**；`Doorway` 也只是单格边缘门的简化模型。当前 40 组独立自检不覆盖这些游戏功能，本次调查没有添加猜测的游戏补丁。
+后续已实现框内／框外格与区域变换、不可变逐格阻挡数据、实例布局、多格门与门前区域，以及保留角色碰撞框尺寸的候选落点计算；详见[核心接口说明](layout-core.md)。当前 63 组独立自检使用明确的样例和模拟世界检查，**仍没有接入真实 `CollisionMap`、游戏额外放置检查或 NPC 寻路**。本项目未添加猜测的运行时补丁。
 
 下一步接入时，先读取实际建筑数据并加开发用叠加显示：分别画占地边界、真正阻挡格、人物碰撞框和门前区域，用不对称的通行缺口验证四个朝向。检查放置后新旧占地是否正确释放/阻挡，门前整条路线是否可达，以及同类型多栋建筑是否互不影响。再分别验证步行、NPC 和动物进出、已有路线遇到旋转后的障碍、保存重载；这些都属于待完成的验收。

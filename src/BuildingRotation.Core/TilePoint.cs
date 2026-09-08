@@ -21,5 +21,7 @@ namespace BuildingRotation.Core
         public static bool operator !=(TilePoint left, TilePoint right) => !left.Equals(right);
         public static TilePoint operator +(TilePoint left, TilePoint right) =>
             new TilePoint(checked(left.X + right.X), checked(left.Y + right.Y));
+        public static TilePoint operator -(TilePoint left, TilePoint right) =>
+            new TilePoint(checked(left.X - right.X), checked(left.Y - right.Y));
     }
 }
