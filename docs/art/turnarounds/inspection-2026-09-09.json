@@ -3,9 +3,9 @@
   "date": "2026-09-09",
   "baseCommit": "606d32fe67788d653bccafaf9d7a5bb1f846ff47",
   "toolMode": "built-in image_gen",
-  "generatedBoardCount": 7,
-  "retainedBoardCount": 4,
-  "retainedViewCount": 16,
+  "generatedBoardCount": 8,
+  "retainedBoardCount": 5,
+  "retainedViewCount": 20,
   "structureSource": "Estimated volumes from the supplied front sprites, projected by scripts/build-turnaround-reference.py; not original game models",
   "priority": "Four-view consistency first; alpha and Reveal postponed by the user",
   "gameRuntimeTested": false,
@@ -98,12 +98,12 @@
         "Back"
       ],
       "panelCountVisuallyChecked": 4,
-      "status": "user-requested-revision-awaiting-review",
+      "status": "superseded-after-user-perspective-feedback",
       "runtimeReady": false,
       "pixelAnchorsVerified": false,
       "uniformScaleVerified": false,
       "alphaAndRevealEvaluation": "deferred-by-user",
-      "current": true,
+      "current": false,
       "sideLabelsCorrected": true,
       "selectedEditSourceSha256": "8ddbf135435f9c6794ab7d4a235c3c547700c45af8bc961d6b0c524c8092ed64",
       "selectedEditSourceFile": "image-edit-target-1f6835e2762c1b16.png",
@@ -123,7 +123,39 @@
           "yPercent": 52.9,
           "change": "Remove the distant roof strip from the left view using the right view as the standard"
         }
-      ]
+      ],
+      "supersededBy": "barn-four-views-v5.png",
+      "userFeedback": "The perspective of the two crossed boards is wrong; the X reads as upright in front of the wall."
+    },
+    {
+      "building": "Barn",
+      "file": "barn-four-views-v5.png",
+      "sha256": "abd1c0a0d1df73cc690217f8e42803ec3cca2e6b10ffbce9a1d213714b77a367",
+      "bytes": 1556456,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "user-requested-revision-awaiting-review",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": true,
+      "selectedEditSourceSha256": "7428743528ae9869ba2234f85dfc2b5325e266effee05efbbcf091935dcbfad7",
+      "selectedEditSourceFile": "barn-four-views-v4.png",
+      "requestedEdits": [
+        "Correct projection of two crossing battens so they lie flat on the small roof surface in the RIGHT panel; expose the red wall strip above."
+      ],
+      "visualInspection": "The X occupies the shallow small-roof band and no longer spans the red wall. Existing side labels and left roof silhouette retained. Fine textures were regenerated; other regions are not claimed bit-identical. Awaiting user review; no strict 3D projection validation."
     }
   ],
   "currentBoardCount": 3,
