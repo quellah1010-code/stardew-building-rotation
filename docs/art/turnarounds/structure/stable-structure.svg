@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1120" viewBox="0 0 1440 1120">
+<rect width="1440" height="1120" fill="#f2f0e9"/>
+<text x="36" y="43" font-family="sans-serif" font-size="25" fill="#302d27">Stable / fixed-camera structure reference</text>
+<text x="40" y="104" font-family="sans-serif" font-size="19" fill="#464139">FRONT / entrance faces DOWN</text>
+<polygon points="284.00,436.00 436.00,436.00 436.00,512.00 284.00,512.00" fill="#dfd9ca" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,443.60 291.60,443.60 291.60,337.20 284.00,337.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,436.76 436.00,436.76 436.00,292.36 284.00,330.36" fill="#7f552f" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="428.40,443.60 436.00,443.60 436.00,301.10 428.40,301.10" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,388.50 284.00,464.50 287.80,464.50 287.80,388.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="432.20,388.50 432.20,464.50 436.00,464.50 436.00,388.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,498.70 287.80,498.70 287.80,464.50 284.00,464.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="432.20,498.70 436.00,498.70 436.00,464.50 432.20,464.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,329.60 284.00,337.20 291.60,337.20 291.60,329.60" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,512.00 291.60,512.00 291.60,405.60 284.00,405.60" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="428.40,293.50 428.40,301.10 436.00,301.10 436.00,293.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="428.40,512.00 436.00,512.00 436.00,369.50 428.40,369.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="280.20,319.15 280.20,402.75 439.80,362.85 439.80,279.25" fill="#bb5036" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="284.00,398.00 284.00,405.60 291.60,405.60 291.60,398.00" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="280.20,410.35 439.80,370.45 439.80,362.85 280.20,402.75" fill="#9c3c2c" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="428.40,361.90 428.40,369.50 436.00,369.50 436.00,361.90" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<text x="40" y="552" font-family="sans-serif" font-size="15" fill="#6b6459">Ground 4 x 2; same scale; opaque structure</text>
+<text x="760" y="104" font-family="sans-serif" font-size="19" fill="#464139">LEFT / entrance faces LEFT</text>
+<polygon points="1042.00,360.00 1118.00,360.00 1118.00,512.00 1042.00,512.00" fill="#dfd9ca" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1042.00,350.50 1118.00,350.50 1118.00,316.30 1042.00,316.30" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1118.00,312.50 1042.00,312.50 1042.00,316.30 1118.00,316.30" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1110.40,367.60 1118.00,367.60 1118.00,261.20 1110.40,261.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1042.00,367.60 1049.60,367.60 1049.60,261.20 1042.00,261.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1118.00,253.60 1110.40,253.60 1110.40,261.20 1118.00,261.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1049.60,253.60 1042.00,253.60 1042.00,261.20 1049.60,261.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1042.00,498.70 1118.00,498.70 1118.00,464.50 1042.00,464.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1118.00,460.70 1042.00,460.70 1042.00,464.50 1118.00,464.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1121.80,243.15 1038.20,243.15 1038.20,362.85 1121.80,362.85" fill="#bb5036" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1110.40,512.00 1118.00,512.00 1118.00,369.50 1110.40,369.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1042.00,512.00 1049.60,512.00 1049.60,369.50 1042.00,369.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1118.00,361.90 1110.40,361.90 1110.40,369.50 1118.00,369.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1049.60,361.90 1042.00,361.90 1042.00,369.50 1049.60,369.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<text x="760" y="552" font-family="sans-serif" font-size="15" fill="#6b6459">Ground 2 x 4; same scale; opaque structure</text>
+<text x="40" y="604" font-family="sans-serif" font-size="19" fill="#464139">RIGHT / entrance faces RIGHT</text>
+<polygon points="322.00,860.00 398.00,860.00 398.00,1012.00 322.00,1012.00" fill="#dfd9ca" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,850.50 398.00,850.50 398.00,816.30 322.00,816.30" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,816.30 398.00,816.30 398.00,812.50 322.00,812.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,867.60 329.60,867.60 329.60,725.10 322.00,725.10" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="390.40,867.60 398.00,867.60 398.00,725.10 390.40,725.10" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,725.10 329.60,725.10 329.60,717.50 322.00,717.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="390.40,725.10 398.00,725.10 398.00,717.50 390.40,717.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,998.70 398.00,998.70 398.00,964.50 322.00,964.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,964.50 398.00,964.50 398.00,960.70 322.00,960.70" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,1012.00 329.60,1012.00 329.60,905.60 322.00,905.60" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="390.40,1012.00 398.00,1012.00 398.00,905.60 390.40,905.60" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="318.20,902.75 401.80,902.75 401.80,703.25 318.20,703.25" fill="#bb5036" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="322.00,905.60 329.60,905.60 329.60,898.00 322.00,898.00" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="390.40,905.60 398.00,905.60 398.00,898.00 390.40,898.00" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<text x="40" y="1052" font-family="sans-serif" font-size="15" fill="#6b6459">Ground 2 x 4; same scale; opaque structure</text>
+<text x="760" y="604" font-family="sans-serif" font-size="19" fill="#464139">BACK / entrance faces UP</text>
+<polygon points="1004.00,936.00 1156.00,936.00 1156.00,1012.00 1004.00,1012.00" fill="#dfd9ca" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1148.40,943.60 1156.00,943.60 1156.00,837.20 1148.40,837.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1004.00,943.60 1011.60,943.60 1011.60,801.10 1004.00,801.10" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1156.00,964.50 1156.00,888.50 1152.20,888.50 1152.20,964.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1007.80,964.50 1007.80,888.50 1004.00,888.50 1004.00,964.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1152.20,998.70 1156.00,998.70 1156.00,964.50 1152.20,964.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1004.00,998.70 1007.80,998.70 1007.80,964.50 1004.00,964.50" fill="#95683e" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1156.00,837.20 1156.00,829.60 1148.40,829.60 1148.40,837.20" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1148.40,1012.00 1156.00,1012.00 1156.00,905.60 1148.40,905.60" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1156.00,1012.00 1004.00,1012.00 1004.00,867.60 1156.00,905.60" fill="#9c7142" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1011.60,801.10 1011.60,793.50 1004.00,793.50 1004.00,801.10" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1004.00,1012.00 1011.60,1012.00 1011.60,869.50 1004.00,869.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1159.80,902.75 1159.80,819.15 1000.20,779.25 1000.20,862.85" fill="#bb5036" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1156.00,905.60 1156.00,898.00 1148.40,898.00 1148.40,905.60" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1000.20,870.45 1159.80,910.35 1159.80,902.75 1000.20,862.85" fill="#9c3c2c" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<polygon points="1011.60,869.50 1011.60,861.90 1004.00,861.90 1004.00,869.50" fill="#b68547" stroke="#4d4035" stroke-width="1.7" stroke-linejoin="round" opacity="1"/>
+<text x="760" y="1052" font-family="sans-serif" font-size="15" fill="#6b6459">Ground 4 x 2; same scale; opaque structure</text>
+<text x="36" y="1098" font-family="sans-serif" font-size="15" fill="#6b6459">Estimated volumes from the front sprite, not an original 3D model. Hidden doors stay on their original wall.</text>
+</svg>

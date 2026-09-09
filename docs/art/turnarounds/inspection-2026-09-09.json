@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-09",
+  "baseCommit": "606d32fe67788d653bccafaf9d7a5bb1f846ff47",
+  "toolMode": "built-in image_gen",
+  "generatedBoardCount": 7,
+  "retainedBoardCount": 4,
+  "retainedViewCount": 16,
+  "structureSource": "Estimated volumes from the supplied front sprites, projected by scripts/build-turnaround-reference.py; not original game models",
+  "priority": "Four-view consistency first; alpha and Reveal postponed by the user",
+  "gameRuntimeTested": false,
+  "assets": [
+    {
+      "building": "Barn",
+      "file": "barn-four-views-v3.png",
+      "sha256": "8ddbf135435f9c6794ab7d4a235c3c547700c45af8bc961d6b0c524c8092ed64",
+      "bytes": 1512715,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Left",
+        "Right",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "superseded-after-user-feedback",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": false,
+      "supersededBy": "barn-four-views-v4.png"
+    },
+    {
+      "building": "Shed",
+      "file": "shed-four-views-v1.png",
+      "sha256": "a65708275a7faed1cb0a106ed1c7d96fe02270a69a278c0fd212907f023112eb",
+      "bytes": 1304616,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Left",
+        "Right",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "awaiting-individual-user-review",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": false
+    },
+    {
+      "building": "Stable",
+      "file": "stable-four-views-v2.png",
+      "sha256": "259e658feeb683f017c7228cda50a5f74c732dc46412701b65736de3cf5bf0c7",
+      "bytes": 1133203,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Left",
+        "Right",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "awaiting-individual-user-review",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": false
+    },
+    {
+      "building": "Barn",
+      "file": "barn-four-views-v4.png",
+      "sha256": "7428743528ae9869ba2234f85dfc2b5325e266effee05efbbcf091935dcbfad7",
+      "bytes": 1537601,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "user-requested-revision-awaiting-review",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": true,
+      "selectedEditSourceSha256": "8ddbf135435f9c6794ab7d4a235c3c547700c45af8bc961d6b0c524c8092ed64",
+      "selectedEditSourceFile": "image-edit-target-1f6835e2762c1b16.png",
+      "requestedEdits": [
+        {
+          "xPercent": 81.1,
+          "yPercent": 32.7,
+          "change": "Add crossed wood members at the top of the right-side attachment"
+        },
+        {
+          "xPercent": 74.6,
+          "yPercent": 46.9,
+          "change": "Swap the side-view labels without moving panels"
+        },
+        {
+          "xPercent": 35.2,
+          "yPercent": 52.9,
+          "change": "Remove the distant roof strip from the left view using the right view as the standard"
+        }
+      ]
+    }
+  ],
+  "currentBoardCount": 3,
+  "currentViewCount": 12,
+  "panelPositionsToWorldFacing": {
+    "topLeft": "South/down",
+    "topRight": "West/left",
+    "bottomLeft": "East/right",
+    "bottomRight": "North/up"
+  },
+  "sideViewNaming": "User clarified architectural left/right sides: the old labels were reversed. Barn v4 corrects labels only; Shed and Stable remain pending individual review."
+}
