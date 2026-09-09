@@ -3,9 +3,9 @@
   "date": "2026-09-09",
   "baseCommit": "606d32fe67788d653bccafaf9d7a5bb1f846ff47",
   "toolMode": "built-in image_gen",
-  "generatedBoardCount": 13,
-  "retainedBoardCount": 7,
-  "retainedViewCount": 28,
+  "generatedBoardCount": 15,
+  "retainedBoardCount": 10,
+  "retainedViewCount": 40,
   "structureSource": "Estimated volumes from the supplied front sprites, projected by scripts/build-turnaround-reference.py; not original game models",
   "priority": "Four-view consistency first; alpha and Reveal postponed by the user",
   "gameRuntimeTested": false,
@@ -180,7 +180,7 @@
       "pixelAnchorsVerified": false,
       "uniformScaleVerified": false,
       "alphaAndRevealEvaluation": "deferred-by-user",
-      "current": true,
+      "current": false,
       "sideLabelsCorrected": true,
       "selectedEditSourceFile": "stable-four-views-v2.png",
       "selectedEditSourceSha256": "259e658feeb683f017c7228cda50a5f74c732dc46412701b65736de3cf5bf0c7",
@@ -289,7 +289,8 @@
         }
       },
       "visualInspection": "Side widths are closer to the intended ground-width proportion; side labels and horizontal roof edges checked. Original front/back identity retained, but those panels were regenerated and changed scale/detail. Strict four-view projection, all component dimensions and game anchors remain unverified.",
-      "guideLimit": "Guide is an art-review width/layout target with estimated roof and wall heights, not an official 3D model or runtime sprite canvas."
+      "guideLimit": "Guide is an art-review width/layout target with estimated roof and wall heights, not an official 3D model or runtime sprite canvas.",
+      "supersededBy": "stable-four-views-v4.png"
     },
     {
       "building": "Shed",
@@ -312,7 +313,7 @@
       "pixelAnchorsVerified": false,
       "uniformScaleVerified": false,
       "alphaAndRevealEvaluation": "deferred-by-user",
-      "current": true,
+      "current": false,
       "sideLabelsCorrected": true,
       "selectedEditSourceFile": "shed-four-views-v1.png",
       "selectedEditSourceSha256": "a65708275a7faed1cb0a106ed1c7d96fe02270a69a278c0fd212907f023112eb",
@@ -421,7 +422,190 @@
         }
       },
       "visualInspection": "Side widths are closer to the intended ground-width proportion; side labels and horizontal roof edges checked. Original front/back identity retained, but those panels were regenerated and changed scale/detail. Strict four-view projection, all component dimensions and game anchors remain unverified.",
-      "guideLimit": "Guide is an art-review width/layout target with estimated roof and wall heights, not an official 3D model or runtime sprite canvas."
+      "guideLimit": "Guide is an art-review width/layout target with estimated roof and wall heights, not an official 3D model or runtime sprite canvas.",
+      "supersededBy": "shed-four-views-v3.png"
+    },
+    {
+      "building": "Stable",
+      "file": "stable-four-views-user-selected-wide.png",
+      "sha256": "8ba5d850bc24f18dc36fc0576130bd90ad9e7409591bd33139ce6dc57ecb24ba",
+      "bytes": 1389608,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "bounds": {
+        "Front": {
+          "x": 246,
+          "y": 139,
+          "width": 346,
+          "height": 386
+        },
+        "Right": {
+          "x": 872,
+          "y": 150,
+          "width": 323,
+          "height": 377
+        },
+        "Left": {
+          "x": 266,
+          "y": 634,
+          "width": 317,
+          "height": 383
+        },
+        "Back": {
+          "x": 873,
+          "y": 629,
+          "width": 360,
+          "height": 388
+        }
+      },
+      "sideFrontRatio": {
+        "Right": 0.9335,
+        "Left": 0.9162
+      },
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": false,
+      "sideLabelsCorrected": true,
+      "status": "historical-attempt-reselected-by-user-as-edit-source",
+      "originalAttemptId": "stable-width-attempt-3",
+      "userApprovalScope": "Visible side width only; not full geometry or runtime approval",
+      "supersededBy": "stable-four-views-v4.png"
+    },
+    {
+      "building": "Stable",
+      "file": "stable-four-views-v4.png",
+      "sha256": "c618805e00e776812cb28ce9013233c8aa6ace1b2690ef5f20ac7fd6b58b3e4f",
+      "bytes": 1413815,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "bounds": {
+        "Front": {
+          "x": 246,
+          "y": 139,
+          "width": 346,
+          "height": 386
+        },
+        "Right": {
+          "x": 872,
+          "y": 150,
+          "width": 323,
+          "height": 377
+        },
+        "Left": {
+          "x": 266,
+          "y": 634,
+          "width": 318,
+          "height": 383
+        },
+        "Back": {
+          "x": 873,
+          "y": 629,
+          "width": 360,
+          "height": 389
+        }
+      },
+      "sideFrontRatio": {
+        "Right": 0.9335,
+        "Left": 0.9191
+      },
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": true,
+      "status": "single-rail-review-draft",
+      "selectedEditSource": "stable-four-views-user-selected-wide.png",
+      "selectedEditSourceSha256": "8ba5d850bc24f18dc36fc0576130bd90ad9e7409591bd33139ce6dc57ecb24ba",
+      "visualChecks": [
+        "One raised horizontal rail per side; diagonal braces and bottom sills retained",
+        "Selected wide silhouette preserved: right unchanged, left differs by 1 pixel",
+        "Front/back identity, props and roof directions retained; generated texture changes remain"
+      ],
+      "pixelIdenticalOutsideEdit": false
+    },
+    {
+      "building": "Shed",
+      "file": "shed-four-views-v3.png",
+      "sha256": "e0ebcfa8aaa329446eec23365b332aaf8be2f9f034020818b9029cb5e606ac85",
+      "bytes": 1402723,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "bounds": {
+        "Front": {
+          "x": 206,
+          "y": 66,
+          "width": 473,
+          "height": 436
+        },
+        "Right": {
+          "x": 858,
+          "y": 129,
+          "width": 325,
+          "height": 373
+        },
+        "Left": {
+          "x": 277,
+          "y": 602,
+          "width": 317,
+          "height": 392
+        },
+        "Back": {
+          "x": 773,
+          "y": 571,
+          "width": 479,
+          "height": 424
+        }
+      },
+      "sideFrontRatio": {
+        "Right": 0.6871,
+        "Left": 0.6702
+      },
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": true,
+      "status": "two-thirds-width-review-trial",
+      "selectedEditSource": "shed-four-views-v2.png",
+      "requestedSideFrontRatio": 0.6666666666666666,
+      "visualChecks": [
+        "Side ratios approximately 68.7% and 67.0%; requested visual two-thirds trial",
+        "Front width 473 pixels versus previous 474; side widths differ by 8 pixels",
+        "Generated roof and wall heights changed; not a width-only pixel edit",
+        "No added side doorway or gable; both side ridge/eave edges horizontal"
+      ],
+      "pixelIdenticalOutsideEdit": false
     }
   ],
   "currentBoardCount": 3,
@@ -446,5 +630,7 @@
     "scripts/build-turnaround-reference.py",
     "docs/art/turnarounds/prompts-2026-09-09.json",
     "docs/art/turnarounds/inspection-2026-09-09.json"
-  ]
+  ],
+  "latestFeedback": "User selected the wider Stable screenshot, requested one raised side rail while retaining its width, and asked for Shed sides at roughly two-thirds of front. Gameplay/interior questions remain discussion only; user then asked to finish existing progress first.",
+  "measurementMethod": "Dark-pixel bounding boxes (min RGB < 150) within isolated artwork ROIs; labels excluded. Review-board pixels, not source sprite, collision, or projection validation."
 }
