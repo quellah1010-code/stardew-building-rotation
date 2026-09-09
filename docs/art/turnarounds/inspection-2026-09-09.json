@@ -3,9 +3,9 @@
   "date": "2026-09-09",
   "baseCommit": "606d32fe67788d653bccafaf9d7a5bb1f846ff47",
   "toolMode": "built-in image_gen",
-  "generatedBoardCount": 8,
-  "retainedBoardCount": 5,
-  "retainedViewCount": 20,
+  "generatedBoardCount": 13,
+  "retainedBoardCount": 7,
+  "retainedViewCount": 28,
   "structureSource": "Estimated volumes from the supplied front sprites, projected by scripts/build-turnaround-reference.py; not original game models",
   "priority": "Four-view consistency first; alpha and Reveal postponed by the user",
   "gameRuntimeTested": false,
@@ -50,13 +50,14 @@
         "Back"
       ],
       "panelCountVisuallyChecked": 4,
-      "status": "awaiting-individual-user-review",
+      "status": "superseded-after-user-side-width-feedback",
       "runtimeReady": false,
       "pixelAnchorsVerified": false,
       "uniformScaleVerified": false,
       "alphaAndRevealEvaluation": "deferred-by-user",
-      "current": true,
-      "sideLabelsCorrected": false
+      "current": false,
+      "sideLabelsCorrected": false,
+      "supersededBy": "shed-four-views-v2.png"
     },
     {
       "building": "Stable",
@@ -74,13 +75,14 @@
         "Back"
       ],
       "panelCountVisuallyChecked": 4,
-      "status": "awaiting-individual-user-review",
+      "status": "superseded-after-user-side-width-feedback",
       "runtimeReady": false,
       "pixelAnchorsVerified": false,
       "uniformScaleVerified": false,
       "alphaAndRevealEvaluation": "deferred-by-user",
-      "current": true,
-      "sideLabelsCorrected": false
+      "current": false,
+      "sideLabelsCorrected": false,
+      "supersededBy": "stable-four-views-v3.png"
     },
     {
       "building": "Barn",
@@ -156,6 +158,270 @@
         "Correct projection of two crossing battens so they lie flat on the small roof surface in the RIGHT panel; expose the red wall strip above."
       ],
       "visualInspection": "The X occupies the shallow small-roof band and no longer spans the red wall. Existing side labels and left roof silhouette retained. Fine textures were regenerated; other regions are not claimed bit-identical. Awaiting user review; no strict 3D projection validation."
+    },
+    {
+      "building": "Stable",
+      "file": "stable-four-views-v3.png",
+      "sha256": "0ddef22d4850440dffd61158428ef02ed60ce8b5363aa15fcb46bb76fbd8effa",
+      "bytes": 1103933,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "user-requested-revision-awaiting-review",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": true,
+      "selectedEditSourceFile": "stable-four-views-v2.png",
+      "selectedEditSourceSha256": "259e658feeb683f017c7228cda50a5f74c732dc46412701b65736de3cf5bf0c7",
+      "requestedEdits": [
+        "Widen both side elevations relative to the front using the real footprint as a starting point.",
+        "Preserve level side roof edges and correct reversed side labels."
+      ],
+      "outlineMeasurements": {
+        "before": {
+          "panels": {
+            "Front": {
+              "bbox": [
+                245,
+                138,
+                592,
+                525
+              ],
+              "width": 347,
+              "height": 387
+            },
+            "Right": {
+              "bbox": [
+                971,
+                149,
+                1121,
+                528
+              ],
+              "width": 150,
+              "height": 379
+            },
+            "Left": {
+              "bbox": [
+                346,
+                636,
+                489,
+                1017
+              ],
+              "width": 143,
+              "height": 381
+            },
+            "Back": {
+              "bbox": [
+                874,
+                630,
+                1233,
+                1018
+              ],
+              "width": 359,
+              "height": 388
+            }
+          },
+          "sideToFrontWidth": {
+            "Right": 0.4323,
+            "Left": 0.4121
+          },
+          "method": "Dark-pixel outer bounding boxes in isolated panel regions; includes posts/eaves, excludes labels. Approximate review-outline measurement, not collision geometry."
+        },
+        "after": {
+          "panels": {
+            "Front": {
+              "bbox": [
+                241,
+                134,
+                594,
+                525
+              ],
+              "width": 353,
+              "height": 391
+            },
+            "Right": {
+              "bbox": [
+                953,
+                150,
+                1137,
+                525
+              ],
+              "width": 184,
+              "height": 375
+            },
+            "Left": {
+              "bbox": [
+                327,
+                635,
+                511,
+                1021
+              ],
+              "width": 184,
+              "height": 386
+            },
+            "Back": {
+              "bbox": [
+                866,
+                625,
+                1239,
+                1021
+              ],
+              "width": 373,
+              "height": 396
+            }
+          },
+          "sideToFrontWidth": {
+            "Right": 0.5212,
+            "Left": 0.5212
+          },
+          "method": "Dark-pixel outer bounding boxes in isolated panel regions; includes posts/eaves, excludes labels. Approximate review-outline measurement, not collision geometry."
+        }
+      },
+      "visualInspection": "Side widths are closer to the intended ground-width proportion; side labels and horizontal roof edges checked. Original front/back identity retained, but those panels were regenerated and changed scale/detail. Strict four-view projection, all component dimensions and game anchors remain unverified.",
+      "guideLimit": "Guide is an art-review width/layout target with estimated roof and wall heights, not an official 3D model or runtime sprite canvas."
+    },
+    {
+      "building": "Shed",
+      "file": "shed-four-views-v2.png",
+      "sha256": "479c7e546cd927e8e03b2fccf993739ad275c4aea1fd22db24044559f8fc0285",
+      "bytes": 1303053,
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGB",
+      "fullyDecoded": true,
+      "panels": [
+        "Front",
+        "Right",
+        "Left",
+        "Back"
+      ],
+      "panelCountVisuallyChecked": 4,
+      "status": "user-requested-revision-awaiting-review",
+      "runtimeReady": false,
+      "pixelAnchorsVerified": false,
+      "uniformScaleVerified": false,
+      "alphaAndRevealEvaluation": "deferred-by-user",
+      "current": true,
+      "sideLabelsCorrected": true,
+      "selectedEditSourceFile": "shed-four-views-v1.png",
+      "selectedEditSourceSha256": "a65708275a7faed1cb0a106ed1c7d96fe02270a69a278c0fd212907f023112eb",
+      "requestedEdits": [
+        "Widen both side elevations relative to the front using the real footprint as a starting point.",
+        "Preserve level side roof edges and correct reversed side labels."
+      ],
+      "outlineMeasurements": {
+        "before": {
+          "panels": {
+            "Front": {
+              "bbox": [
+                200,
+                78,
+                621,
+                498
+              ],
+              "width": 421,
+              "height": 420
+            },
+            "Right": {
+              "bbox": [
+                953,
+                99,
+                1106,
+                498
+              ],
+              "width": 153,
+              "height": 399
+            },
+            "Left": {
+              "bbox": [
+                333,
+                597,
+                486,
+                996
+              ],
+              "width": 153,
+              "height": 399
+            },
+            "Back": {
+              "bbox": [
+                817,
+                581,
+                1243,
+                996
+              ],
+              "width": 426,
+              "height": 415
+            }
+          },
+          "sideToFrontWidth": {
+            "Right": 0.3634,
+            "Left": 0.3634
+          },
+          "method": "Dark-pixel outer bounding boxes in isolated panel regions; includes posts/eaves, excludes labels. Approximate review-outline measurement, not collision geometry."
+        },
+        "after": {
+          "panels": {
+            "Front": {
+              "bbox": [
+                206,
+                70,
+                680,
+                503
+              ],
+              "width": 474,
+              "height": 433
+            },
+            "Right": {
+              "bbox": [
+                913,
+                92,
+                1124,
+                503
+              ],
+              "width": 211,
+              "height": 411
+            },
+            "Left": {
+              "bbox": [
+                322,
+                588,
+                535,
+                996
+              ],
+              "width": 213,
+              "height": 408
+            },
+            "Back": {
+              "bbox": [
+                774,
+                576,
+                1252,
+                995
+              ],
+              "width": 478,
+              "height": 419
+            }
+          },
+          "sideToFrontWidth": {
+            "Right": 0.4451,
+            "Left": 0.4494
+          },
+          "method": "Dark-pixel outer bounding boxes in isolated panel regions; includes posts/eaves, excludes labels. Approximate review-outline measurement, not collision geometry."
+        }
+      },
+      "visualInspection": "Side widths are closer to the intended ground-width proportion; side labels and horizontal roof edges checked. Original front/back identity retained, but those panels were regenerated and changed scale/detail. Strict four-view projection, all component dimensions and game anchors remain unverified.",
+      "guideLimit": "Guide is an art-review width/layout target with estimated roof and wall heights, not an official 3D model or runtime sprite canvas."
     }
   ],
   "currentBoardCount": 3,
@@ -166,5 +432,19 @@
     "bottomLeft": "East/right",
     "bottomRight": "North/up"
   },
-  "sideViewNaming": "User clarified architectural left/right sides: the old labels were reversed. Barn v4 corrects labels only; Shed and Stable remain pending individual review."
+  "sideViewNaming": "All three CURRENT boards use architectural side names: Front top left, Right top right, Left bottom left, Back bottom right. Historical Shed v1 and Stable v2 retain reversed labels.",
+  "latestReviewInputsRead": [
+    "README.md",
+    "docs/continuation.md",
+    "docs/design.md",
+    "docs/art/README.md",
+    "docs/art/turnarounds/README.md",
+    "docs/content-audit.md",
+    "docs/content-mapping.md",
+    "docs/roadmap.md",
+    "docs/art/templates/rotation-template-anchors.json",
+    "scripts/build-turnaround-reference.py",
+    "docs/art/turnarounds/prompts-2026-09-09.json",
+    "docs/art/turnarounds/inspection-2026-09-09.json"
+  ]
 }

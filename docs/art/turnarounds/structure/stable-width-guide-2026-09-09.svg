@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1448" height="1086" viewBox="0 0 1448 1086">
+<rect x="0" y="0" width="1448" height="1086" fill="#f7f5ed" stroke="none" stroke-width="0"/>
+<text x="724" y="44" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#37251d">STABLE — SILHOUETTE WIDTH GUIDE</text>
+<rect x="245" y="138" width="347" height="389" fill="#e9e4d8" stroke="#b5a995" stroke-width="3"/>
+<text x="418" y="330" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#37251d">KEEP FRONT</text>
+<rect x="874" y="630" width="358" height="389" fill="#e9e4d8" stroke="#b5a995" stroke-width="3"/>
+<text x="1053" y="825" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#37251d">KEEP BACK</text>
+<text x="1048" y="115" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#37251d">RIGHT</text>
+<text x="418" y="609" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#37251d">LEFT</text>
+<rect x="956" y="150" width="184" height="145" fill="#bd4429" stroke="#37251d" stroke-width="3"/>
+<rect x="961" y="295" width="174" height="232" fill="#986230" stroke="#37251d" stroke-width="3"/>
+<rect x="961" y="295" width="26" height="232" fill="#ba843d" stroke="#37251d" stroke-width="3"/>
+<rect x="1109" y="295" width="26" height="232" fill="#ba843d" stroke="#37251d" stroke-width="3"/>
+<rect x="326" y="638" width="184" height="222" fill="#bd4429" stroke="#37251d" stroke-width="3"/>
+<rect x="331" y="860" width="174" height="188" fill="#986230" stroke="#37251d" stroke-width="3"/>
+<rect x="331" y="860" width="26" height="188" fill="#ba843d" stroke="#37251d" stroke-width="3"/>
+<rect x="479" y="860" width="26" height="188" fill="#ba843d" stroke="#37251d" stroke-width="3"/>
+<text x="1050" y="555" font-family="sans-serif" font-size="24" text-anchor="middle" fill="#37251d">184 px side / 347 px front</text>
+</svg>
