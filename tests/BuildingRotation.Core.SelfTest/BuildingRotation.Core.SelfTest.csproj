@@ -8,6 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/BuildingRotation.Core/BuildingRotation.Core.csproj" />
+    <ProjectReference Include="../../src/BuildingRotation.Runtime/BuildingRotation.Runtime.csproj" />
     <ProjectReference Include="../../tools/BuildingRotation.ContentAudit/BuildingRotation.ContentAudit.csproj" />
     <EmbeddedResource Include="../../docs/reference/content-building-facts.json" LogicalName="BuildingRotation.ContentFacts.json" />
   </ItemGroup>

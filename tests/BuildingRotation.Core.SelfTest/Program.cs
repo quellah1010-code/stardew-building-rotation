@@ -143,7 +143,8 @@ var tests = new (string Name, Action Run)[]
 
 tests = tests.Concat(EditingTests.Cases()).Concat(MoveModeTests.Cases())
     .Concat(LayoutTests.Cases()).Concat(DoorRegionTests.Cases())
-    .Concat(ContentDataTests.Cases(args)).Concat(ArtTemplateTests.Cases()).ToArray();
+    .Concat(ContentDataTests.Cases(args)).Concat(ArtTemplateTests.Cases())
+    .Concat(RuntimeTests.Cases()).ToArray();
 int failed = 0;
 foreach (var test in tests)
 {

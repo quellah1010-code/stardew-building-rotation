@@ -48,8 +48,9 @@ function compile(name, dir, refs, exe = false, resources = []) {
 }
 const core = compile('BuildingRotation.Core', 'src/BuildingRotation.Core', netstd);
 const data = compile('BuildingRotation.Data', 'src/BuildingRotation.Data', [...netstd, core]);
+const runtime = compile('BuildingRotation.Runtime', 'src/BuildingRotation.Runtime', [...netstd, core]);
 const audit = compile('BuildingRotation.ContentAudit', 'tools/BuildingRotation.ContentAudit', [...net8, core, data], true);
-const tests = compile('BuildingRotation.Core.SelfTest', 'tests/BuildingRotation.Core.SelfTest', [...net8, core, data, audit], true,
+const tests = compile('BuildingRotation.Core.SelfTest', 'tests/BuildingRotation.Core.SelfTest', [...net8, core, data, runtime, audit], true,
   ['-resource:' + quote(path.join(root, 'docs/reference/content-building-facts.json')) + ',BuildingRotation.ContentFacts.json']);
 run([tests, ...process.argv.slice(3)]);
 process.stdout.write(`Direct compilation output: ${out}\n`);

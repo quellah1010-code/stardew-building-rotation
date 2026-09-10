@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Reference-era target only; verify against the user's installed game. -->
+    <TargetFramework Condition="'$(GameTargetFramework)' == ''">net6.0</TargetFramework>
+    <TargetFramework Condition="'$(GameTargetFramework)' != ''">$(GameTargetFramework)</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>BuildingRotation.Smapi</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../BuildingRotation.Runtime/BuildingRotation.Runtime.csproj" />
+    <Reference Include="StardewModdingAPI"><HintPath>$(GamePath)/StardewModdingAPI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Stardew Valley"><HintPath>$(GamePath)/Stardew Valley.dll</HintPath><Private>false</Private></Reference>
+    <None Update="manifest.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="VerifyGameReferences" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(GamePath)' == ''" Text="Set GamePath to the matching game/SMAPI assembly folder. This diagnostic project cannot be built from Content alone." />
+    <Error Condition="!Exists('$(GamePath)/StardewModdingAPI.dll')" Text="Matching StardewModdingAPI.dll is missing." />
+    <Error Condition="!Exists('$(GamePath)/Stardew Valley.dll')" Text="Matching Stardew Valley.dll is missing." />
+  </Target>
+</Project>

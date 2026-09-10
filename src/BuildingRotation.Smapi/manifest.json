@@ -1,0 +1,10 @@
+{
+  "Name": "Building Rotation — Diagnostics",
+  "Author": "quellah1010-code",
+  "Version": "0.0.1",
+  "Description": "Development loader only. Reports dependencies; gameplay rotation is not connected.",
+  "UniqueID": "quellah.BuildingRotation",
+  "EntryDll": "BuildingRotation.Smapi.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}
