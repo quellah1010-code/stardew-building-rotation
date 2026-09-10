@@ -2,7 +2,32 @@
 
 本记录更新至 2026-09-10，包含此前真实数据、四视图待审状态及本轮室内／马厩讨论。开始续做先读取仓库最新提交和工作区修改；不要假定临时目录、SDK 或进程会跨执行保留。
 
-## 最新完成：诊断包 0.0.2
+## 进行中的 0.1.0：工作区断线，代码与安装包尚未同步
+
+2026-09-10 用户继续补充了 MonoGame ZIP 和三张实机截图。截图已确认旧诊断包 0.0.2 成功加载，读到 Let's Move It 的启用／非复制／非多选状态，以及 Deluxe Barn 的拿起、取消和移动后坐标变化。这只证明诊断观察；首版实际旋转仍限定普通空 Barn。ZIP 同时包含 MonoGame.Framework.dll（3.8.0.1641）、xTile.dll（1.0.0.0）、StardewValley.GameData.dll（1.6.15.24356），编译依赖已经齐，不要重复索要。
+
+断线前本地已写好 GameRotationHost、RotationController、RotationPatches，修改入口、探针、工程引用及 manifest 为 0.1.0。实现范围包括单人普通空牛棚、同农场单选搬动、350ms 长按及 24px 侧拖一档、短点击放置、取消／失焦／保存时清理草稿、真实碰撞与门、出口传送、实例 modData 和加载重建。预览使用格子占位外观，青色标记真实人门；不是正式四视图或 Reveal。
+
+本地标准 Release 构建成功；新增工具 BuildingRotation.GameAudit 读取实际 DLL 元数据，13/13 补丁目标的签名及方法体存在检查通过。该检查不执行游戏，不能记作 Harmony 运行加载、四向玩法或存读档验收。此前 100 项核心独立检查未重跑，核心／运行层行为没有更改。
+
+打包脚本已生成 artifacts/BuildingRotation.Prototype-0.1.0.zip：50373 字节，SHA-256 为 cbbea8360ddad4c6b019b852769a5e579bcc5634113287dd69d18214f25d6270，六个文件内容与 CRC 已核对；仅自有四个 DLL、manifest 和中文说明。**本 GitHub 提交只保存这份接续记录，尚未包含上述新源码或 ZIP；不要把 main 上现有 0.0.2 当成旋转包，也不要报告 0.1.0 已交付。**
+
+阻塞为执行环境返回 environment_offline，终端及备用文件访问均无法连接；不是自动审批拒绝，也不是用户缺文件。此前本地目录为 /workspace/scratch/0dfc15d37142/stardew-building-rotation，主源码与包仍待恢复连接后读取，未确认丢失。README、continuation、diagnostic-test 的部分本地更新已写入；roadmap 和 runtime-adapter 的最新更新调用在断线时报错，需检查是否执行，不能假定成功。
+
+恢复后接续顺序：
+
+1. 先检查本地工作区和远端本记录，保留未提交文件，不重置覆盖。此前源码基线为 0eb7a3a21ee456474f257b33fc18ab845d6915d6。
+2. 读取新源码与 docs/prototype-test.md，核对包和构建结果；完成 README／roadmap／runtime-adapter 的当前状态更新，将历史“缺文件／未接入”标为旧记录。不要误把本节的“尚未同步”保留成完成后的当前状态。
+3. 一并提交完整自有源码、GameAudit、打包脚本、文档和 0.1.0 ZIP。原游戏／SMAPI／第三方 DLL、原截图（有个人标识）和反编译原文不入库。
+4. 交付安装包：退出游戏，移除旧 Mods/BuildingRotation.Diagnostics，放入新的 BuildingRotation.Prototype，两个 UniqueID 相同不可并存。请用户用单人测试存档的普通空牛棚先测彩色预览、转向、放下，再测四向进出门和存读档；之前截图的豪华牛棚不属于这一版的编辑范围。
+
+关键实现供恢复核对：GameRotationHost 由真实 GetData 读不可变布局；按 Building 对象登记身份，快照修订包括位置／尺寸／门／元数据／房间及出口。候选范围调用 isBuildable 并检查角色／地形；本次查询上下文只排除旧建筑，不切换有副作用的 isMoving。放置要求清理地面，不调用会删除世界物件的建造回调。提交前重验，捕获旧位置、尺寸、门、自己的朝向键及出口；异常时尝试逐个恢复，恢复失败明确报错。放置失败或取消不能修改共享建筑数据。
+
+13 个补丁：Building.occupiesTile(int,int,bool)、isTilePassable(Vector2)、intersects(Rectangle)、draw(SpriteBatch)、doAction(Vector2,Farmer)、LoadFromBuildingData(BuildingData,bool,bool)、load()、updateInteriorWarps(GameLocation)；Game1.performWarpFarmer(LocationRequest,int,int,int)；Let's Move It ModEntry.SelectTargetAction(ButtonPressedEventArgs)、SingleTargetAction(ButtonPressedEventArgs)、ClearSelection()；Target.Render(SpriteBatch,GameLocation,Vector2)。保存朝向使用 quellah.BuildingRotation/facing = 1:south/east/north/west。正常进门保留原 doAction 的锁、坐骑、声音和动作逻辑，室内不旋转；返回前及 OnWarp 后按完整人物碰撞框核对落点。
+
+以下是此前已同步批次的历史内容。当前文件依赖与实际进度以上方为准。
+
+## 历史：诊断包 0.0.2
 
 新上传的 SMAPI／CoreInterfaces／Toolkit 已确认均为 4.5.2，旧文件版本差异解除。新增只读 `LetsMoveItProbe`，读取 0.6.20 的实际单选／多选目标和配置；只观察，不给 Runtime 输入所有权，不修改游戏状态。Release 标准构建通过，自己的三个 DLL、manifest 和中文测试说明已生成 [诊断包](../artifacts/BuildingRotation.Diagnostics-0.0.2.zip)，ZIP 五文件内容及 CRC 已核对。自有包可进 Git；用户原 DLL、第三方程序集和反编译源码不入仓库。
 
