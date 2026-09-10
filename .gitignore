@@ -9,6 +9,7 @@
 *.pdb
 *.log
 *.zip
+!artifacts/BuildingRotation.Diagnostics-*.zip
 stardewvalley.targets
 Saves/
 save-backups/

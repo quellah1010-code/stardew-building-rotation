@@ -1,8 +1,24 @@
 # 空牛棚运行流程与 SMAPI 接入准备
 
-2026-09-10。`BuildingRotation.Runtime` 将现有手势、编辑草稿、真实布局和朝向元数据串联；`BuildingRotation.Smapi` 加载／诊断入口现已用上传 DLL 编译成功，但上传的 SMAPI 版本与启动截图不一致，尚无游戏加载结果。**仍没有能游玩的旋转 mod：真实游戏宿主和运行时补丁尚未实现。**
+2026-09-10。`BuildingRotation.Runtime` 将现有手势、编辑草稿、真实布局和朝向元数据串联；SMAPI 4.5.2 文件现已对齐，诊断包 0.0.2 已编译并打包，尚无游戏加载结果。**可以安装验证加载和搬动状态读取，仍不能游玩旋转功能：真实游戏宿主和旋转补丁尚未实现。**
 
-## 最新：本机文件核对与首次入口构建
+## 最新：4.5.2 文件对齐与诊断包 0.0.2
+
+新上传的 `StardewModdingAPI.dll` 程序集、文件及产品版本均为 4.5.2，`SMAPI.Toolkit.CoreInterfaces.dll`、`SMAPI.Toolkit.dll` 也是 4.5.2；与原启动截图一致。Harmony 为 2.2.2。已替换临时参考目录里的旧 SMAPI 文件，没有修改用户安装或上传 ZIP。新 SMAPI SHA-256 为 `5e4c51bb3cd6616f5adcb804769dbb7c6872b2478fab786fb4ca00c72c7456bf`；CoreInterfaces 为 `8b9b2376954a78cb16843b3ba4196b364f55a828997b9411ccdf98520b8a23c8`。
+
+新增 `LetsMoveItProbe`，通过已核对的 SMAPI 4.5.2 `ModRegistryHelper.Get` → `ModMetadata.Mod` 取得现有 mod 实例，读取 Let's Move It 0.6.20 的 `SingleTarget`／`MultipleTargets`／`Config`、目标 `TargetObject`。读取当前建筑类型、真实坐标／占地和启用／复制／多选配置，不修改任何字段。构造时绑定成员，随后只保留 mod 实例和成员信息，不缓存建筑、地点或配置对象。这里只是针对已核验私有结构的诊断，不是公开兼容 API；未检查房间是否为空，也不创建可提交的 Runtime 会话。
+
+进入存档后每 10 个更新观察一次，仅报告变化，`br_status` 可主动报告。读取失败停止观察器并保留错误说明；退出存档清除上次报告。版本不符时仅禁用该观察器。没有 Harmony 补丁、输入拦截、旋转预览、位置写入或存档绑定。此轮在 4.5.2 引用下发现旧 `Constants.GameVersion` API 已不可用，改用游戏程序集版本及实际 `Constants.ApiVersion` 输出。
+
+SMAPI 工程显式添加 `SMAPI.Toolkit.CoreInterfaces` 引用并设 `Private=false`；`MinimumApiVersion` 更新为 4.5.2。Release 标准构建通过，警告作为错误处理。用 `scripts/package-diagnostics.py` 生成 [诊断包 0.0.2](../artifacts/BuildingRotation.Diagnostics-0.0.2.zip)，精确核对 ZIP 五个文件和内容、CRC，通过；包内只有自有 Core／Runtime／Smapi DLL、manifest、测试说明。SHA-256：`a5e44c2518f0f34cf1f5f124523423ac9b153b401a5fda0d9852791271b24bc2`。
+
+**没有实机加载或实际拾取／取消结果。** 元数据／源码成员核对与编译成功不代替这一项。本轮未修改 Core／Runtime，也未重跑此前 100 项独立检查。用户下一步按[本机测试说明](diagnostic-test.md)安装，反馈 `nothing held → building=Barn → nothing held` 及是否报错。
+
+仍缺同一游戏目录中的 `MonoGame.Framework.dll`、`xTile.dll`、`StardewValley.GameData.dll`，用于后续真实碰撞、地图、建筑数据和绘制。SMAPI、smapi-internal、Content 和之前已收到的 DLL 不用重传。实际配置已可由探针读取，不再把 `config.json` 作为这轮测试的前置条件。
+
+## 历史：首包版本差异与首次入口构建
+
+以下为前一批记录，旧 SMAPI 版本差异已由上方新上传文件解除。
 
 用户上传的两个 ZIP 均可正常解压，启动截图也已读取。游戏为 Windows 11 上的 Stardew Valley 1.6.15 build 24356，截图显示 SMAPI 4.5.2、Let's Move It 0.6.20。以下为上传文件本身的元数据，不以截图替代二进制检查：
 
@@ -22,7 +38,7 @@ dotnet build src/BuildingRotation.Smapi/BuildingRotation.Smapi.csproj -c Release
 
 本次只验证加载入口的构建；没有游戏进程、没有执行 `br_status`，没有发出可玩测试包。Core／Runtime 逻辑未改，不重复跑此前 100 项自检；本次不能新增“100 项实机通过”的说法。
 
-### 下一包需要的文件
+### 前一批补充文件清单（已由最新清单取代）
 
 从**截图中正在启动的那套安装目录**复制以下文件，原安装文件保持原样。不要从另外的备份或旧目录取：
 
@@ -72,9 +88,9 @@ dotnet build src/BuildingRotation.Smapi/BuildingRotation.Smapi.csproj -c Release
 
 ## SMAPI 入口源码
 
-`src/BuildingRotation.Smapi` 已有工程、manifest 和 `ModEntry`：订阅 `GameLaunched`／`SaveLoaded`／`ReturnedToTitle`，并提供开发控制台命令 `br_status` 报告程序集版本、加载状态与未接通的功能。它目前不接管鼠标，不打 Harmony 补丁，也不写存档。记录的程序集版本不一定等于游戏产品版本；准确版本仍以实际 SMAPI 启动信息和安装文件交叉核对。
+`src/BuildingRotation.Smapi` 已有工程、manifest 和 `ModEntry`：订阅 `GameLaunched`／`SaveLoaded`／`ReturnedToTitle`／`UpdateTicked`，并提供开发控制台命令 `br_status` 报告程序集版本、加载状态、只读搬动状态与未接通的功能。它目前不接管鼠标，不打 Harmony 补丁，也不写存档。记录的程序集版本不一定等于游戏产品版本；准确版本仍以实际 SMAPI 启动信息和安装文件交叉核对。
 
-工程显式引用本机游戏和 SMAPI DLL，引用设置 `Private=false`，不把游戏程序集打进输出包，也不自动部署。`net6.0` 已与本次游戏文件对齐；`MinimumApiVersion=4.0.0` 仍是参考期起点，**并非完整玩法已核定的支持范围**。实际建筑接入时仍需补齐全部引用，而非造同名桩 DLL。
+工程显式引用本机游戏、SMAPI 和 CoreInterfaces DLL，引用设置 `Private=false`，不把游戏程序集打进输出包，也不自动部署。`net6.0` 已与本次游戏文件对齐；`MinimumApiVersion=4.5.2` 用于本诊断包，**并非完整玩法已核定的支持范围**。实际建筑接入时仍需补齐全部引用，而非造同名桩 DLL。
 
 ```sh
 dotnet build src/BuildingRotation.Smapi/BuildingRotation.Smapi.csproj -p:GamePath="/path/to/game"
@@ -88,4 +104,4 @@ dotnet build src/BuildingRotation.Smapi/BuildingRotation.Smapi.csproj -p:GamePat
 
 本批五个无游戏依赖工程标准 MSBuild 构建成功，运行标准构建产物得到 **100/100 通过**。自检新增 12 组，覆盖真实 Barn 四向提交与元数据重建、碰撞／门／返回一致性、另一栋建筑不变、非法地块／堵门、外部修改、宿主异常、取整后的碰撞框、重复搬动，以及拾取—旋转—松手—点击放置的完整调用流程。原始上传 ZIP 当前无法由 zipfile 打开，因此使用此前已核验并保存的真实字段摘要，不重报原 ZIP 检查通过。
 
-接下来按本文开头对齐 SMAPI 与附属引用，重编译并加载诊断入口，再实现真实宿主和搬动提供方，随后逐项接碰撞、门、返回、绘制和游戏存读档。可以用方向与入口可辨认的占位图，不等全部室内或马厩方案定稿。
+接下来安装诊断包验证加载与状态读取，同时补齐三项游戏附属引用，继续实现真实宿主和搬动提供方，随后逐项接碰撞、门、返回、绘制和游戏存读档。可以用方向与入口可辨认的占位图，不等全部室内或马厩方案定稿。
