@@ -10,6 +10,7 @@
 *.log
 *.zip
 !artifacts/BuildingRotation.Diagnostics-*.zip
+!artifacts/BuildingRotation.Prototype-*.zip
 stardewvalley.targets
 Saves/
 save-backups/

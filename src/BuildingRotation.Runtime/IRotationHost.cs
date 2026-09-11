@@ -3,7 +3,7 @@ using BuildingRotation.Core;
 
 namespace BuildingRotation.Runtime
 {
-    // This is the unimplemented game boundary, not a claim of SMAPI/Harmony integration.
+    // The game boundary; GameRotationHost provides the first empty-Barn implementation.
     // Call synchronously on the game thread. Never run these operations concurrently.
     public interface IRotationHost
     {

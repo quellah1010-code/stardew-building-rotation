@@ -2,6 +2,9 @@ using System.Collections;
 using System.Reflection;
 using StardewModdingAPI;
 using StardewValley.Buildings;
+using StardewValley;
+using StardewModdingAPI.Utilities;
+using Microsoft.Xna.Framework;
 
 namespace BuildingRotation.Smapi;
 
@@ -69,4 +72,23 @@ internal sealed class LetsMoveItProbe
 
     private static PropertyInfo Property(Type type, string name)
         => type.GetProperty(name, Members) ?? throw new MissingMemberException(type.FullName, name);
+
+    internal object ModInstance => mod;
+    internal Type TargetType => singleTarget.FieldType;
+    internal object? SelectedTarget => singleTarget.GetValue(mod);
+    internal Building? SelectedBuilding => SelectedTarget is object target ? targetObject.GetValue(target) as Building : null;
+    internal T Setting<T>(string name) => (T)Property(config.FieldType, name).GetValue(config.GetValue(mod))!;
+    internal bool IsSingleMove => Setting<bool>("ModEnabled") && !Setting<bool>("CopyMode") && !Setting<bool>("MultiSelect")
+        && ((IDictionary)multipleTargets.GetValue(mod)!).Count == 0;
+    internal Vector2 GrabOffset => (Vector2)Property(singleTarget.FieldType, "TileOffset").GetValue(SelectedTarget)!;
+    internal GameLocation TargetLocation => (GameLocation)Property(singleTarget.FieldType, "TargetLocation").GetValue(SelectedTarget)!;
+    internal bool UsesLeftMouse
+    {
+        get
+        {
+            Keybind[] keys = Setting<KeybindList>("MoveKey").Keybinds;
+            return keys.Length == 1 && keys[0].Buttons.Length == 1 && keys[0].Buttons[0] == SButton.MouseLeft;
+        }
+    }
+    internal void ClearSelection() => mod.GetType().GetMethod("ClearSelection", Members)!.Invoke(mod, null);
 }

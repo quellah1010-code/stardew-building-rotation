@@ -1,107 +1,59 @@
-# 空牛棚运行流程与 SMAPI 接入准备
+# 空牛棚游戏接入记录
 
-2026-09-10。`BuildingRotation.Runtime` 将现有手势、编辑草稿、真实布局和朝向元数据串联；SMAPI 4.5.2 文件现已对齐，诊断包 0.0.2 已编译并打包，尚无游戏加载结果。**可以安装验证加载和搬动状态读取，仍不能游玩旋转功能：真实游戏宿主和旋转补丁尚未实现。**
+**当前为可安装实验版 0.1.0：真实宿主、输入、碰撞、门和朝向保存代码已接入，完整玩法尚待实机验收。** 安装与操作见 [prototype-test.md](prototype-test.md)。首版只支持单人、同一农场、普通空 Barn；Big Barn／Deluxe Barn、动物、升级、联机和其他搬动提供方没有自动获得支持。
 
-## 最新：4.5.2 文件对齐与诊断包 0.0.2
+## 真实环境与已收到的证据
 
-新上传的 `StardewModdingAPI.dll` 程序集、文件及产品版本均为 4.5.2，`SMAPI.Toolkit.CoreInterfaces.dll`、`SMAPI.Toolkit.dll` 也是 4.5.2；与原启动截图一致。Harmony 为 2.2.2。已替换临时参考目录里的旧 SMAPI 文件，没有修改用户安装或上传 ZIP。新 SMAPI SHA-256 为 `5e4c51bb3cd6616f5adcb804769dbb7c6872b2478fab786fb4ca00c72c7456bf`；CoreInterfaces 为 `8b9b2376954a78cb16843b3ba4196b364f55a828997b9411ccdf98520b8a23c8`。
+用户最新三张截图确认 Windows 11、Stardew Valley 1.6.15 build 24356、SMAPI 4.5.2。0.0.2 诊断包已加载，显示 `read-only selection probe attached`；进入存档后配置为 `enabled=True, copy=False, multi=False`，观察到多次 `nothing held → building=Deluxe Barn → nothing held`。建筑移动后，真实位置从 (20,51) 变成 (38,53)。这证明旧包的加载和只读状态观察；不证明新旋转补丁或豪华牛棚支持。截图中个人标识不发布。
 
-新增 `LetsMoveItProbe`，通过已核对的 SMAPI 4.5.2 `ModRegistryHelper.Get` → `ModMetadata.Mod` 取得现有 mod 实例，读取 Let's Move It 0.6.20 的 `SingleTarget`／`MultipleTargets`／`Config`、目标 `TargetObject`。读取当前建筑类型、真实坐标／占地和启用／复制／多选配置，不修改任何字段。构造时绑定成员，随后只保留 mod 实例和成员信息，不缓存建筑、地点或配置对象。这里只是针对已核验私有结构的诊断，不是公开兼容 API；未检查房间是否为空，也不创建可提交的 Runtime 会话。
+本批需要的引用已齐。游戏主 DLL 为 1.6.15.24356，SMAPI／CoreInterfaces／Toolkit 均为 4.5.2，Harmony 为 2.2.2，Let's Move It 为 0.6.20。最初游戏 ZIP 中的 SMAPI 4.3.2 与截图不一致，后来上传的 SMAPI 和 smapi-internal 已解除该问题。此前逐文件哈希可查 [0.0.2 核对记录](https://github.com/quellah1010-code/stardew-building-rotation/blob/0eb7a3a21ee456474f257b33fc18ab845d6915d6/docs/runtime-adapter.md)。
 
-进入存档后每 10 个更新观察一次，仅报告变化，`br_status` 可主动报告。读取失败停止观察器并保留错误说明；退出存档清除上次报告。版本不符时仅禁用该观察器。没有 Harmony 补丁、输入拦截、旋转预览、位置写入或存档绑定。此轮在 4.5.2 引用下发现旧 `Constants.GameVersion` API 已不可用，改用游戏程序集版本及实际 `Constants.ApiVersion` 输出。
+最新 MonoGame ZIP 同时包含以下三项，不再请求用户补取：
 
-SMAPI 工程显式添加 `SMAPI.Toolkit.CoreInterfaces` 引用并设 `Private=false`；`MinimumApiVersion` 更新为 4.5.2。Release 标准构建通过，警告作为错误处理。用 `scripts/package-diagnostics.py` 生成 [诊断包 0.0.2](../artifacts/BuildingRotation.Diagnostics-0.0.2.zip)，精确核对 ZIP 五个文件和内容、CRC，通过；包内只有自有 Core／Runtime／Smapi DLL、manifest、测试说明。SHA-256：`a5e44c2518f0f34cf1f5f124523423ac9b153b401a5fda0d9852791271b24bc2`。
-
-**没有实机加载或实际拾取／取消结果。** 元数据／源码成员核对与编译成功不代替这一项。本轮未修改 Core／Runtime，也未重跑此前 100 项独立检查。用户下一步按[本机测试说明](diagnostic-test.md)安装，反馈 `nothing held → building=Barn → nothing held` 及是否报错。
-
-仍缺同一游戏目录中的 `MonoGame.Framework.dll`、`xTile.dll`、`StardewValley.GameData.dll`，用于后续真实碰撞、地图、建筑数据和绘制。SMAPI、smapi-internal、Content 和之前已收到的 DLL 不用重传。实际配置已可由探针读取，不再把 `config.json` 作为这轮测试的前置条件。
-
-## 历史：首包版本差异与首次入口构建
-
-以下为前一批记录，旧 SMAPI 版本差异已由上方新上传文件解除。
-
-用户上传的两个 ZIP 均可正常解压，启动截图也已读取。游戏为 Windows 11 上的 Stardew Valley 1.6.15 build 24356，截图显示 SMAPI 4.5.2、Let's Move It 0.6.20。以下为上传文件本身的元数据，不以截图替代二进制检查：
-
-| 上传文件 | 实际版本／内容 | SHA-256 |
+| 文件 | 版本 | SHA-256 |
 | --- | --- | --- |
-| `Stardew Valley.dll` | 程序集及文件版本 `1.6.15.24356`，目标 .NET 6 | `7f1e5b8e58d2758b78570ba771bbeb03d33522f62188bf6c32edf0cf626deaee` |
-| `StardewModdingAPI.dll` | 程序集、文件、产品版本均为 `4.3.2`；`Constants` 初始化中的 API 版本字符串也为 `4.3.2` | `2c03e8d3028977bbe8d128975ff091e1104df31ae2b08724e72888fca702b0a8` |
-| `LetsMoveIt.dll` | `0.6.20.0`，引用 SMAPI `4.5.2.0` | `38c746e638cc00bbba245b654dbfa1ee53008c198c8ff8131efbefc9cf7bfb12` |
+| MonoGame.Framework.dll | 3.8.0.1641 | `92e5423a5d002b399de4369e483577007274c5634745f5414fd508981b7494de` |
+| xTile.dll | 1.0.0.0 | `a7c0a758ac446bb4f7715651478e3097b7b3bb6fbd4daca52bfa8e80ee1e7df1` |
+| StardewValley.GameData.dll | 1.6.15.24356 | `9c03497c2d2ac24c94e2f25b3c2fc39ecde1bc97341e514c5f9fdcc1e759cb81` |
 
-游戏 runtimeconfig 标记 `net6.0`，随游戏运行框架为 `6.0.32`。此前“没有程序集”的阻塞已部分解除；**现在缺的是与正在运行的 SMAPI 4.5.2 对应的文件，以及实际游戏适配需要的附属引用**。不能把此次构建写成“SMAPI 4.5.2 编译／加载通过”，也不能据此判断用户当前安装损坏。文件为什么不一致尚未确认。
+配置由已有探针读取，不另索要 config.json。所有原始引用与反编译内容只用于本地核对，不入公开仓库。
 
-使用 .NET SDK 8.0.424、官方 .NET 6.0.36 targeting packs，对 `BuildingRotation.Smapi` 进行了 Debug 和 Release 标准 MSBuild 构建，均成功，无编译警告／错误。入口增加 `GameLaunched` 时报告，并用公开 `ModRegistry.IsLoaded` 报告 Let's Move It 是否加载、是否已进入存档；不读取其私有选择状态，不改配置，不拦截输入。`IsLoaded` 不等于其 `ModEnabled` 设置开启，更不等于已适配。
+## 当前接入
 
-```sh
-dotnet build src/BuildingRotation.Smapi/BuildingRotation.Smapi.csproj -c Release -p:GamePath="/path/to/matching-game-files"
-```
+详细行为和限制集中在 [prototype-test.md](prototype-test.md)。核心与 Runtime 继续使用现有实现，本轮接入以下游戏边界：
 
-本次只验证加载入口的构建；没有游戏进程、没有执行 `br_status`，没有发出可玩测试包。Core／Runtime 逻辑未改，不重复跑此前 100 项自检；本次不能新增“100 项实机通过”的说法。
-
-### 前一批补充文件清单（已由最新清单取代）
-
-从**截图中正在启动的那套安装目录**复制以下文件，原安装文件保持原样。不要从另外的备份或旧目录取：
-
-- `StardewModdingAPI.dll`：重新取一次，用于对齐截图的 4.5.2。
-- `MonoGame.Framework.dll`、`xTile.dll`、`StardewValley.GameData.dll`：上传游戏 DLL 确实引用了这三项；后续建筑数据、矩形和地图适配要用。
-- `smapi-internal` 文件夹：需要其中匹配的 `SMAPI.Toolkit.CoreInterfaces.dll`、`SMAPI.Toolkit.dll` 和 `0Harmony.dll` 等依赖。拿到后核对实际目录及版本，不把它们发布进自己的包。
-- 已安装 Let's Move It 的 `config.json`，如存在：Nexus 原始下载 ZIP 没有用户实际按键、复制／多选等设置。
-
-已收到游戏主 DLL、runtimeconfig 和搬动 mod 下载包，不需要重复上传 Content、存档或整个游戏。若目录中找不到上述文件，让用户发目录截图再定位；不要求安装新 SMAPI 或替换其现有文件。
-
-### Let's Move It 0.6.20 的实际接入点
-
-用 ILSpy 9.1.0.7988 读取上传 DLL；反编译内容只留在临时参考目录，没有复制到公开仓库。缺少 MonoGame／xTile 等引用，因此部分图形类型的反编译带未解析标记；本轮只核对明确的选择字段与控制流，不把反编译产物当作可编译源码。DLL 产品版本标记的上游提交为 `00195e510db28e647c518316d1247790343572ff`。
-
-- `LetsMoveIt.ModEntry` 有私有 `SingleTarget`、`MultipleTargets`、`Config`；不能仅根据某个键按下就认定拿起了建筑。
-- `OnButtonPressed` 在搬动键按下时调用 `SingleTargetAction`，后者立即检查占用并执行 `CopyTo`／`MoveTo`。后续需要在这次提交发生前协调输入所有权，普通事后输入监听不足以保证长按旋转。
-- 拿起通过 `SelectTargetAction`，取消通过 `ClearSelection`。目标 `Target` 提供 `TargetObject`、`TargetLocation`、`TilePosition` 和 `TileOffset`，建筑实际放置用 `tile - TileOffset`；不能把鼠标格直接当左上角。
-- 当前 DLL 中的方法是 `Target.MoveBuilding`（上游源码可位于 `Move.cs` 的 partial class 中，并没有 `TargetData.Move` 类型）。同地点移动调用 `buildStructure`，成功后 `performActionOnBuildingPlacement`，并清空 `TargetObject`。
-- 跨地点分支会调整室内出口并使用门的 Y 加 1；首版仍只做同一农场的普通空牛棚。具体补丁、候选占地验证及失败后的恢复尚未实现。
-
-后续拿到匹配依赖，先重编译／交付诊断包做本机加载检查，同时继续实现真实宿主和该版本的输入适配。现有独立会话不能被描述为已经接管上述方法。
-
-## 已经可运行验证的部分
-
-`RotationEditor` 接收搬动提供方的当前状态和输入，使用原 `MoveModeGesture`，创建／结束单栋 `RotationSession`。拿起那次点击不放下，长按拖动转一档，松手保持预览，之后短点击提交；失焦或失去输入所有权丢弃未提交草稿。手势阈值和正向拖动对应哪种旋转由适配方传入，没有新增全局启动键。
-
-`RotationSession` 只允许当前受支持的普通空牛棚进入编辑。预览不改宿主；放下前检查建筑是否自拿起后发生变化，再验证放置和门外一格净空，最后交给宿主提交。取消不撤销别的系统随后做的修改，完成的会话不能重复提交。实例身份必须由宿主提供，不能使用坐标或建筑种类作身份。
-
-`FacingData` 为每栋建筑生成 `quellah.BuildingRotation/facing` 数据，取值为 `1:south/east/north/west`，同时保留其他 mod 字段；不重复保存游戏已经管理的位置。缺少本字段视作原始朝向，未知格式明确拒绝读取而不覆盖。这里验证的是字典数据的保存／重建，**尚未接入真实 Building.modData 或游戏存档序列化**。
-
-`RotationQueries` 每次从宿主读取已提交状态，用于建筑阻挡、真实门动作和返回目标。入口要求动作格落在当前门区、人物位于门外且面向门；室内仍使用原房间。返回时核对房间归属，重新按建筑当前位置计算，先取整人物位置，再用对应完整碰撞框检查实际落点。房间后来有摆放可以阻止再次编辑，但不会仅因此阻止玩家返回。返回目标只是待执行数据，不是已经传送。
-
-## 尚缺的游戏边界
-
-`IRotationHost` 是待实现的真实宿主接口。自检中实现的是内存宿主，用于验证调用合同，不能当作原版游戏模拟器。
-
-| 宿主接口 | 实际游戏适配方要完成的工作 |
+| 组件／接口 | 当前实现 |
 | --- | --- |
-| `Read` | 从单栋真实建筑读取最终运行时数据、位置、modData、房间身份和编辑资格；相关数据变化后修订号也必须变；换存档后旧身份失效 |
-| `CanPlace` | 用候选范围替代本建筑旧范围，检查地图、地形、物件、角色、其他建筑及两类附加区域；保留原有放置规则 |
-| `CanOccupy` | 检查完整角色／通道矩形与其他世界碰撞，排除本建筑旧几何；Runtime 再合成候选建筑碰撞 |
-| `TryApply` | 写入前再核验，并将位置、宽高、门／出口缓存和 modData 一起应用；失败或异常要真正恢复已写内容 |
+| `LetsMoveItProbe` | 核对 4.5.2／0.6.20 后绑定实际 mod 实例及私有成员，读取单选、配置、地点、鼠标抓取偏移；已有旧诊断包实机证据 |
+| `RotationController` | 拾取后创建编辑会话，在原放置方法前协调输入；长按 350ms／侧拖 24px 转一档，松手保留预览，短点击提交；取消、失焦或保存时清理未提交操作 |
+| `Read` | 从真实 GetData 映射不可变布局；按 Building 对象登记身份，快照修订包含位置、尺寸、门、元数据、房间、出口和编辑资格变化；换存档清除 |
+| `CanPlace` | 候选占地和两类附加区域逐格调用原版 isBuildable，加边界、角色与地面检查；只在本次查询中排除旧建筑，不切换有副作用的 isMoving |
+| `CanOccupy` | 用实际完整矩形查地图／物件／角色碰撞；由 Runtime 再合成候选建筑自身阻挡 |
+| `TryApply` | 重读快照后重新验证，保存旧字段，再写位置／宽高／门／朝向键和出口；异常时尝试恢复每个旧字段，恢复异常明确报告 |
+| `RotationPatches` | 已标记普通 Barn 的逐格通行、矩形碰撞、真实人门动作、返回传送、加载重建和占位绘制 |
 
-**接口里写明“原子提交”不等于游戏回滚已经实现。** 内存自检的失败案例发生在写入前；游戏发生半写入后的恢复、其他 mod 的副作用、保存期间的编辑收尾，都仍是宿主适配与实机测试的工作。`CanPlace` 返回 true 也依赖宿主实现正确；本项目没有绕过原版规则的默认“总是允许”宿主。
+编辑要求普通 Barn、原始 Building 类型、单人主玩家、当前农场、未施工／升级且房内无物品／角色／动物。房间后来放物品会阻止再次编辑，但不会仅因此阻止出门。旋转源格由 Let's Move It 的 TileOffset 逆变换取得，每次转向后仍跟随鼠标。物理按键采样避免被 SMAPI 输入抑制误读为松手。
 
-普通空牛棚是编辑资格范围；其他建筑、动物、升级、联机和搬动 mod 的具体兼容不随这批代码自动获得。查询方法也必须由真实补丁有条件调用，不能替换全世界的碰撞结果。
+预览不写游戏对象。提交采用直接更新本建筑必要字段的方式，避免原建造／放置回调删除草、物件或挖掘点；因此本版要求先清理地面。第三方依赖放置回调的行为、游戏内故障恢复与事件副作用仍待验证。没有改变同类型建筑的共享定义。
 
-## SMAPI 入口源码
+朝向写入真实 `Building.modData` 的 `quellah.BuildingRotation/facing`，值为 `1:south/east/north/west`，只修改自己的键。位置沿用游戏原字段。建筑数据重新载入、房间重建、出口更新和 SaveLoaded 后重建尺寸、门和 warp；保存前终止未提交编辑。未知朝向格式明确拒绝，不覆盖为默认值。
 
-`src/BuildingRotation.Smapi` 已有工程、manifest 和 `ModEntry`：订阅 `GameLaunched`／`SaveLoaded`／`ReturnedToTitle`／`UpdateTicked`，并提供开发控制台命令 `br_status` 报告程序集版本、加载状态、只读搬动状态与未接通的功能。它目前不接管鼠标，不打 Harmony 补丁，也不写存档。记录的程序集版本不一定等于游戏产品版本；准确版本仍以实际 SMAPI 启动信息和安装文件交叉核对。
+正常进门继续执行原版 doAction，以保留骑乘限制、锁、声音和 OnUseHumanDoor。入口须从当前门外格接近并面向门；房间保持未旋转布局。返回前核对归属、净空及取整后的完整人物碰撞框；传送完成后再核对并校准位置。若淡入期间出口被占用，尝试返回原房间标准入口。落点检查不等于已验证从门到农场其他地方的路线畅通。
 
-工程显式引用本机游戏、SMAPI 和 CoreInterfaces DLL，引用设置 `Private=false`，不把游戏程序集打进输出包，也不自动部署。`net6.0` 已与本次游戏文件对齐；`MinimumApiVersion=4.5.2` 用于本诊断包，**并非完整玩法已核定的支持范围**。实际建筑接入时仍需补齐全部引用，而非造同名桩 DLL。
+## 验证与交付
 
-```sh
-dotnet build src/BuildingRotation.Smapi/BuildingRotation.Smapi.csproj -p:GamePath="/path/to/game"
-```
+`BuildingRotation.GameAudit` 使用 System.Reflection.Metadata 读取实际 DLL，不执行游戏。以下 **13/13 目标参数类型及方法体存在检查通过**：
 
-可传 `-p:GameTargetFramework=netX.Y` 指定已核验的框架。此前仅运行过缺少 GamePath 的检查；最新已进行真实 DLL 构建，结果及版本差异见本文开头，游戏加载仍未验证。
+- Building：occupiesTile(int,int,bool)、isTilePassable(Vector2)、intersects(Rectangle)、draw(SpriteBatch)、doAction(Vector2,Farmer)、LoadFromBuildingData(BuildingData,bool,bool)、load()、updateInteriorWarps(GameLocation)。
+- Game1：performWarpFarmer(LocationRequest,int,int,int)。
+- Let's Move It ModEntry：SelectTargetAction(ButtonPressedEventArgs)、SingleTargetAction(ButtonPressedEventArgs)、ClearSelection()；Target：Render(SpriteBatch,GameLocation,Vector2)。
 
-加载入口参照 [SMAPI Mod 基类](https://github.com/Pathoschild/SMAPI/blob/develop/src/SMAPI/Mod.cs) 和 [SaveLoaded 事件定义](https://github.com/Pathoschild/SMAPI/blob/develop/src/SMAPI/Events/SaveLoadedEventArgs.cs)。构建路径与后续可选自动配置参考 [SMAPI 构建包文档](https://github.com/Pathoschild/SMAPI/blob/develop/docs/technical/mod-package.md)。本次读取于 2026-09-10，未复制上游实现；版本接入时仍需固定来源。
+Harmony 安装阶段异常会撤回本 mod ID 的补丁并报告 prototype unavailable。签名存在与编译成功不能代替它在游戏中的安装成功，更不能代替四向行为验证。
 
-## 本批验证与真正的下一步
+.NET SDK 8.0.424、官方 .NET 6.0.36 targeting packs 下 Release 构建通过；游戏 runtimeconfig 为 net6.0／6.0.32，没有凭空升级框架。外部 DLL 引用设 Private=false，不自动部署、不伪造同名桩引用。构建及打包命令见实验版说明。
 
-本批五个无游戏依赖工程标准 MSBuild 构建成功，运行标准构建产物得到 **100/100 通过**。自检新增 12 组，覆盖真实 Barn 四向提交与元数据重建、碰撞／门／返回一致性、另一栋建筑不变、非法地块／堵门、外部修改、宿主异常、取整后的碰撞框、重复搬动，以及拾取—旋转—松手—点击放置的完整调用流程。原始上传 ZIP 当前无法由 zipfile 打开，因此使用此前已核验并保存的真实字段摘要，不重报原 ZIP 检查通过。
+0.1.0 ZIP 仅包含四个自有 DLL、manifest 和中文说明，六文件内容与 CRC 校验通过。SHA-256：`cbbea8360ddad4c6b019b852769a5e579bcc5634113287dd69d18214f25d6270`。此前 100 项 Runtime／Core 独立自检保持历史结果，本轮未修改其行为，也未重复运行。
 
-接下来安装诊断包验证加载与状态读取，同时补齐三项游戏附属引用，继续实现真实宿主和搬动提供方，随后逐项接碰撞、门、返回、绘制和游戏存读档。可以用方向与入口可辨认的占位图，不等全部室内或马厩方案定稿。
+打包后工作区曾短暂断线，已恢复并继续完整同步；中间的断线接续提交不代表代码丢失或仍缺文件。
+
+**下一步：** 安装新包、移除旧 Diagnostics，避免重复 UniqueID；用普通空牛棚先反馈预览、旋转和放置，再完成四向碰撞／进出门、取消、多栋隔离和过夜重进。只将有实机证据的项目记为验收完成。渲染批次、输入顺序、真实落点和第三方影响是这次反馈要解决的具体不确定性。

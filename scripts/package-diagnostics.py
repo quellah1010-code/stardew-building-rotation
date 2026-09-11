@@ -1,4 +1,4 @@
-"""Package only this project's compiled diagnostic code and instructions."""
+"""Package only this project's compiled mod code and the matching test instructions."""
 import hashlib
 import json
 from pathlib import Path
@@ -16,18 +16,22 @@ if manifest["UniqueID"] != "quellah.BuildingRotation":
 version = manifest["Version"]
 if not all(c in "0123456789." for c in version):
     raise SystemExit("Unexpected package version.")
+prototype = manifest["Name"] == "Building Rotation — Prototype"
+package_name = "BuildingRotation.Prototype" if prototype else "BuildingRotation.Diagnostics"
 files = {
     "manifest.json": manifest_path,
     "BuildingRotation.Smapi.dll": build / "BuildingRotation.Smapi.dll",
     "BuildingRotation.Runtime.dll": build / "BuildingRotation.Runtime.dll",
     "BuildingRotation.Core.dll": build / "BuildingRotation.Core.dll",
-    "README.md": root / "docs/diagnostic-test.md",
+    "README.md": root / ("docs/prototype-test.md" if prototype else "docs/diagnostic-test.md"),
 }
+if prototype:
+    files["BuildingRotation.Data.dll"] = build / "BuildingRotation.Data.dll"
 # Resolve the complete allowlist before creating the output archive.
 contents = {name: path.read_bytes() for name, path in files.items()}
-output = root / "artifacts" / f"BuildingRotation.Diagnostics-{version}.zip"
+output = root / "artifacts" / f"{package_name}-{version}.zip"
 output.parent.mkdir(exist_ok=True)
-prefix = "BuildingRotation.Diagnostics/"
+prefix = package_name + "/"
 with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
     for name, data in sorted(contents.items()):
         info = zipfile.ZipInfo(prefix + name, date_time=(2000, 1, 1, 0, 0, 0))
