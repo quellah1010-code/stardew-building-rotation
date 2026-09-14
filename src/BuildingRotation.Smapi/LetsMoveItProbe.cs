@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace BuildingRotation.Smapi;
 
-// Temporary read-only diagnostic for the inspected SMAPI 4.5.2 / Let's Move It
-// 0.6.20 binaries. These private members aren't a public compatibility API.
-// This probe never grants RotationEditor input ownership or writes live state.
+// Adapter for the inspected SMAPI 4.5.2 / Let's Move It 0.6.20 binaries.
+// Read observes state; ClearSelection invokes the mover's existing cancellation.
+// These private members aren't a public compatibility API.
 internal sealed class LetsMoveItProbe
 {
     private const BindingFlags Members = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
@@ -82,6 +82,7 @@ internal sealed class LetsMoveItProbe
         && ((IDictionary)multipleTargets.GetValue(mod)!).Count == 0;
     internal Vector2 GrabOffset => (Vector2)Property(singleTarget.FieldType, "TileOffset").GetValue(SelectedTarget)!;
     internal GameLocation TargetLocation => (GameLocation)Property(singleTarget.FieldType, "TargetLocation").GetValue(SelectedTarget)!;
+    internal string MoveKeyDescription => Setting<KeybindList>("MoveKey").ToString() ?? "<unavailable>";
     internal bool UsesLeftMouse
     {
         get

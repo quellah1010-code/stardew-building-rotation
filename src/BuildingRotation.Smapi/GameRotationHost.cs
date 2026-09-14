@@ -94,6 +94,16 @@ internal sealed class GameRotationHost : IRotationHost
             && !house.animals.Pairs.Any() && !house.objects.Pairs.Any() && house.furniture.Count == 0
             && house.characters.Count == 0 && !house.farmers.Any() && !house.terrainFeatures.Pairs.Any();
 
+    // Diagnostic snapshot only: leave the eligibility policy in IsEmpty unchanged.
+    public static string DescribeEligibility(Building b)
+    {
+        GameLocation? interior = b.GetIndoors();
+        string summary = $"type={b.buildingType.Value}; runtimeType={b.GetType().FullName}; construction={b.daysOfConstructionLeft.Value}; upgrade={b.daysUntilUpgrade.Value}; interiorType={interior?.GetType().FullName ?? "<not created>"}";
+        if (interior is AnimalHouse house)
+            summary += $"; residentAnimals={house.animalsThatLiveHere.Count}; animals={house.animals.Pairs.Count()}; objects={house.objects.Pairs.Count()}; furniture={house.furniture.Count}; characters={house.characters.Count}; farmers={house.farmers.Count()}; terrain={house.terrainFeatures.Pairs.Count()}";
+        return summary;
+    }
+
     public BuildingLayout? ManagedLayout(Building b)
     {
         if (b.buildingType.Value != "Barn" || !b.modData.ContainsKey(FacingData.Key)) return null;
