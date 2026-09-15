@@ -93,6 +93,7 @@ public sealed class ModEntry : Mod
 
     private void Report()
     {
+        Monitor.Log($"Mod version: {ModManifest.Version}.", LogLevel.Info);
         Monitor.Log($"Game assembly: {typeof(Game1).Assembly.GetName().Version}; SMAPI: {Constants.ApiVersion}; runtime assembly: {typeof(FacingData).Assembly.GetName().Version}.", LogLevel.Info);
         Monitor.Log($"Save loaded: {Context.IsWorldReady}; Let's Move It loaded: {Helper.ModRegistry.IsLoaded("Exblosis.LetsMoveIt")}. This does not verify its settings or input integration.", LogLevel.Info);
         Monitor.Log("Prototype: ordinary empty Barn only, single player, Let's Move It single selection / MouseLeft / no copy. Hold + sideways drag to turn; click to commit. Gameplay needs testing.", LogLevel.Info);
