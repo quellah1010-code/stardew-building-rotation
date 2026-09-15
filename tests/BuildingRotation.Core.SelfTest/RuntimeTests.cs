@@ -39,6 +39,27 @@ internal static class RuntimeTests
 
     internal static IEnumerable<(string Name, Action Run)> Cases()
     {
+        yield return ("empty Barn permits its fixed Feed Hopper and rejects added player objects", () =>
+        {
+            // Supplied Buildings.json: Barn IndoorItems Default_FeedHopper, (BC)99, (6,3), Indestructible.
+            var tile = new TilePoint(6, 3);
+            var hopper = (tile, "(BC)99", true);
+            Check(BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { hopper }, tile), "A fresh Barn was rejected.");
+            Check(BarnInteriorPolicy.HasOnlyBuiltInObjects(Array.Empty<(TilePoint, string, bool)>(), tile), "Empty room rejected.");
+            Check(!BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { hopper, (new TilePoint(3, 4), "(BC)130", false) }, tile), "Player chest ignored.");
+            Check(!BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { hopper, (new TilePoint(7, 3), "(O)178", false) }, tile), "Hay in the room ignored.");
+        });
+        yield return ("Barn built-in exception follows declared fixture and cannot excuse a replacement", () =>
+        {
+            var tile = new TilePoint(6, 3);
+            var hopper = (tile, "(BC)99", true);
+            Check(!BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { hopper }, null), "Undeclared fixture accepted.");
+            Check(!BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { hopper }, new TilePoint(5, 3)), "Misplaced fixture accepted.");
+            Check(!BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { (tile, "(BC)99", false) }, tile), "Loose Hopper accepted.");
+            Check(!BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { (tile, "(BC)130", true) }, tile), "Different object at fixture tile accepted.");
+            var movedTile = new TilePoint(8, 2);
+            Check(BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { (movedTile, "(BC)99", true) }, movedTile), "Live declaration ignored.");
+        });
         yield return ("runtime editor pickup rotate release place pipeline commits exactly once", () =>
         {
             var host = new Host(); var editor = new RotationEditor(host, 300, 20, 1);

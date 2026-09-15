@@ -20,6 +20,10 @@ internal sealed class RotationController
     private TilePoint sourceGrab;
     private bool previewValid;
     private string lastError = "";
+    private string lastSelectionReport = "no selection attempt observed since load";
+    public string DiagnosticStatus => $"active={ActiveBuilding != null}; last attempt: {lastSelectionReport}";
+    public void ResetDiagnostics() => lastSelectionReport = "no selection attempt observed since load";
+
     public GameRotationHost Host { get; }
     public Building? ActiveBuilding { get; private set; }
     public object? ActiveTarget => heldTarget;
@@ -33,23 +37,59 @@ internal sealed class RotationController
 
     public void SelectionChanged()
     {
-        if (heldTarget != null && !ReferenceEquals(heldTarget, mover.SelectedTarget)) Cancel(false);
-        if (ActiveBuilding != null || mover.SelectedBuilding is not Building b || !mover.IsSingleMove || !mover.UsesLeftMouse) return;
-        if (!Context.IsWorldReady || !Context.IsPlayerFree || mover.TargetLocation != Game1.currentLocation || !GameRotationHost.IsEmpty(b)) return;
         try
         {
+            if (heldTarget != null && !ReferenceEquals(heldTarget, mover.SelectedTarget)) Cancel(false);
+            if (ActiveBuilding != null) return;
+            if (mover.SelectedBuilding is not Building b)
+            {
+                lastSelectionReport = "no building target";
+                return;
+            }
+            if (!mover.IsSingleMove)
+            { SelectionRejected("single-move settings: " + mover.Read()); return; }
+            if (!mover.UsesLeftMouse)
+            { SelectionRejected("MoveKey=" + mover.MoveKeyDescription + "; expected a single MouseLeft binding."); return; }
+            if (!Context.IsWorldReady || !Context.IsPlayerFree)
+            { SelectionRejected($"worldReady={Context.IsWorldReady}; playerFree={Context.IsPlayerFree}"); return; }
+            if (mover.TargetLocation != Game1.currentLocation)
+            { SelectionRejected($"target location={mover.TargetLocation?.NameOrUniqueName}; current location={Game1.currentLocation?.NameOrUniqueName}"); return; }
+            if (!GameRotationHost.IsEmpty(b))
+            { SelectionRejected("building eligibility: " + GameRotationHost.DescribeEligibility(b)); return; }
+
             string id = Host.Identify(b);
             BuildingSnapshot snapshot = Host.Read(id);
-            if (!snapshot.SupportsPrototype) return;
+            if (!snapshot.SupportsPrototype)
+            {
+                SelectionRejected($"world eligibility: multiplayer={Context.IsMultiplayer}; mainPlayer={Context.IsMainPlayer}; parentIsFarm={ReferenceEquals(b.GetParentLocation(), Game1.getFarm())}; playerAtParent={ReferenceEquals(Game1.currentLocation, b.GetParentLocation())}; " + GameRotationHost.DescribeEligibility(b));
+                return;
+            }
             Vector2 grab = mover.GrabOffset;
             sourceGrab = snapshot.Definition.Collision.Footprint.InverseTransformCell(new TilePoint((int)grab.X, (int)grab.Y), snapshot.Pose.Direction);
             heldTarget = mover.SelectedTarget;
             ActiveBuilding = b;
             context = new MoveModeContext("Exblosis.LetsMoveIt/0.6.20", Guid.NewGuid().ToString("N"), id, true, true, true);
             Sample(); // The held pickup press is consumed by the existing gesture gate.
+            if (ActiveBuilding == null)
+            {
+                lastSelectionReport = "session ended during its initial sample; see the preceding warning";
+                return;
+            }
+            lastSelectionReport = $"accepted {b.buildingType.Value}; MoveKey={mover.MoveKeyDescription}";
             monitor.Log("Rotation preview active: hold left mouse 350ms and drag sideways, release, then click to place. Cancel with the mover's cancel key.", LogLevel.Info);
         }
-        catch (Exception ex) { Cancel(false); Warn(ex.Message); }
+        catch (Exception ex)
+        {
+            Cancel(false);
+            SelectionRejected("selection exception: " + ex.Message);
+            Warn(ex.Message);
+        }
+    }
+
+    private void SelectionRejected(string reason)
+    {
+        lastSelectionReport = "rejected: " + reason;
+        monitor.Log("Rotation selection " + lastSelectionReport, LogLevel.Info);
     }
 
     // A Harmony prefix calls this BEFORE Let's Move It's press-to-place method.

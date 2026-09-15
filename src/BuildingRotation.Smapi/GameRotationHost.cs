@@ -91,8 +91,27 @@ internal sealed class GameRotationHost : IRotationHost
         => b.buildingType.Value == "Barn" && b.GetType() == typeof(Building)
             && b.daysOfConstructionLeft.Value == 0 && b.daysUntilUpgrade.Value == 0
             && b.GetIndoors() is AnimalHouse house && house.animalsThatLiveHere.Count == 0
-            && !house.animals.Pairs.Any() && !house.objects.Pairs.Any() && house.furniture.Count == 0
+            && !house.animals.Pairs.Any() && HasOnlyBuiltInObjects(b, house) && house.furniture.Count == 0
             && house.characters.Count == 0 && !house.farmers.Any() && !house.terrainFeatures.Pairs.Any();
+
+    private static bool HasOnlyBuiltInObjects(Building b, AnimalHouse house)
+    {
+        var hopper = b.GetData()?.IndoorItems?.FirstOrDefault(item => item.Id == "Default_FeedHopper"
+            && item.ItemId == "(BC)99" && item.Indestructible);
+        TilePoint? tile = hopper == null ? null : new TilePoint(hopper.Tile.X, hopper.Tile.Y);
+        return BarnInteriorPolicy.HasOnlyBuiltInObjects(house.objects.Pairs.Select(p =>
+            (new TilePoint((int)p.Key.X, (int)p.Key.Y), p.Value.QualifiedItemId, p.Value.fragility.Value == 2)), tile);
+    }
+
+    // Keep this snapshot separate from the eligibility decision.
+    public static string DescribeEligibility(Building b)
+    {
+        GameLocation? interior = b.GetIndoors();
+        string summary = $"type={b.buildingType.Value}; runtimeType={b.GetType().FullName}; construction={b.daysOfConstructionLeft.Value}; upgrade={b.daysUntilUpgrade.Value}; interiorType={interior?.GetType().FullName ?? "<not created>"}";
+        if (interior is AnimalHouse house)
+            summary += $"; residentAnimals={house.animalsThatLiveHere.Count}; animals={house.animals.Pairs.Count()}; objects={house.objects.Pairs.Count()}; onlyBuiltInObjects={HasOnlyBuiltInObjects(b, house)}; furniture={house.furniture.Count}; characters={house.characters.Count}; farmers={house.farmers.Count()}; terrain={house.terrainFeatures.Pairs.Count()}";
+        return summary;
+    }
 
     public BuildingLayout? ManagedLayout(Building b)
     {
