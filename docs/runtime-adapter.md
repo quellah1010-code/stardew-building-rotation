@@ -4,9 +4,11 @@
 
 ## 真实环境与已收到的证据
 
-最新 0.1.0 实机日志显示 `prototype attached`，探针看到了普通 Barn，但尚无成功旋转预览。原始 Content 和 1.6.15 初始化代码确认默认取草槽被加入 objects，旧零物件限制错误拒绝新建牛棚。0.1.1 只允许实际数据中声明位置的固定设施，其余物品／动物限制不变；选择失败会打印原因，br_status 保留最后一次选择结果。见 [具体排查](rotation-input-investigation.md)。
+2026-09-15 最新 0.1.2 实机证据：普通 Barn 的旋转预览已进入，East／North／West 转向与一次朝东提交有日志；重选读取位置 (37,54)、4×7。用户在旧档临时测试而不保存，不能认定存读档通过。旧朝向与新预览重叠已登记，下一步测碰撞和进出门；见[实机记录](rotation-input-investigation.md)。
 
-用户最新三张截图确认 Windows 11、Stardew Valley 1.6.15 build 24356、SMAPI 4.5.2。0.0.2 诊断包已加载，显示 `read-only selection probe attached`；进入存档后配置为 `enabled=True, copy=False, multi=False`，观察到多次 `nothing held → building=Deluxe Barn → nothing held`。建筑移动后，真实位置从 (20,51) 变成 (38,53)。这证明旧包的加载和只读状态观察；不证明新旋转补丁或豪华牛棚支持。截图中个人标识不发布。
+此前 0.1.0 实机日志显示 `prototype attached`，探针看到了普通 Barn，但尚无成功旋转预览。原始 Content 和 1.6.15 初始化代码确认默认取草槽被加入 objects，旧零物件限制错误拒绝新建牛棚。0.1.1 只允许实际数据中声明位置的固定设施，其余物品／动物限制不变；选择失败会打印原因，br_status 保留最后一次选择结果。见 [具体排查](rotation-input-investigation.md)。
+
+此前三张截图确认 Windows 11、Stardew Valley 1.6.15 build 24356、SMAPI 4.5.2。0.0.2 诊断包已加载，显示 `read-only selection probe attached`；进入存档后配置为 `enabled=True, copy=False, multi=False`，观察到多次 `nothing held → building=Deluxe Barn → nothing held`。建筑移动后，真实位置从 (20,51) 变成 (38,53)。这证明旧包的加载和只读状态观察；不证明新旋转补丁或豪华牛棚支持。截图中个人标识不发布。
 
 本批需要的引用已齐。游戏主 DLL 为 1.6.15.24356，SMAPI／CoreInterfaces／Toolkit 均为 4.5.2，Harmony 为 2.2.2，Let's Move It 为 0.6.20。最初游戏 ZIP 中的 SMAPI 4.3.2 与截图不一致，后来上传的 SMAPI 和 smapi-internal 已解除该问题。此前逐文件哈希可查 [0.0.2 核对记录](https://github.com/quellah1010-code/stardew-building-rotation/blob/0eb7a3a21ee456474f257b33fc18ab845d6915d6/docs/runtime-adapter.md)。
 
