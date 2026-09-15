@@ -21,6 +21,8 @@ public sealed class ModEntry : Mod
         helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         helper.Events.GameLoop.Saving += (_, _) => rotation?.Cancel(true);
         helper.Events.Display.RenderedWorld += (_, e) => rotation?.DrawPreview(e.SpriteBatch);
+        helper.Events.Input.ButtonPressed += (_, e) => { if (e.Button == SButton.MouseRight) rotation?.RightMouseChanged(); };
+        helper.Events.Input.ButtonReleased += (_, e) => { if (e.Button == SButton.MouseRight) rotation?.RightMouseChanged(); };
         helper.ConsoleCommands.Add("br_status", "Report Building Rotation dependencies and integration status.",
             (_, _) => Report());
         Report();
@@ -96,7 +98,7 @@ public sealed class ModEntry : Mod
         Monitor.Log($"Mod version: {ModManifest.Version}.", LogLevel.Info);
         Monitor.Log($"Game assembly: {typeof(Game1).Assembly.GetName().Version}; SMAPI: {Constants.ApiVersion}; runtime assembly: {typeof(FacingData).Assembly.GetName().Version}.", LogLevel.Info);
         Monitor.Log($"Save loaded: {Context.IsWorldReady}; Let's Move It loaded: {Helper.ModRegistry.IsLoaded("Exblosis.LetsMoveIt")}. This does not verify its settings or input integration.", LogLevel.Info);
-        Monitor.Log("Prototype: ordinary empty Barn only, single player, Let's Move It single selection / MouseLeft / no copy. Hold + sideways drag to turn; click to commit. Gameplay needs testing.", LogLevel.Info);
+        Monitor.Log("Prototype: ordinary empty Barn only, single player, Let's Move It single selection / MouseLeft / no copy. RIGHT hold + sideways drag to turn; LEFT click to commit. Gameplay needs testing.", LogLevel.Info);
         Monitor.Log(probeStatus, LogLevel.Info);
         if (rotation != null) Monitor.Log("Rotation selection: " + rotation.DiagnosticStatus, LogLevel.Info);
         ReportSelection(true);

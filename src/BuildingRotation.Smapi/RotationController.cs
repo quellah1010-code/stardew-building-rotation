@@ -50,6 +50,8 @@ internal sealed class RotationController
             { SelectionRejected("single-move settings: " + mover.Read()); return; }
             if (!mover.UsesLeftMouse)
             { SelectionRejected("MoveKey=" + mover.MoveKeyDescription + "; expected a single MouseLeft binding."); return; }
+            if (mover.RightMouseConflict is string conflict)
+            { SelectionRejected($"MouseRight is already used by Let's Move It {conflict}; release that binding before using right-drag rotation."); return; }
             if (!Context.IsWorldReady || !Context.IsPlayerFree)
             { SelectionRejected($"worldReady={Context.IsWorldReady}; playerFree={Context.IsPlayerFree}"); return; }
             if (mover.TargetLocation != Game1.currentLocation)
@@ -69,14 +71,14 @@ internal sealed class RotationController
             heldTarget = mover.SelectedTarget;
             ActiveBuilding = b;
             context = new MoveModeContext("Exblosis.LetsMoveIt/0.6.20", Guid.NewGuid().ToString("N"), id, true, true, true);
-            Sample(); // The held pickup press is consumed by the existing gesture gate.
+            Sample(); // Sample the separate rotation button; never reinterpret the pickup click.
             if (ActiveBuilding == null)
             {
                 lastSelectionReport = "session ended during its initial sample; see the preceding warning";
                 return;
             }
-            lastSelectionReport = $"accepted {b.buildingType.Value}; MoveKey={mover.MoveKeyDescription}";
-            monitor.Log("Rotation preview active: hold left mouse 350ms and drag sideways, release, then click to place. Cancel with the mover's cancel key.", LogLevel.Info);
+            lastSelectionReport = $"accepted {b.buildingType.Value}; MoveKey={mover.MoveKeyDescription}; rotate=MouseRight drag";
+            monitor.Log("Rotation preview active: hold RIGHT mouse 350ms and drag sideways to turn; LEFT click to place. Right release keeps the preview. Cancel with the mover's cancel key.", LogLevel.Info);
         }
         catch (Exception ex)
         {
@@ -99,7 +101,21 @@ internal sealed class RotationController
         if (ActiveBuilding != null)
         {
             helper.Input.Suppress(SButton.MouseLeft);
-            Sample();
+            try
+            {
+                Sample(); // Update the cursor anchor and any final rotation before committing.
+                if (ActiveBuilding != null)
+                {
+                    if (editor.TryPlace(64))
+                    {
+                        monitor.Log($"Rotation committed: {ActiveBuilding.buildingType.Value} / {editor.Session!.Preview.Pose.Direction}.", LogLevel.Info);
+                        Game1.playSound("axchop");
+                        Cancel(true);
+                    }
+                    else Warn(editor.Session?.LastRejection ?? "The rotation session ended; pick up the Barn again.");
+                }
+            }
+            catch (Exception ex) { Cancel(true); Warn($"Rotation placement failed: {ex.Message}"); }
             return false;
         }
         if (mover.SelectedBuilding is Building b && b.modData.ContainsKey(FacingData.Key))
@@ -109,6 +125,15 @@ internal sealed class RotationController
             return false;
         }
         return true;
+    }
+
+    // Suppress the normal game interaction on the press/release event, not a later tick.
+    // Outside an active supported selection, right mouse keeps its usual meaning.
+    public void RightMouseChanged()
+    {
+        if (ActiveBuilding == null) return;
+        helper.Input.Suppress(SButton.MouseRight);
+        Tick();
     }
 
     public void Tick()
@@ -130,22 +155,19 @@ internal sealed class RotationController
         Footprint source = Host.Definition(ActiveBuilding).Collision.Footprint;
         TilePoint cursor = new((int)Game1.currentCursorTile.X, (int)Game1.currentCursorTile.Y);
         TilePoint origin = cursor - source.TransformCell(sourceGrab, facing);
-        MoveGestureResult input = editor.Sample(context, origin, mouse.LeftButton == ButtonState.Pressed,
-            mouse.X, mouse.Y, Environment.TickCount64, 64);
-        if (input.IsHandled) helper.Input.Suppress(SButton.MouseLeft);
-        if (editor.Session?.State == PlacementState.Placed)
-        {
-            monitor.Log($"Rotation committed: {ActiveBuilding.buildingType.Value} / {editor.Session.Preview.Pose.Direction}.", LogLevel.Info);
-            Game1.playSound("axchop");
-            Cancel(true);
-            return;
-        }
+        bool rightDown = mouse.RightButton == ButtonState.Pressed;
+        MoveGestureResult input = editor.Sample(context, origin, rightDown,
+            mouse.X, mouse.Y, Environment.TickCount64);
+        if (input.IsHandled || rightDown) helper.Input.Suppress(SButton.MouseRight);
         if (editor.Session?.State == PlacementState.Editing)
         {
             Facing next = editor.Session.Preview.Pose.Direction;
-            if (next != facing) editor.Session.MoveTo(cursor - source.TransformCell(sourceGrab, next));
+            if (next != facing)
+            {
+                editor.Session.MoveTo(cursor - source.TransformCell(sourceGrab, next));
+                monitor.Log($"Rotation preview turned: {next}.", LogLevel.Info);
+            }
             previewValid = editor.Session.Validate(64);
-            if (input.Intent == GestureIntent.Place && !previewValid) Warn(editor.Session.LastRejection);
         }
         else if (editor.Session == null)
         {
@@ -174,6 +196,8 @@ internal sealed class RotationController
     {
         if (Preview is not BuildingLayout layout) return;
         DrawLayout(batch, layout, previewValid ? Color.LimeGreen : Color.OrangeRed, true);
+        Vector2 top = Game1.GlobalToLocal(new Vector2(layout.Pose.Origin.X * 64, layout.Pose.Origin.Y * 64));
+        batch.DrawString(Game1.smallFont, "Right drag: turn | Left click: place", new Vector2(top.X, top.Y - 60), Color.White);
     }
 
     public static void DrawLayout(SpriteBatch batch, BuildingLayout layout, Color color, bool preview)

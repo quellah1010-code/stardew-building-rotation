@@ -1,7 +1,7 @@
 {
   "Name": "Building Rotation — Prototype",
   "Author": "quellah1010-code",
-  "Version": "0.1.1",
+  "Version": "0.1.2",
   "Description": "Experimental rotation for an empty ordinary Barn using Let's Move It. Placeholder graphics; single-player test saves only.",
   "UniqueID": "quellah.BuildingRotation",
   "EntryDll": "BuildingRotation.Smapi.dll",

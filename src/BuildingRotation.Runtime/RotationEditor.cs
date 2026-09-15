@@ -3,8 +3,8 @@ using BuildingRotation.Core;
 
 namespace BuildingRotation.Runtime
 {
-    // Composes the existing gesture with a placement session. The provider still has to
-    // discover live move mode and suppress its own handling whenever IsHandled is true.
+    // The sampled button only rotates. Placement is a separate explicit provider action.
+    // The provider suppresses the rotation button whenever IsHandled is true.
     public sealed class RotationEditor
     {
         private readonly IRotationHost host;
@@ -23,7 +23,7 @@ namespace BuildingRotation.Runtime
         }
 
         public MoveGestureResult Sample(MoveModeContext? current, TilePoint hoverOrigin,
-            bool pointerDown, int screenX, int screenY, long milliseconds, int pixelsPerTile)
+            bool pointerDown, int screenX, int screenY, long milliseconds)
         {
             if (current != null && (!current.CanEdit || !host.Read(current.HeldBuildingId!).SupportsPrototype)) current = null;
             bool same = context == null ? current == null : current != null
@@ -45,10 +45,13 @@ namespace BuildingRotation.Runtime
             {
                 case GestureIntent.RotatePositive: Session.RotateSteps(positiveDragSteps); break;
                 case GestureIntent.RotateNegative: Session.RotateSteps(-positiveDragSteps); break;
-                case GestureIntent.Place: Session.TryPlace(pixelsPerTile); break;
+                // A short rotation-button click has no placement meaning.
             }
             return input;
         }
+
+        public bool TryPlace(int pixelsPerTile)
+            => Session?.State == PlacementState.Editing && Session.TryPlace(pixelsPerTile);
 
         // Focus loss, cancellation, location change or returned-to-title.
         public void Reset()

@@ -60,35 +60,74 @@ internal static class RuntimeTests
             var movedTile = new TilePoint(8, 2);
             Check(BarnInteriorPolicy.HasOnlyBuiltInObjects(new[] { (movedTile, "(BC)99", true) }, movedTile), "Live declaration ignored.");
         });
-        yield return ("runtime editor pickup rotate release place pipeline commits exactly once", () =>
+        yield return ("runtime rotation button never places; explicit placement commits exactly once", () =>
         {
             var host = new Host(); var editor = new RotationEditor(host, 300, 20, 1);
             var context = new MoveModeContext("test-mover", "session-1", "a", true, true, true);
             var origin = new TilePoint(20, 20);
-            editor.Sample(context, origin, true, 0, 0, 0, 64);
-            editor.Sample(context, origin, false, 0, 0, 10, 64);
+            editor.Sample(context, origin, true, 0, 0, 0);
+            editor.Sample(context, origin, false, 0, 0, 10);
             Equal(0, host.Writes);
-            Check(editor.Sample(context, origin, true, 0, 0, 20, 64).IsHandled, "Press not owned.");
-            editor.Sample(context, origin, true, 25, 0, 320, 64);
-            Check(editor.Sample(context, origin, false, 25, 0, 330, 64).IsHandled, "Release not owned.");
+            Check(editor.Sample(context, origin, true, 0, 0, 20).IsHandled, "Press not owned.");
+            editor.Sample(context, origin, true, 25, 0, 320);
+            Check(editor.Sample(context, origin, false, 25, 0, 330).IsHandled, "Release not owned.");
             Equal(0, host.Writes); Equal(Facing.East, editor.Session!.Preview.Pose.Direction);
-            editor.Sample(context, origin, true, 25, 0, 400, 64);
-            editor.Sample(context, origin, false, 25, 0, 410, 64);
+            editor.Sample(context, origin, true, 25, 0, 400);
+            editor.Sample(context, origin, false, 25, 0, 410);
+            Equal(0, host.Writes); // Short right click is also rotation-only.
+            Check(editor.TryPlace(64), "Separate placement action failed.");
+            Check(!editor.TryPlace(64), "Repeated placement accepted.");
             Equal(1, host.Writes); Equal(Facing.East, host.Read("a").Pose.Direction);
-            editor.Sample(context, origin, false, 25, 0, 420, 64); Equal(1, host.Writes);
-            Check(editor.Sample(context, origin, true, 25, 0, 430, 64).IsHandled, "Stale provider received new press.");
-            Check(editor.Sample(context, origin, false, 25, 0, 440, 64).IsHandled, "Stale provider received release.");
+            editor.Sample(context, origin, false, 25, 0, 420); Equal(1, host.Writes);
+            Check(editor.Sample(context, origin, true, 25, 0, 430).IsHandled, "Stale provider received new press.");
+            Check(editor.Sample(context, origin, false, 25, 0, 440).IsHandled, "Stale provider received release.");
             Equal(1, host.Writes);
+        });
+        yield return ("explicit placement needs no rotation press and retains a blocked preview", () =>
+        {
+            var host = new Host(); var editor = new RotationEditor(host, 300, 20, 1);
+            var context = new MoveModeContext("test-mover", "left-place", "a", true, true, true);
+            var origin = new TilePoint(20, 20);
+            editor.Sample(context, origin, false, 0, 0, 0);
+            host.PlaceAllowed = false;
+            Check(!editor.TryPlace(64), "Blocked left placement accepted.");
+            Equal(0, host.Writes); Equal(PlacementState.Editing, editor.Session!.State);
+            host.PlaceAllowed = true;
+            Check(editor.TryPlace(64), "Immediate left placement failed without a rotation gesture.");
+            Equal(1, host.Writes); Equal(Facing.South, host.Read("a").Pose.Direction);
+        });
+        yield return ("rotation cancellation and an inherited right press cannot commit another selection", () =>
+        {
+            var host = new Host(); var editor = new RotationEditor(host, 300, 20, 1);
+            var first = new MoveModeContext("test-mover", "first", "a", true, true, true);
+            var second = new MoveModeContext("test-mover", "second", "b", true, true, true);
+            var origin = new TilePoint(20, 20);
+            editor.Sample(first, origin, false, 0, 0, 0);
+            editor.Sample(first, origin, true, 0, 0, 10);
+            editor.Sample(first, origin, true, 25, 0, 310);
+            Equal(Facing.East, editor.Session!.Preview.Pose.Direction);
+            editor.Reset();
+            Check(!editor.TryPlace(64), "Cancelled edit committed.");
+            editor.Sample(second, origin, true, 25, 0, 320);
+            editor.Sample(second, origin, true, 60, 0, 700);
+            editor.Sample(second, origin, false, 60, 0, 710);
+            Equal(Facing.South, editor.Session!.Preview.Pose.Direction); Equal(0, host.Writes);
+            editor.Sample(second, origin, true, 60, 0, 720);
+            editor.Sample(second, origin, true, 85, 0, 1020);
+            Check(editor.TryPlace(64), "Left click during a held rotation failed.");
+            editor.Sample(second, origin, false, 85, 0, 1030);
+            Equal(1, host.Writes); Equal(Facing.East, host.Read("b").Pose.Direction);
+            Equal(Facing.South, host.Read("a").Pose.Direction);
         });
         yield return ("runtime editor reset and input ownership loss abandon only uncommitted previews", () =>
         {
             var host = new Host(); var editor = new RotationEditor(host, 300, 20, -1);
             var context = new MoveModeContext("test-mover", "one", "a", true, true, true);
-            editor.Sample(context, default, false, 0, 0, 0, 64);
+            editor.Sample(context, default, false, 0, 0, 0);
             editor.Session!.RotateSteps(2); editor.Reset(); Equal(0, host.Writes);
             Check(editor.Session == null, "Reset retained session.");
-            editor.Sample(context, default, false, 0, 0, 10, 64);
-            editor.Sample(new MoveModeContext("test-mover", "one", "a", true, true, false), default, false, 0, 0, 20, 64);
+            editor.Sample(context, default, false, 0, 0, 10);
+            editor.Sample(new MoveModeContext("test-mover", "one", "a", true, true, false), default, false, 0, 0, 20);
             Check(editor.Session == null, "Loss of ownership retained editor."); Equal(0, host.Writes);
         });
         yield return ("runtime facing codec preserves other mod keys and rejects unknown saved versions", () =>

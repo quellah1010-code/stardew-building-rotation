@@ -83,6 +83,9 @@ internal sealed class LetsMoveItProbe
     internal Vector2 GrabOffset => (Vector2)Property(singleTarget.FieldType, "TileOffset").GetValue(SelectedTarget)!;
     internal GameLocation TargetLocation => (GameLocation)Property(singleTarget.FieldType, "TargetLocation").GetValue(SelectedTarget)!;
     internal string MoveKeyDescription => Setting<KeybindList>("MoveKey").ToString() ?? "<unavailable>";
+    internal string? RightMouseConflict => new[] { "MoveKey", "ModKey", "CancelKey", "RemoveKey", "OverwriteKey",
+        "ToggleCopyModeKey", "ToggleMultiSelectKey", "ToggleCropTileKey", "ToggleCropPotKey" }
+        .FirstOrDefault(name => Setting<KeybindList>(name).Keybinds.Any(key => key.Buttons.Contains(SButton.MouseRight)));
     internal bool UsesLeftMouse
     {
         get
