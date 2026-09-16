@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-16",
+  "tool": "image_gen.imagegen",
+  "task": "Barn side roof volume correction after the ordinary empty Barn 0.1.3 basic gameplay checks passed.",
+  "input": "barn-four-views-v5.png",
+  "output": "barn-four-views-v6.png",
+  "status": "review-board; not a production sprite or user-approved final",
+  "prompt": "Use case: precise-object-edit.\nEdit the supplied BARN four-view pixel-art board. This is a LOCAL ROOF-MATERIAL / ROOF-VOLUME correction, preserving the user's approved structure. Output the same 2x2 review sheet.\n\nImage 1 is the authoritative v5 edit target. Keep panel order and exact labels: upper-left FRONT, upper-right RIGHT, lower-left LEFT, lower-right BACK; BARN title. Keep the front and back building designs, the background, panel positions, side widths and outer silhouettes visually unchanged. All four depict the same compact red timber barn under the fixed elevated Stardew Valley camera, no vanishing-point perspective.\n\nOnly repaint the large brown shingle roof surface inside each SIDE view, upper-right RIGHT and lower-left LEFT. Currently the uniform rectangular rows make these surfaces look like vertical brick walls. These are the barn's gambrel-like rounded pitched roofs seen from the side: show a shallower upper slope rolling into a steeper lower slope using the SHINGLE ROW SPACING AND BROAD PLANE LIGHTING. The top three or four rows are compressed vertically and softly lit ochre, the mid-slope transitions into warmer medium brown, and the steeper lower rows have greater vertical exposure and deeper warm brown shade. Match the actual weathered, uneven overlapping shingles and warm palette of the FRONT roof. Give shingles small irregular chips, staggered overlaps and subtle local variation, not a uniform brick bond. Make a coherent readable roof surface with ONE subtle horizontal change of slope across its upper-middle region, not a stack of thick ledges. Use crisp restrained pixel-art clusters and dark thin overlaps. Avoid glossy highlights, smooth 3D rendering, big bright stripes or black bands.\n\nGeometric invariants: both side roofs remain the SAME width they are now, rectangular silhouettes with exactly horizontal ridge and exactly horizontal eave. Their width/height, lower walls, foundations and panel positions must not change. No triangle gable on the side, no diagonal eave, no trapezoid, no new roof strip showing beyond the far ridge, no front face or front door added on visible side walls. Keep narrow ridge cap and lower thin eave with a restrained shadow beneath it. DO NOT add more visible roof outside existing outline to suggest depth.\n\nKeep the RIGHT near-side accessory wooden structure exactly where it is. Its two crossed wooden slats sit on the SHALLOW TOP SURFACE of that accessory: preserve their flattened horizontal perspective and preserve the visible red wall strip behind them. Do not raise them into a giant frontal X over the red barn wall. LEFT keeps its plain red wall without an invented near-side accessory. FRONT keeps its small human door and open large animal doorway, and its tall wooden accessory on image-right. BACK keeps the closed red wall and accessory on image-left. No new door, window, trim, animals, people, terrain, transparent layer or Reveal.\n\nThe requested result is the same Barn v5 board with BOTH side roof surfaces now reading as a sloping, subtly bending SHINGLED ROOF instead of flat brick panels. Front/back and user-corrected structure should remain visually stable.",
+  "png": {
+    "width": 1448,
+    "height": 1086,
+    "mode": "RGB",
+    "hasAlpha": false,
+    "bytes": 1589194,
+    "sha256": "96c643f5b0879f329543942ee7288a8d2c7ae8d2c8a2a392b64bd2c60fde390d"
+  },
+  "inspection": {
+    "completeDecode": true,
+    "visuallyReviewed": true,
+    "sideRoofChanges": "Upper shingle rows have reduced vertical exposure, lower rows are larger and darker; weathered overlapping tiles replace the regular brick-like rows.",
+    "preservedVisually": [
+      "FRONT/RIGHT/LEFT/BACK panel order and corrected side names",
+      "Horizontal side ridge and eave; no far-side roof strip",
+      "RIGHT accessory's shallow projected crossed slats and red wall strip above",
+      "Front doors, closed back, accessory on front-right and back-left"
+    ],
+    "remaining": [
+      "Roof curvature and common component scale still need review",
+      "Generation repainted texture beyond the two roof surfaces; no pixel-identical preservation claim",
+      "No native-pixel asset, alpha layer, visual door alignment or runtime integration in this batch"
+    ],
+    "panelBoundsMethod": "Dark-pixel bounding box within isolated panel; RGB channels all <180; exclusive right/bottom. Includes trim, eaves, accessory; excludes captions. Board pixels only.",
+    "panelBounds": {
+      "FRONT": [
+        196,
+        59,
+        624,
+        462
+      ],
+      "RIGHT": [
+        923,
+        65,
+        1190,
+        470
+      ],
+      "LEFT": [
+        275,
+        576,
+        543,
+        968
+      ],
+      "BACK": [
+        834,
+        576,
+        1254,
+        968
+      ]
+    }
+  },
+  "facingMapping": {
+    "FRONT": "South",
+    "RIGHT": "West",
+    "LEFT": "East",
+    "BACK": "North"
+  },
+  "productionContract": {
+    "source": "../templates/rotation-template-anchors.json",
+    "unchanged": true,
+    "note": "Review-board panel dimensions must not be stretched into the native canvas. Redraw against ground/door anchors. This correction does not move the already tested game doors.",
+    "barnCanvas": {
+      "South": [
+        112,
+        112
+      ],
+      "West": [
+        64,
+        160
+      ],
+      "East": [
+        64,
+        160
+      ],
+      "North": [
+        112,
+        112
+      ]
+    },
+    "groundOrigin": [
+      0,
+      48
+    ],
+    "humanThreshold": {
+      "South": [
+        24,
+        112
+      ],
+      "West": [
+        0,
+        72
+      ],
+      "East": [
+        64,
+        136
+      ],
+      "North": [
+        88,
+        48
+      ]
+    }
+  },
+  "validationScope": "Image decode, visual review, metadata and documentation only; no C# changes, rebuild or repeated gameplay tests."
+}
