@@ -202,26 +202,35 @@ internal sealed class RotationController
 
     public static void DrawLayout(SpriteBatch batch, BuildingLayout layout, Color color, bool preview)
     {
+        // The world batch sorts FrontToBack. Equal depths don't preserve submission order,
+        // so the footprint could otherwise be sorted over the cyan door as the batch changes.
+        // Keep this diagnostic ground overlay below actors while ordering its own layers.
+        const float backgroundDepth = .000001f, gridDepth = .000002f;
+        const float doorDepth = .000003f, approachDepth = .000004f, labelDepth = .000005f;
         Vector2 top = Game1.GlobalToLocal(new Vector2(layout.Pose.Origin.X * 64, layout.Pose.Origin.Y * 64));
         var box = new Rectangle((int)top.X, (int)top.Y, layout.Footprint.Width * 64, layout.Footprint.Height * 64);
-        batch.Draw(Game1.staminaRect, box, color * (preview ? .25f : .65f));
+        Fill(batch, box, color * (preview ? .25f : .65f), backgroundDepth);
         for (int y = 0; y < layout.Footprint.Height; y++)
             for (int x = 0; x < layout.Footprint.Width; x++)
                 if (layout.BlocksLocal(new TilePoint(x, y)))
-                    Outline(batch, new Rectangle(box.X + x * 64, box.Y + y * 64, 64, 64), color * .8f, 2);
-        Outline(batch, box, color, 4);
+                    Outline(batch, new Rectangle(box.X + x * 64, box.Y + y * 64, 64, 64), color * .8f, 2, gridDepth);
+        Outline(batch, box, color, 4, gridDepth);
         var door = layout.LocalDoors["human"];
         Rectangle DoorBox(TileRectangle r) => new(box.X + r.X * 64, box.Y + r.Y * 64, r.Width * 64, r.Height * 64);
-        batch.Draw(Game1.staminaRect, DoorBox(door.Area), Color.Cyan * .9f);
-        Outline(batch, DoorBox(door.ApproachArea(1)), Color.Cyan, 3);
-        batch.DrawString(Game1.smallFont, $"BARN / {layout.Pose.Direction.ToString().ToUpperInvariant()}", new Vector2(box.X, box.Y - 32), Color.White);
+        Fill(batch, DoorBox(door.Area), Color.Cyan * .9f, doorDepth);
+        Outline(batch, DoorBox(door.ApproachArea(1)), Color.Cyan, 3, approachDepth);
+        batch.DrawString(Game1.smallFont, $"BARN / {layout.Pose.Direction.ToString().ToUpperInvariant()}",
+            new Vector2(box.X, box.Y - 32), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, labelDepth);
     }
 
-    private static void Outline(SpriteBatch batch, Rectangle box, Color color, int width)
+    private static void Fill(SpriteBatch batch, Rectangle box, Color color, float depth)
+        => batch.Draw(Game1.staminaRect, box, null, color, 0f, Vector2.Zero, SpriteEffects.None, depth);
+
+    private static void Outline(SpriteBatch batch, Rectangle box, Color color, int width, float depth)
     {
-        batch.Draw(Game1.staminaRect, new Rectangle(box.X, box.Y, box.Width, width), color);
-        batch.Draw(Game1.staminaRect, new Rectangle(box.X, box.Bottom - width, box.Width, width), color);
-        batch.Draw(Game1.staminaRect, new Rectangle(box.X, box.Y, width, box.Height), color);
-        batch.Draw(Game1.staminaRect, new Rectangle(box.Right - width, box.Y, width, box.Height), color);
+        Fill(batch, new Rectangle(box.X, box.Y, box.Width, width), color, depth);
+        Fill(batch, new Rectangle(box.X, box.Bottom - width, box.Width, width), color, depth);
+        Fill(batch, new Rectangle(box.X, box.Y, width, box.Height), color, depth);
+        Fill(batch, new Rectangle(box.Right - width, box.Y, width, box.Height), color, depth);
     }
 }

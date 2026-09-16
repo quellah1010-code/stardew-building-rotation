@@ -2,9 +2,9 @@
 
 星露谷建筑四向旋转 mod，先用单栋普通牛棚验证玩法，再考虑扩展建筑种类。
 
-**状态：0.1.2 的普通牛棚基本转向、放置、非法拒绝、Esc 取消、绕行和各方向进出门已有实测。** 右键长按横拖旋转、左键点击放下；侧向占地为 4×7，出口回到对应门外。下一步在副本验证保存重进；失焦等其他中断情况未单独验收。当前使用格子占位外观，旧朝向与新预览重叠待修；见[实机结果](docs/rotation-input-investigation.md)。
+**状态：0.1.2 的基本旋转流程已有实测，用户新增反馈过夜／载入后的进出门及室内交互正常；0.1.3 修正门格闪烁风险与预览重叠。** 这次绘制修正仍待实机确认，正式贴图、动物及其他建筑尚未支持。见[实机记录](docs/rotation-input-investigation.md)。
 
-下载 [BuildingRotation.Prototype-0.1.2.zip](artifacts/BuildingRotation.Prototype-0.1.2.zip)，按[实验版说明](docs/prototype-test.md)替换旧 Prototype 文件夹、移除残留 Diagnostics，用单人普通空牛棚测试。用户当前是在旧档中临时操作、不过夜保存。默认取草槽不用拆；失败时贴出新增的 `Rotation selection` 日志。两个包的 UniqueID 相同，不能同时安装；整个仓库不是安装包。
+下载 [BuildingRotation.Prototype-0.1.3.zip](artifacts/BuildingRotation.Prototype-0.1.3.zip)，按[实验版说明](docs/prototype-test.md)替换旧 Prototype 文件夹、移除残留 Diagnostics，用单人普通空牛棚测试。继续使用现有独立测试档，原档保留。默认取草槽不用拆；失败时贴出新增的 `Rotation selection` 日志。两个包的 UniqueID 相同，不能同时安装；整个仓库不是安装包。
 
 目标是在已有搬建筑流程中增加四向旋转；配合已适配的便携搬动 mod 时，玩家不必去 Robin 那里。旋转编辑跟随建筑移动模式启用，不新增全局启动或拿起快捷键。外观、实际占地、碰撞和门的位置一起变化；首版保持室内布局不变，后续室内转向仍在讨论。背向镜头时，通过专门重构的 Reveal 贴图显示真实入口，辅以不占格的地面引导和建筑上的标识。
 
