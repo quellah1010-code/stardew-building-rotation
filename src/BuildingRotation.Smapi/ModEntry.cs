@@ -36,7 +36,7 @@ public sealed class ModEntry : Mod
             var host = new GameRotationHost();
             rotation = new RotationController(Helper, Monitor, moveProbe, host);
             RotationPatches.Install(rotation, moveProbe, Monitor);
-            probeStatus = "ordinary empty Barn prototype attached; placeholder graphics";
+            probeStatus = "ordinary empty Barn prototype attached; east-facing art trial; other managed facings use placeholders";
         }
         catch (Exception ex)
         {

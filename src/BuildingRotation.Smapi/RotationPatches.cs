@@ -97,7 +97,7 @@ internal static class RotationPatches
         if (ReferenceEquals(controller?.ActiveBuilding, __instance) && controller?.Preview != null) return false;
         BuildingLayout? layout = Layout(__instance);
         if (layout == null || __instance.isMoving || __instance.isUnderConstruction()) return true;
-        RotationController.DrawLayout(b, layout, Color.SandyBrown, false);
+        controller!.DrawBuilding(b, layout, Color.SandyBrown, false, __instance);
         return false;
     }
     private static bool TargetRenderPrefix(object __instance) => !ReferenceEquals(controller?.ActiveTarget, __instance);

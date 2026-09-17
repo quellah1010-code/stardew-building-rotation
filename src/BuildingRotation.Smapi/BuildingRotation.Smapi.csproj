@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>BuildingRotation.Smapi</AssemblyName>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -20,6 +20,7 @@
     <Reference Include="StardewValley.GameData"><HintPath>$(GamePath)/StardewValley.GameData.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="0Harmony"><HintPath>$(GamePath)/smapi-internal/0Harmony.dll</HintPath><Private>false</Private></Reference>
     <None Update="manifest.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="assets/barn-east-v1.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="VerifyGameReferences" BeforeTargets="PrepareForBuild">
     <Error Condition="'$(GamePath)' == ''" Text="Set GamePath to the matching game/SMAPI assembly folder. This diagnostic project cannot be built from Content alone." />

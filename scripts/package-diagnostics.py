@@ -1,4 +1,4 @@
-"""Package only this project's compiled mod code and the matching test instructions."""
+"""Package this project's compiled code, explicit art assets and test instructions."""
 import hashlib
 import json
 from pathlib import Path
@@ -27,6 +27,10 @@ files = {
 }
 if prototype:
     files["BuildingRotation.Data.dll"] = build / "BuildingRotation.Data.dll"
+    asset_name = "assets/barn-east-v1.png"
+    files[asset_name] = build / asset_name
+    if files[asset_name].read_bytes() != (root / "src/BuildingRotation.Smapi" / asset_name).read_bytes():
+        raise SystemExit("Build sprite is stale; rebuild Release before packaging.")
 # Resolve the complete allowlist before creating the output archive.
 contents = {name: path.read_bytes() for name, path in files.items()}
 output = root / "artifacts" / f"{package_name}-{version}.zip"
