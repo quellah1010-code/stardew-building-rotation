@@ -27,7 +27,7 @@ files = {
 }
 if prototype:
     files["BuildingRotation.Data.dll"] = build / "BuildingRotation.Data.dll"
-    asset_name = "assets/barn-east-v1.png"
+    asset_name = "assets/barn-east-v2.png"
     files[asset_name] = build / asset_name
     if files[asset_name].read_bytes() != (root / "src/BuildingRotation.Smapi" / asset_name).read_bytes():
         raise SystemExit("Build sprite is stale; rebuild Release before packaging.")

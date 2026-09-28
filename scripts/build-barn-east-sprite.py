@@ -1,103 +1,112 @@
-"""Build the east-only test sprite from the project's generated Barn v6 board.
+"""Finish a complete generated side elevation; never repeat roof texture strips.
 
-Programmatic image processing was explicitly authorized by the user. The board
-is a material reference, not a native sprite: shingle courses and wall sections
-are reassembled at source scale, rather than stretching the whole elevation.
-No extracted game PNG or rejected checkerboard image is required.
+The generated RGBA source was alpha-thresholded (192), cropped, and uniformly
+reduced to 112 pixels high (92 wide after rounding). Keep that roof intact.
+Only fit the wall width to the real footprint and locate the edge-on jamb.
+Private game/player references are optional and never needed for repo assets.
 """
 from pathlib import Path
+import argparse
 import hashlib
 import json
+from collections import deque
 from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[1]
-source = ROOT / "docs/art/turnarounds/barn-four-views-v6.png"
-board = Image.open(source).convert("RGB")
-assert hashlib.sha256(source.read_bytes()).hexdigest() == "96c643f5b0879f329543942ee7288a8d2c7ae8d2c8a2a392b64bd2c60fde390d"
+parser = argparse.ArgumentParser()
+parser.add_argument("--original-barn", type=Path)
+parser.add_argument("--player-screenshot", type=Path)
+parser.add_argument("--private-review", type=Path)
+args = parser.parse_args()
+source = Image.open(ROOT / "docs/art/runtime/barn-east-v2-source.png").convert("RGBA")
+assert source.size == (92, 112)
+sprite = source.copy()
+# Eave ends at y=70. Fit only the wall/posts/base from 78 to 64 pixels wide.
+# The roof is untouched; this small wall adjustment is explicitly not uniform.
+wall = source.crop((7, 71, 85, 112)).resize((64, 41), Image.Resampling.NEAREST)
+sprite.paste((0, 0, 0, 0), (0, 71, 92, 112))
+sprite.paste(wall, (14, 71))
+draw = ImageDraw.Draw(sprite)
+# World-local threshold (64,88); source ground origin (14,0) gives (78,88).
+draw.rectangle((74, 69, 77, 87), fill="#291b13")
+draw.line((74, 69, 74, 86), fill="#cbb49a")
+draw.line((75, 69, 77, 69), fill="#92704b")
+draw.line((75, 86, 77, 86), fill="#bd9e70")
+draw.line((75, 87, 77, 87), fill="#4c3320")
+draw.point((76, 79), fill="#c29348")
+alpha = sprite.getchannel("A").point(lambda a: 255 if a >= 192 else 0)
+sprite = sprite.convert("RGB").quantize(colors=64, dither=Image.Dither.NONE).convert("RGBA")
+sprite.putalpha(alpha)
+for y in range(sprite.height):
+    for x in range(sprite.width):
+        if alpha.getpixel((x, y)) == 0:
+            sprite.putpixel((x, y), (0, 0, 0, 0))
+assert set(sprite.getchannel("A").tobytes()) == {0, 255}
+assert sprite.getchannel("A").crop((0, 111, 92, 112)).getbbox() == (14, 0, 78, 1)
+assert sprite.getpixel((78, 88))[3] == 0
 anchors = json.loads((ROOT / "docs/art/templates/rotation-template-anchors.json").read_text())
 barn = next(b for b in anchors["buildings"] if b["id"] == "Barn")
 east = next(o for o in barn["orientations"] if o["Facing"] == "East")
-assert (east["CanvasWidth"], east["CanvasHeight"]) == (64, 160)
-assert east["GroundOrigin"] == {"X": 0, "Y": 48}
-assert east["Doors"]["human"]["Threshold"] == {"X": 64, "Y": 136}
-approach = east["Doors"]["human"]["Approach"]
-threshold = east["Doors"]["human"]["Threshold"]
-
-# The LEFT board panel is the building facing East in game coordinates.
-# Reduce each material at the same approximately 0.24 scale; extend courses,
-# not individual pixels, to span the rotated 4 x 7 tile ground plane.
-roof = board.crop((275, 576, 543, 810)).resize((64, 56), Image.Resampling.NEAREST)
-wall = board.crop((286, 810, 532, 968)).resize((58, 38), Image.Resampling.NEAREST)
-sprite = Image.new("RGBA", (64, 160))
-sprite.paste(roof.crop((0, 0, 64, 6)), (0, 0))
-y = 6
-for top, bottom, count in [(6, 12, 3), (12, 16, 2), (16, 21, 2),
-                            (21, 29, 2), (29, 37, 2), (37, 46, 2), (46, 55, 2)]:
-    for _ in range(count):
-        sprite.paste(roof.crop((0, top, 64, bottom)), (0, y))
-        y += bottom - top
-assert y == 110  # Two-pixel eave below the last complete shingle course.
-sprite.paste(wall.crop((0, 0, 58, 18)), (3, 112))
-sprite.paste(wall.crop((0, 12, 58, 22)), (3, 130))
-sprite.paste(wall.crop((0, 18, 58, 38)), (3, 140))
-
-# Deliberate pixel silhouette removes the pale review-board edge completely.
-d = ImageDraw.Draw(sprite)
-outline, shade, trim, gold = "#28170e", "#55321b", "#cab38a", "#ae7739"
-d.line((0, 2, 0, 111), fill=outline)
-d.line((63, 2, 63, 111), fill=outline)
-d.line((1, 0, 62, 0), fill=outline)
-d.rectangle((0, 110, 63, 111), fill=outline)
-for x in (0, 63):
-    for cy in (0, 1):
-        sprite.putpixel((x, cy), (0, 0, 0, 0))
-d.line((3, 112, 3, 158), fill=outline)
-d.line((60, 112, 60, 158), fill=outline)
-d.line((3, 159, 60, 159), fill=outline)
-
-# Thin edge-on entrance on the east edge; its sill ends at the exact ground
-# threshold (64, 136). This is a visual trial, not a change to game door data.
-d.rectangle((60, 112, 63, 135), fill=outline)
-d.line((60, 112, 60, 133), fill=trim)
-d.line((63, 113, 63, 133), fill=shade)
-d.line((61, 112, 63, 112), fill=gold)
-d.point((62, 124), fill=gold)
-d.line((61, 134, 63, 134), fill=trim)
-d.line((61, 135, 63, 135), fill=shade)
-
-# A compact palette and strictly binary alpha keep clean source-scale pixels.
-alpha = sprite.getchannel("A")
-sprite = sprite.convert("RGB").quantize(colors=48, dither=Image.Dither.NONE).convert("RGBA")
-sprite.putalpha(alpha)
-for cy in range(160):
-    for cx in range(64):
-        if alpha.getpixel((cx, cy)) == 0:
-            sprite.putpixel((cx, cy), (0, 0, 0, 0))
-assert set(sprite.getchannel("A").tobytes()) == {0, 255}
-assert sprite.getpixel((63, 135))[3] == 255
-assert sprite.getpixel((63, 136))[3] == 0
-
-asset = ROOT / "src/BuildingRotation.Smapi/assets/barn-east-v1.png"
-asset.parent.mkdir(parents=True, exist_ok=True)
+old_origin = east["GroundOrigin"]
+old_threshold = east["Doors"]["human"]["Threshold"]
+assert (old_threshold["X"] - old_origin["X"], old_threshold["Y"] - old_origin["Y"]) == (64, 88)
+asset = ROOT / "src/BuildingRotation.Smapi/assets/barn-east-v2.png"
 sprite.save(asset, optimize=True)
 
-# Four-times preview: real alpha composited on two solid backgrounds; guide
-# is generated from the same source-coordinate contract as the game renderer.
-preview = Image.new("RGB", (768, 760), "#f2eddf")
-pd = ImageDraw.Draw(preview)
-pd.text((24, 16), "BARN EAST - source 64 x 160 / displayed 4x", fill="#30231c")
-scaled = sprite.resize((256, 640), Image.Resampling.NEAREST)
-for ox, background in [(64, "#778a51"), (448, "#252d35")]:
-    pd.rectangle((ox - 16, 54, ox + 272, 724), fill=background)
-    preview.paste(scaled, (ox, 70), scaled)
-    pd.rectangle((ox + approach["X"] * 4, 70 + approach["Y"] * 4,
-                  ox + approach["Right"] * 4 - 1, 70 + approach["Bottom"] * 4 - 1), outline="#69e7d3", width=2)
-    pd.line((ox + threshold["X"] * 4 - 8, 70 + threshold["Y"] * 4,
-             ox + threshold["X"] * 4 + 12, 70 + threshold["Y"] * 4), fill="#69e7d3", width=2)
-pd.text((24, 740), "Mint outline: real outside approach tile. Door sill: (64, 136). Art trial, not final.", fill="#30231c")
-review = ROOT / "docs/art/runtime/barn-east-v1-preview.png"
-review.parent.mkdir(parents=True, exist_ok=True)
-preview.save(review, optimize=True)
-print(json.dumps({"asset":str(asset.relative_to(ROOT)),"size":sprite.size,"mode":sprite.mode,
-                  "bytes":asset.stat().st_size,"sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
-                  "preview":str(review.relative_to(ROOT))}, indent=2))
+def placed(board, im, left, bottom, scale=4):
+    large = im.resize((im.width * scale, im.height * scale), Image.Resampling.NEAREST)
+    board.paste(large, (left, bottom - large.height), large)
+
+old = Image.open(ROOT / "src/BuildingRotation.Smapi/assets/barn-east-v1.png").convert("RGBA")
+review = Image.new("RGB", (880, 760), "#d7ddc5")
+d = ImageDraw.Draw(review)
+d.text((32, 20), "REJECTED v1: 64 x 160", fill="#4c3025")
+d.text((430, 20), "REBUILT v2: 92 x 112 / same 4 x 7 ground", fill="#273b29")
+placed(review, old, 52, 704)
+placed(review, sprite, 440, 704)
+for ox in (52, 440 + 14 * 4):
+    d.rectangle((ox, 256, ox + 255, 703), outline="#378371", width=2)
+    d.rectangle((ox + 256, 576, ox + 319, 639), outline="#009e95", width=2)
+d.text((32, 732), "4x nearest-neighbor. Green: unchanged collision bounds. Cyan: actual outside approach tile.", fill="#273b29")
+review_path = ROOT / "docs/art/runtime/barn-east-v2-comparison.png"
+review.save(review_path, optimize=True)
+
+if args.private_review:
+    if not args.original_barn or not args.player_screenshot:
+        parser.error("Private review requires both reference paths.")
+    # A cropped player reference from the user's 3x screenshot, converted to 4x.
+    player = Image.open(args.player_screenshot).convert("RGBA").crop((88, 132, 140, 228))
+    mask = Image.new("L", player.size, 255)
+    queue = deque([(x, y) for x in range(player.width) for y in (0, player.height-1)] +
+                  [(x, y) for y in range(player.height) for x in (0, player.width-1)])
+    seen = set()
+    while queue:
+        x, y = queue.popleft()
+        if (x, y) in seen or not (0 <= x < player.width and 0 <= y < player.height):
+            continue
+        seen.add((x, y))
+        r, g, b, _ = player.getpixel((x, y))
+        if r > 140 and g > 75 and b < 120 and r > g:
+            mask.putpixel((x, y), 0)
+            queue.extend(((x-1,y),(x+1,y),(x,y-1),(x,y+1)))
+    player.putalpha(mask)
+    player = player.resize((round(player.width*4/3), round(player.height*4/3)), Image.Resampling.NEAREST)
+    original = Image.open(args.original_barn).convert("RGBA").crop((0, 0, 112, 112))
+    board = Image.new("RGB", (1536, 800), "#89996b")
+    bd = ImageDraw.Draw(board)
+    for x, label in [(32,"ORIGINAL BARN / reference"),(600,"REJECTED v1"),(1050,"REBUILT v2")]:
+        bd.text((x,24),label,fill="#162519")
+    placed(board, original, 32, 720)
+    placed(board, old, 600, 720)
+    placed(board, sprite, 1050, 720)
+    for x in (502, 896, 1434):
+        board.paste(player, (x, 720-player.height), player)
+    bd.rectangle((1050+78*4, 720-112*4+80*4, 1050+94*4-1, 720-112*4+96*4-1), outline="#66f2db", width=2)
+    bd.text((32,768),"Same source scale (4x). Offline composition, not an in-game screenshot. Input/collision/door coordinates unchanged.",fill="#162519")
+    args.private_review.parent.mkdir(parents=True, exist_ok=True)
+    board.save(args.private_review, optimize=True)
+
+print(json.dumps({"asset":str(asset.relative_to(ROOT)), "size":sprite.size,
+    "ground_origin":[14,0], "threshold":[78,88], "bytes":asset.stat().st_size,
+    "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+    "preview":str(review_path.relative_to(ROOT))}, indent=2))

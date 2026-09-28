@@ -16,6 +16,7 @@ internal sealed class RotationController
     private readonly LetsMoveItProbe mover;
     private readonly RotationEditor editor;
     private readonly Texture2D? eastSprite;
+    private static readonly Vector2 EastGroundOrigin = new(14, 0);
     private MoveModeContext? context;
     private object? heldTarget;
     private TilePoint sourceGrab;
@@ -36,9 +37,9 @@ internal sealed class RotationController
         editor = new RotationEditor(host, 350, 24, 1);
         try
         {
-            Texture2D texture = helper.ModContent.Load<Texture2D>("assets/barn-east-v1.png");
-            if (texture.Width != 64 || texture.Height != 160)
-                throw new InvalidOperationException("Expected the 64 x 160 east Barn sprite.");
+            Texture2D texture = helper.ModContent.Load<Texture2D>("assets/barn-east-v2.png");
+            if (texture.Width != 92 || texture.Height != 112)
+                throw new InvalidOperationException("Expected the 92 x 112 east Barn sprite.");
             eastSprite = texture;
         }
         catch (Exception ex)
@@ -209,8 +210,8 @@ internal sealed class RotationController
         if (Preview is not BuildingLayout layout) return;
         DrawBuilding(batch, layout, previewValid ? Color.LimeGreen : Color.OrangeRed, true, ActiveBuilding);
         Vector2 top = Game1.GlobalToLocal(new Vector2(layout.Pose.Origin.X * 64, layout.Pose.Origin.Y * 64));
-        int headroom = layout.Pose.Direction == Facing.East && eastSprite != null ? 48 * 4 : 0;
-        batch.DrawString(Game1.smallFont, "Right drag: turn | Left click: place", new Vector2(top.X, top.Y - headroom - 60),
+        if (layout.Pose.Direction == Facing.East && eastSprite != null) top -= EastGroundOrigin * 4f;
+        batch.DrawString(Game1.smallFont, "Right drag: turn | Left click: place", new Vector2(top.X, top.Y - 60),
             Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
     }
 
@@ -222,10 +223,11 @@ internal sealed class RotationController
             return;
         }
 
-        // Source canvas 64 x 160, ground origin (0,48), at 4 game pixels/source pixel.
+        // Rebuilt 92 x 112 canvas: ground origin (14,0), with roof overhang on each side.
+        // The 64 x 112 ground area and world-local human threshold (64,88) are unchanged.
         // Both the held and placed image use the layout origin, never the old building position.
         Vector2 ground = Game1.GlobalToLocal(new Vector2(layout.Pose.Origin.X * 64, layout.Pose.Origin.Y * 64));
-        Vector2 imageTop = ground - new Vector2(0, 48 * 4);
+        Vector2 imageTop = ground - EastGroundOrigin * 4f;
         float sortOffset = building?.GetData()?.SortTileOffset ?? 0f;
         float depth = preview ? .9997f : (layout.Pose.Origin.Y + layout.Footprint.Height - sortOffset) * 64f / 10000f;
         Color tint = preview ? Color.White * .8f : (building?.color ?? Color.White) * (building?.alpha ?? 1f);
