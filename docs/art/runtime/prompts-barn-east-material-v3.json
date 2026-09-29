@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-29",
+  "mode": "built-in imagegen",
+  "use_case": "style-transfer",
+  "prompt": "Use case: style-transfer.\nAsset type: Stardew Valley mod pixel sprite, one closed SIDE elevation of the existing barn.\nInput 1 is the EDIT TARGET: preserve its exact silhouette, camera, horizontal ridge and eave, roof/wall proportions, full uninterrupted wall, width and total height.\nInput 2 is MATERIAL / PIXEL-STYLE REFERENCE ONLY: the original game's front barn. Do not draw its frontal gable, doors, accessory or other geometry into the target.\nPrimary request: repaint only the surface rendering of target 1 so its roof shingles, red wood siding, trim and outlining look hand-pixelled by the same artist as reference 2.\nThe approved side is 88 source pixels wide and 107 tall. Treat target 1 as an enlarged low-resolution sprite. Use coherent crisp square pixel clusters, a small muted palette, hard stepped pixel edges, and sparse deliberate details. No blur or anti-aliasing.\nRoof: dull medium brown wooden shingles, flatter matte shapes with subtle uneven short strokes and restrained dark lower-edge lines. Smaller finer shingle divisions, about 7-9 pieces across a typical row. Remove every glossy inflated highlight and the smooth pillowy/3D cushion effect. Avoid bright gold. Reference browns around #5c3b28, #775333, #946b40, #aa8050.\nWall: continuous CLOSED red vertical wood siding, absolutely no door, doorway, window, handle, sign or hatch anywhere. Flat warm dark red boards with sparse crisp darker grain and modest orange-red wear, no rounded glossy gradients. Muted dusty pink/cream trim like reference 2, NOT brilliant white.\nLighting: restrained painted pixel lighting, not a rendered shiny object.\nInvariants: exact same whole-building silhouette as input 1; same ridge height, eave position and wall bottom; same camera; the full side wall stays closed; no opposite roof plane visible; no added architecture. Do not stretch the roof or shrink the wall.\nOutput only this one isolated edited SIDE sprite, entire building uncropped, on actual transparent alpha with no shadow outside the silhouette. No text, no labels, no comparison board, no background grid.",
+  "inputs": [
+    {
+      "role": "edit target",
+      "asset": "barn-east-closed-wall-height-study.png",
+      "preparation": "8x nearest-neighbor"
+    },
+    {
+      "role": "material reference",
+      "asset": "private original Barn front; not distributed",
+      "preparation": "body crop (0,5,112,112), 8x nearest-neighbor"
+    }
+  ],
+  "generated_source": {
+    "size": [
+      1138,
+      1382
+    ],
+    "alpha_threshold": 192,
+    "crop": [
+      24,
+      19,
+      1116,
+      1367
+    ],
+    "reduced_size": [
+      88,
+      107
+    ],
+    "repository_asset": "barn-east-material-v3-source.png"
+  },
+  "processing": {
+    "script": "scripts/refine-barn-side-materials.py",
+    "eave_alignment": "generated row 61 -> accepted row 64; complete regions fitted, scanline extents matched to accepted alpha",
+    "palette": "16 opaque colors, discrete browns/reds/dusty-pink trim; no dithering",
+    "roof_cleanup": "remove isolated 1-2 pixel clusters using adjacent dominant color",
+    "alpha": "byte-identical to accepted height-study silhouette"
+  },
+  "status": "material revision for review; shape direction accepted, new material not yet reviewed; no new runtime package"
+}
