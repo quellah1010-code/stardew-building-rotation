@@ -1,5 +1,17 @@
 # Barn 朝东素材重做
 
+## 2026-10-12：补齐白边版右侧与背面
+
+![白边版四向同高对照](../turnarounds/barn-white-trim-four-views-v1.png)
+
+选定的 East／建筑左视原稿 **88×107，文件不变**。新增 West／右视 `barn-west-white-trim-v1.png` 为 88×107；上方 79 行直接保留选稿屋顶、白边与红墙，下部是内置 imagegen 新画的近端附属木构。叉条盖板单独压为 7 像素深，整体木板墙下接共同地线，没有重复瓦片行或整体拉长屋顶。
+
+新增 North／背面 `barn-north-white-trim-v1.png` 为 113×107；近侧整面红墙无门，附属木构在左，保留白檐边／立柱。正面沿用 v6 生成板作结构参照，缩为 114×107，不使用或发布解包的原版游戏 PNG。四面共享顶线、底线与 4 倍显示比例；原始生成结果保留为原生尺寸 `*-source.png`，未继续套用减色 v3。
+
+已检查透明背景、107 像素可见高度、选稿文件散列与 West 屋顶一致性；新面尚待用户看图。背面瓦片亮度、附件尺度和严格投影仍可继续改。这套是外观研究稿，**运行时仍为 0.1.5 的旧图**；绘制原点、人物遮挡、入口视觉和 Reveal 尚未接入，本轮不构建或重新跑游戏逻辑测试。
+
+复现：`python scripts/build-barn-white-trim-study.py`。生成方式为内置 imagegen，提示词见 [prompts-barn-white-trim-v1.json](prompts-barn-white-trim-v1.json)，源裁切／缩放与核对结果见 [inspection-barn-white-trim-v1.json](inspection-barn-white-trim-v1.json)。脚本只读取公开项目美术，明确保留已选 East，不写运行时目录。
+
 ## 当前基准：中间那张，保留亮白收边（2026-09-29）
 
 用户表示更喜欢三栏对照中间的上一稿，随后明确“其实我就是喜欢那个白边”。后续以 `barn-east-closed-wall-height-study.png`（88×107）为基准，原样保留亮白檐边／立柱、瓦片层次和木墙质感。继续遵守整面侧墙、正侧面同高、宽度可不同的约定。不要再把白边当成缺陷，或自动套用减色／压高光处理。

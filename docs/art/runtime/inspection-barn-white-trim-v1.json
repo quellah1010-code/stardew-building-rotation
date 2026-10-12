@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-12",
+  "status": "art studies for review; not runtime sprites",
+  "selected_east_sha256": "74be00303ae5c778497dfc8000bc86b32acae3d120aeabf42d2fc341a7328e6b",
+  "selected_east_unchanged": true,
+  "west_upper_79_rows_match_selected_east": true,
+  "visible_height_all_views": 107,
+  "dimensions": {
+    "FRONT / SOUTH": [
+      114,
+      107
+    ],
+    "LEFT / EAST": [
+      88,
+      107
+    ],
+    "RIGHT / WEST": [
+      88,
+      107
+    ],
+    "BACK / NORTH": [
+      113,
+      107
+    ]
+  },
+  "front_source": "existing generated barn-four-views-v6.png; not original game PNG",
+  "new_sources": {
+    "west": {
+      "generation_crop": [
+        33,
+        12,
+        1105,
+        1373
+      ],
+      "normalized_size": [
+        88,
+        112
+      ]
+    },
+    "north": {
+      "generation_crop": [
+        24,
+        22,
+        1253,
+        1190
+      ],
+      "normalized_size": [
+        113,
+        107
+      ]
+    }
+  },
+  "processing": "Nearest-neighbor uniform source reduction; alpha threshold 192. West annex lid compressed separately; roof/eave retained verbatim from selected East. No palette quantization.",
+  "not_validated": [
+    "user approval of new sides",
+    "runtime anchors",
+    "character occlusion",
+    "door visual cues",
+    "Reveal"
+  ]
+}
