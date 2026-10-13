@@ -21,7 +21,7 @@ public sealed class ModEntry : Mod
         helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         helper.Events.GameLoop.Saving += (_, _) => rotation?.Cancel(true);
         helper.Events.Display.RenderedWorld += (_, e) => rotation?.DrawPreview(e.SpriteBatch);
-        helper.Events.Input.ButtonPressed += (_, e) => { if (e.Button == SButton.MouseRight) rotation?.RightMouseChanged(); };
+        helper.Events.Input.ButtonPressed += (_, e) => { if (e.Button == SButton.MouseRight) rotation?.RightMousePressed(); };
         helper.Events.Input.ButtonReleased += (_, e) => { if (e.Button == SButton.MouseRight) rotation?.RightMouseChanged(); };
         helper.ConsoleCommands.Add("br_status", "Report Building Rotation dependencies and integration status.",
             (_, _) => Report());
@@ -52,6 +52,7 @@ public sealed class ModEntry : Mod
         if (rotation != null)
         {
             rotation.ResetDiagnostics();
+            rotation.ResetVisuals();
             rotation.Host.Clear();
             foreach (var b in Game1.getFarm().buildings) rotation.Host.Reapply(b);
         }
@@ -64,6 +65,7 @@ public sealed class ModEntry : Mod
         rotation?.Cancel(false);
         rotation?.Host.Clear();
         rotation?.ResetDiagnostics();
+        rotation?.ResetVisuals();
         RotationPatches.Clear();
         Monitor.Log("Returned to title; selection report cleared.", LogLevel.Trace);
     }

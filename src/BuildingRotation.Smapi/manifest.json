@@ -1,8 +1,8 @@
 {
   "Name": "Building Rotation — Prototype",
   "Author": "quellah1010-code",
-  "Version": "0.1.7",
-  "Description": "Experimental empty Barn rotation using Let's Move It. White-trim East, West and North artwork; South uses game art. Single-player prototype; Reveal is not implemented.",
+  "Version": "0.1.8",
+  "Description": "Experimental empty Barn rotation using Let's Move It. White-trim artwork and a proximity-triggered North entrance Reveal. Single-player prototype.",
   "UniqueID": "quellah.BuildingRotation",
   "EntryDll": "BuildingRotation.Smapi.dll",
   "MinimumApiVersion": "4.5.2",

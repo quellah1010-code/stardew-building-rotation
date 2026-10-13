@@ -145,6 +145,7 @@ tests = tests.Concat(EditingTests.Cases()).Concat(MoveModeTests.Cases())
     .Concat(LayoutTests.Cases()).Concat(DoorRegionTests.Cases())
     .Concat(ContentDataTests.Cases(args)).Concat(ArtTemplateTests.Cases())
     .Concat(RuntimeTests.Cases()).ToArray();
+tests = args.Contains("--reveal-only") ? RevealTests.Cases().ToArray() : tests.Concat(RevealTests.Cases()).ToArray();
 int failed = 0;
 foreach (var test in tests)
 {

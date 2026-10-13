@@ -1,0 +1,82 @@
+{
+  "source_sha256": "d2680759facda3858b61a12b81094625701ce383f57e6da06517ed75a5d9f648",
+  "layers_reconstruct_visible_pixels_exactly": true,
+  "eave_vertices": [
+    [
+      0,
+      72
+    ],
+    [
+      17,
+      72
+    ],
+    [
+      18,
+      76
+    ],
+    [
+      24,
+      69
+    ],
+    [
+      32,
+      62
+    ],
+    [
+      42,
+      58
+    ],
+    [
+      50,
+      56
+    ],
+    [
+      77,
+      56
+    ],
+    [
+      85,
+      58
+    ],
+    [
+      97,
+      65
+    ],
+    [
+      106,
+      75
+    ],
+    [
+      112,
+      78
+    ]
+  ],
+  "base_first_row": 101,
+  "roof_opacity": 0.16,
+  "wall_opacity": 0.3,
+  "base_opacity": 1,
+  "entrance_size": [
+    16,
+    28
+  ],
+  "entrance_threshold_anchor": [
+    8,
+    26
+  ],
+  "human_door_north_local_tile": [
+    5,
+    0
+  ],
+  "approach_local_tile": [
+    5,
+    -1
+  ],
+  "ground_origin_in_north_sprite": [
+    0.5,
+    43
+  ],
+  "entrance_sill_in_north_sprite": [
+    88.5,
+    43
+  ]
+}

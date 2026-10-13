@@ -30,8 +30,10 @@ files = {
 }
 if prototype:
     files["BuildingRotation.Data.dll"] = build / "BuildingRotation.Data.dll"
-    for facing in ("east", "west", "north"):
-        asset_name = f"assets/barn-{facing}-white-trim.png"
+    art_files = [f"barn-{facing}-white-trim.png" for facing in ("east", "west", "north")]
+    art_files += [f"barn-north-{layer}.png" for layer in ("roof", "wall", "base", "entrance")]
+    for filename in art_files:
+        asset_name = f"assets/{filename}"
         files[asset_name] = build / asset_name
         if files[asset_name].read_bytes() != (root / "src/BuildingRotation.Smapi" / asset_name).read_bytes():
             raise SystemExit(f"Build sprite is stale: {asset_name}; rebuild before packaging.")

@@ -1,0 +1,76 @@
+{
+  "package": "BuildingRotation.Prototype-0.1.8.zip",
+  "sha256": "ce4ad5c3cd4b68c13791e42f93fd7c95770d3e1a528d012f51e2b49624658c04",
+  "bytes": 152214,
+  "file_count": 13,
+  "assets": {
+    "barn-east-white-trim.png": {
+      "size": [
+        88,
+        107
+      ],
+      "sha256": "74be00303ae5c778497dfc8000bc86b32acae3d120aeabf42d2fc341a7328e6b"
+    },
+    "barn-north-base.png": {
+      "size": [
+        113,
+        107
+      ],
+      "sha256": "57e89c079b0194eb32fe74c195e573e30e9dd6f6d34b6ef90ec98bba83e1da5e"
+    },
+    "barn-north-entrance.png": {
+      "size": [
+        16,
+        28
+      ],
+      "sha256": "8e9dd67e09ad6da76a8c33a3abe98fd2078d4c9204e7fa1772e770f5b24164b9"
+    },
+    "barn-north-roof.png": {
+      "size": [
+        113,
+        107
+      ],
+      "sha256": "b6d75aa87e985ca14510b4280c4a460b21a288d95cb12ec4fb90f8f78f607012"
+    },
+    "barn-north-wall.png": {
+      "size": [
+        113,
+        107
+      ],
+      "sha256": "c58eadce86a4732ece22cc416a7bc57a706f38cdb1c3bb996ba0401acf734bac"
+    },
+    "barn-north-white-trim.png": {
+      "size": [
+        113,
+        107
+      ],
+      "sha256": "d2680759facda3858b61a12b81094625701ce383f57e6da06517ed75a5d9f648"
+    },
+    "barn-west-white-trim.png": {
+      "size": [
+        88,
+        107
+      ],
+      "sha256": "ec0f02be60f6548f5db494a193f12a10ee7feb5c2d9f6601c84ac546331cea1c"
+    }
+  },
+  "corrected_pairing": {
+    "East": "door points screen right; visible left wall; no near annex",
+    "West": "door points screen left; visible right wall; near annex"
+  },
+  "build": "Direct SDK 8.0.424 Roslyn with matched .NET6/game/SMAPI references, optimized, nullable, warnings as errors (SDK default 1701/1702 exclusions)",
+  "standard_msbuild": "dotnet launcher failed in Process.GetStat/StartTime; not a successful standard build",
+  "focused_checks_passed": 14,
+  "focused_checks_total": 14,
+  "previous_104_checks_rerun": false,
+  "harmony_targets_changed": false,
+  "core_runtime_data_dlls_match_0_1_7": true,
+  "new_smapi_dll": true,
+  "north_base_sprite_unchanged": true,
+  "layers_disjoint": true,
+  "layers_reconstruct_visible_pixels": true,
+  "base_last_six_rows_unchanged": true,
+  "reveal_visual_only": true,
+  "visible_door_click": "Maps sprite hit to vanilla doAction only from unchanged one-tile north approach, facing South; press only",
+  "game_validation": "Pending: Reveal transition, character ordering, visible door clicks under zoom, corrected side pairing."
+}

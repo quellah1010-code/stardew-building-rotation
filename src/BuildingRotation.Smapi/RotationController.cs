@@ -16,7 +16,10 @@ internal sealed class RotationController
     private readonly LetsMoveItProbe mover;
     private readonly RotationEditor editor;
     private readonly Dictionary<Facing, Texture2D> barnSprites = new();
-    public string ArtStatus => $"white-trim Barn art {barnSprites.Count}/3 loaded; South uses game art";
+    private readonly BarnRevealRenderer revealRenderer;
+    private readonly Dictionary<Building, NorthRevealState> reveals = new();
+    private GameLocation? revealLocation;
+    public string ArtStatus => $"white-trim Barn art {barnSprites.Count}/3 loaded; South uses game art; {revealRenderer.Status}";
     private MoveModeContext? context;
     private object? heldTarget;
     private TilePoint sourceGrab;
@@ -35,9 +38,12 @@ internal sealed class RotationController
     {
         this.helper = helper; this.monitor = monitor; this.mover = mover; Host = host;
         editor = new RotationEditor(host, 350, 24, 1);
+        // Facing names describe the entrance, not the side facing the camera:
+        // East = visible left wall (annex behind); West = right wall (annex near).
         LoadSprite(Facing.East, "assets/barn-east-white-trim.png", 88);
         LoadSprite(Facing.West, "assets/barn-west-white-trim.png", 88);
         LoadSprite(Facing.North, "assets/barn-north-white-trim.png", 113);
+        revealRenderer = new BarnRevealRenderer(helper, monitor);
     }
 
     private void LoadSprite(Facing facing, string asset, int width)
@@ -90,6 +96,7 @@ internal sealed class RotationController
             sourceGrab = snapshot.Definition.Collision.Footprint.InverseTransformCell(new TilePoint((int)grab.X, (int)grab.Y), snapshot.Pose.Direction);
             heldTarget = mover.SelectedTarget;
             ActiveBuilding = b;
+            reveals.Remove(b); // A moving preview never carries its old-location Reveal.
             context = new MoveModeContext("Exblosis.LetsMoveIt/0.6.20", Guid.NewGuid().ToString("N"), id, true, true, true);
             Sample(); // Sample the separate rotation button; never reinterpret the pickup click.
             if (ActiveBuilding == null)
@@ -149,6 +156,37 @@ internal sealed class RotationController
 
     // Suppress the normal game interaction on the press/release event, not a later tick.
     // Outside an active supported selection, right mouse keeps its usual meaning.
+    public void RightMousePressed()
+    {
+        if (ActiveBuilding == null && TryUseRevealedEntrance()) return;
+        RightMouseChanged();
+    }
+
+    private bool TryUseRevealedEntrance()
+    {
+        if (!Context.IsWorldReady || !Context.IsPlayerFree || Context.IsMultiplayer || !revealRenderer.Ready
+            || mover.SelectedTarget != null || Game1.player.UsingTool || Game1.player.isRidingHorse()) return false;
+        // SMAPI ScreenPixels is zoom-adjusted; add the world viewport exactly once.
+        Vector2 screen = helper.Input.GetCursorPosition().ScreenPixels;
+        var pointer = new PixelPoint(screen.X + Game1.viewport.X, screen.Y + Game1.viewport.Y);
+        var actor = new TilePoint(Game1.player.TilePoint.X, Game1.player.TilePoint.Y);
+        foreach (var entry in reveals)
+        {
+            Building b = entry.Key;
+            if (b.GetParentLocation() != Game1.currentLocation || b.isMoving || b.isUnderConstruction()) continue;
+            BuildingLayout? layout = Host.ManagedLayout(b);
+            if (layout?.Pose.Direction != Facing.North) continue;
+            TileRectangle door = layout.LocalDoors["human"].WorldArea(layout.Pose.Origin);
+            if (!entry.Value.CanClickEntrance(door, pointer, actor, GameRotationHost.CoreFacing(Game1.player.FacingDirection))) continue;
+            helper.Input.Suppress(SButton.MouseRight);
+            // The existing ActionPrefix still checks the real approach/facing; vanilla
+            // doAction retains its locks, active-item rules, sound and original warp.
+            b.doAction(new Vector2(door.X, door.Y), Game1.player);
+            return true;
+        }
+        return false;
+    }
+
     public void RightMouseChanged()
     {
         if (ActiveBuilding == null) return;
@@ -158,6 +196,7 @@ internal sealed class RotationController
 
     public void Tick()
     {
+        UpdateReveal(); // Daily visibility also runs when no building is held.
         if (ActiveBuilding == null) return;
         if (!Context.IsWorldReady || !Context.IsPlayerFree || !Game1.game1.IsActive || !mover.IsSingleMove
             || !mover.UsesLeftMouse || !ReferenceEquals(heldTarget, mover.SelectedTarget)
@@ -165,6 +204,38 @@ internal sealed class RotationController
         { Cancel(true); return; }
         try { Sample(); }
         catch (Exception ex) { Cancel(true); Warn($"Rotation edit cancelled: {ex.Message}"); }
+    }
+
+    public void ResetVisuals()
+    {
+        reveals.Clear();
+        revealLocation = null;
+    }
+
+    private void UpdateReveal()
+    {
+        if (!Context.IsWorldReady || !revealRenderer.Ready || !barnSprites.ContainsKey(Facing.North) || Context.IsMultiplayer)
+        { ResetVisuals(); return; }
+        if (!ReferenceEquals(revealLocation, Game1.currentLocation))
+        {
+            ResetVisuals();
+            revealLocation = Game1.currentLocation;
+        }
+        Rectangle bounds = Game1.player.GetBoundingBox();
+        var feet = new PixelPoint(bounds.Center.X, bounds.Bottom);
+        double seconds = Game1.currentGameTime.ElapsedGameTime.TotalSeconds;
+        var retained = new HashSet<Building>();
+        foreach (Building b in Game1.currentLocation.buildings)
+        {
+            if (ReferenceEquals(b, ActiveBuilding) || b.isMoving || b.isUnderConstruction()) continue;
+            BuildingLayout? layout = Host.ManagedLayout(b);
+            if (layout?.Pose.Direction != Facing.North) continue;
+            if (!reveals.TryGetValue(b, out NorthRevealState? state))
+                reveals.Add(b, state = new NorthRevealState());
+            state.Update(Facing.North, layout.LocalDoors["human"].WorldArea(layout.Pose.Origin), feet, seconds);
+            retained.Add(b);
+        }
+        foreach (Building b in reveals.Keys.Where(b => !retained.Contains(b)).ToArray()) reveals.Remove(b);
     }
 
     private void Sample()
@@ -238,17 +309,22 @@ internal sealed class RotationController
         float sortOffset = building?.GetData()?.SortTileOffset ?? 0f;
         float depth = preview ? .9997f : (layout.Pose.Origin.Y + layout.Footprint.Height - sortOffset) * 64f / 10000f;
         Color tint = preview ? Color.White * .8f : (building?.color ?? Color.White) * (building?.alpha ?? 1f);
-        batch.Draw(sprite.Texture, imageTop, sprite.Source, tint, 0f, Vector2.Zero, 4f, SpriteEffects.None, depth);
+        float reveal = !preview && building != null && layout.Pose.Direction == Facing.North
+            && reveals.TryGetValue(building, out NorthRevealState? state) ? state.Amount : 0;
+        if (reveal > 0 && revealRenderer.Ready)
+            revealRenderer.Draw(batch, layout, imageTop, tint, depth, reveal);
+        else
+            batch.Draw(sprite.Texture, imageTop, sprite.Source, tint, 0f, Vector2.Zero, 4f, SpriteEffects.None, depth);
         if (preview && layout.Pose.Direction == Facing.South && building != null)
             DrawSouthPreviewLayers(batch, building, imageTop, tint);
 
         // The outline marks the actual approach tile, not a painted doorway.
-        // North's tile overlaps the roof projection: draw the hint above the sprite
-        // until Reveal is implemented. Distinct depths avoid the old equal-depth flicker.
+        // North's outline yields to the reconstructed entrance as Reveal fades in.
+        // Keep side-facing hints and all held-preview hints unchanged for this iteration.
         TileRectangle approach = layout.LocalDoors["human"].ApproachArea(1);
         var approachBox = new Rectangle((int)ground.X + approach.X * 64, (int)ground.Y + approach.Y * 64,
             approach.Width * 64, approach.Height * 64);
-        Outline(batch, approachBox, Color.Cyan, 3, preview ? .9999f : Math.Min(.9999f, depth + .00001f));
+        Outline(batch, approachBox, Color.Cyan * (1f - reveal), 3, preview ? .9999f : Math.Min(.9999f, depth + .00001f));
         if (preview)
         {
             var box = new Rectangle((int)ground.X, (int)ground.Y, layout.Footprint.Width * 64, layout.Footprint.Height * 64);
