@@ -1,0 +1,41 @@
+{
+  "package": "BuildingRotation.Prototype-0.1.6.zip",
+  "sha256": "15f030bbdb792aa19301eba6ab2861a812e594d08c24a05f9342557c30363071",
+  "assets": {
+    "east": {
+      "size": [
+        88,
+        107
+      ],
+      "ground_origin": [
+        12.0,
+        -5
+      ],
+      "sha256": "74be00303ae5c778497dfc8000bc86b32acae3d120aeabf42d2fc341a7328e6b"
+    },
+    "west": {
+      "size": [
+        88,
+        107
+      ],
+      "ground_origin": [
+        12.0,
+        -5
+      ],
+      "sha256": "ec0f02be60f6548f5db494a193f12a10ee7feb5c2d9f6601c84ac546331cea1c"
+    },
+    "north": {
+      "size": [
+        113,
+        107
+      ],
+      "ground_origin": [
+        0.5,
+        43
+      ],
+      "sha256": "d2680759facda3858b61a12b81094625701ce383f57e6da06517ed75a5d9f648"
+    }
+  },
+  "unchanged_dependencies_match_0.1.5": true,
+  "file_count": 9
+}

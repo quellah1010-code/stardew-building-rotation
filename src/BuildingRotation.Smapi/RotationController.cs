@@ -15,8 +15,8 @@ internal sealed class RotationController
     private readonly IMonitor monitor;
     private readonly LetsMoveItProbe mover;
     private readonly RotationEditor editor;
-    private readonly Texture2D? eastSprite;
-    private static readonly Vector2 EastGroundOrigin = new(14, 0);
+    private readonly Dictionary<Facing, Texture2D> barnSprites = new();
+    public string ArtStatus => $"white-trim Barn art {barnSprites.Count}/3 loaded; South uses game art";
     private MoveModeContext? context;
     private object? heldTarget;
     private TilePoint sourceGrab;
@@ -35,16 +35,23 @@ internal sealed class RotationController
     {
         this.helper = helper; this.monitor = monitor; this.mover = mover; Host = host;
         editor = new RotationEditor(host, 350, 24, 1);
+        LoadSprite(Facing.East, "assets/barn-east-white-trim.png", 88);
+        LoadSprite(Facing.West, "assets/barn-west-white-trim.png", 88);
+        LoadSprite(Facing.North, "assets/barn-north-white-trim.png", 113);
+    }
+
+    private void LoadSprite(Facing facing, string asset, int width)
+    {
         try
         {
-            Texture2D texture = helper.ModContent.Load<Texture2D>("assets/barn-east-v2.png");
-            if (texture.Width != 92 || texture.Height != 112)
-                throw new InvalidOperationException("Expected the 92 x 112 east Barn sprite.");
-            eastSprite = texture;
+            Texture2D texture = helper.ModContent.Load<Texture2D>(asset);
+            if (texture.Width != width || texture.Height != 107)
+                throw new InvalidOperationException($"Expected the {width} x 107 {facing} Barn sprite.");
+            barnSprites.Add(facing, texture);
         }
         catch (Exception ex)
         {
-            monitor.Log($"East Barn art could not load; using the layout placeholder: {ex.Message}", LogLevel.Warn);
+            monitor.Log($"{facing} Barn art could not load; using the layout placeholder: {ex.Message}", LogLevel.Warn);
         }
     }
 
@@ -210,41 +217,86 @@ internal sealed class RotationController
         if (Preview is not BuildingLayout layout) return;
         DrawBuilding(batch, layout, previewValid ? Color.LimeGreen : Color.OrangeRed, true, ActiveBuilding);
         Vector2 top = Game1.GlobalToLocal(new Vector2(layout.Pose.Origin.X * 64, layout.Pose.Origin.Y * 64));
-        if (layout.Pose.Direction == Facing.East && eastSprite != null) top -= EastGroundOrigin * 4f;
+        if (GetSprite(layout, ActiveBuilding) is { } sprite) top -= sprite.GroundOrigin * 4f;
         batch.DrawString(Game1.smallFont, "Right drag: turn | Left click: place", new Vector2(top.X, top.Y - 60),
             Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
     }
 
     public void DrawBuilding(SpriteBatch batch, BuildingLayout layout, Color color, bool preview, Building? building)
     {
-        if (layout.Pose.Direction != Facing.East || eastSprite == null)
+        if (GetSprite(layout, building) is not { } sprite)
         {
             DrawLayout(batch, layout, color, preview);
             return;
         }
 
-        // Rebuilt 92 x 112 canvas: ground origin (14,0), with roof overhang on each side.
-        // The 64 x 112 ground area and world-local human threshold (64,88) are unchanged.
-        // Both the held and placed image use the layout origin, never the old building position.
+        // Keep native dimensions: center the art over the footprint and align its base
+        // with the footprint's south edge. Do not stretch the chosen roof to fill tiles.
+        // Both held and placed sprites use the proposed layout, never the old position.
         Vector2 ground = Game1.GlobalToLocal(new Vector2(layout.Pose.Origin.X * 64, layout.Pose.Origin.Y * 64));
-        Vector2 imageTop = ground - EastGroundOrigin * 4f;
+        Vector2 imageTop = ground - sprite.GroundOrigin * 4f;
         float sortOffset = building?.GetData()?.SortTileOffset ?? 0f;
         float depth = preview ? .9997f : (layout.Pose.Origin.Y + layout.Footprint.Height - sortOffset) * 64f / 10000f;
         Color tint = preview ? Color.White * .8f : (building?.color ?? Color.White) * (building?.alpha ?? 1f);
-        batch.Draw(eastSprite, imageTop, null, tint, 0f, Vector2.Zero, 4f, SpriteEffects.None, depth);
+        batch.Draw(sprite.Texture, imageTop, sprite.Source, tint, 0f, Vector2.Zero, 4f, SpriteEffects.None, depth);
+        if (preview && layout.Pose.Direction == Facing.South && building != null)
+            DrawSouthPreviewLayers(batch, building, imageTop, tint);
 
-        // Keep a ground-level approach marker while the edge-on entrance is under review.
-        // No filled door cell is painted across the new roof/wall.
+        // The outline marks the actual approach tile, not a painted doorway.
+        // North's tile overlaps the roof projection: draw the hint above the sprite
+        // until Reveal is implemented. Distinct depths avoid the old equal-depth flicker.
         TileRectangle approach = layout.LocalDoors["human"].ApproachArea(1);
         var approachBox = new Rectangle((int)ground.X + approach.X * 64, (int)ground.Y + approach.Y * 64,
             approach.Width * 64, approach.Height * 64);
-        Outline(batch, approachBox, Color.Cyan, 3, preview ? .9999f : .000004f);
+        Outline(batch, approachBox, Color.Cyan, 3, preview ? .9999f : Math.Min(.9999f, depth + .00001f));
         if (preview)
         {
             var box = new Rectangle((int)ground.X, (int)ground.Y, layout.Footprint.Width * 64, layout.Footprint.Height * 64);
             Outline(batch, box, color, 4, .9998f);
-            batch.DrawString(Game1.smallFont, "BARN / EAST", imageTop - new Vector2(0, 32), Color.White,
+            batch.DrawString(Game1.smallFont, $"BARN / {layout.Pose.Direction.ToString().ToUpperInvariant()}", imageTop - new Vector2(0, 32), Color.White,
                 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+        }
+    }
+
+    private (Texture2D Texture, Rectangle Source, Vector2 GroundOrigin)? GetSprite(BuildingLayout layout, Building? building)
+    {
+        Texture2D texture;
+        Rectangle source;
+        if (layout.Pose.Direction == Facing.South && building != null)
+        {
+            texture = building.texture.Value;
+            source = building.getSourceRect();
+        }
+        else
+        {
+            if (!barnSprites.TryGetValue(layout.Pose.Direction, out Texture2D? art)) return null;
+            texture = art;
+            source = texture.Bounds;
+        }
+        Vector2 origin = new((source.Width - layout.Footprint.Width * 16) / 2f,
+            source.Height - layout.Footprint.Height * 16);
+        if (layout.Pose.Direction == Facing.South)
+            origin -= building?.GetData()?.DrawOffset ?? Vector2.Zero;
+        return (texture, source, origin);
+    }
+
+    // Use the game's own source frames for the South preview, including its animal
+    // door panels. This only reads the Building; no coordinates or saved fields move.
+    private static void DrawSouthPreviewLayers(SpriteBatch batch, Building building, Vector2 top, Color tint)
+    {
+        var layers = building.GetData()?.DrawLayers;
+        if (layers == null) return;
+        int milliseconds = (int)Game1.currentGameTime.TotalGameTime.TotalMilliseconds;
+        int index = 0;
+        foreach (var layer in layers)
+        {
+            if (layer.OnlyDrawIfChestHasContents != null) continue; // Ordinary empty Barn has no chest layers.
+            Texture2D texture = layer.Texture == null ? building.texture.Value : Game1.content.Load<Texture2D>(layer.Texture);
+            Rectangle source = building.ApplySourceRectOffsets(layer.GetSourceRect(milliseconds));
+            Vector2 doorShift = new Vector2(layer.AnimalDoorOffset.X, layer.AnimalDoorOffset.Y) * building.animalDoorOpenAmount.Value;
+            float depth = layer.DrawInBackground ? .9996f : .99971f + index++ * .000001f;
+            batch.Draw(texture, top + (layer.DrawPosition + doorShift) * 4f, source, tint,
+                0f, Vector2.Zero, 4f, SpriteEffects.None, depth);
         }
     }
 

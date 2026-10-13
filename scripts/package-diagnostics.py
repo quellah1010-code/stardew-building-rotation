@@ -1,16 +1,19 @@
 """Package this project's compiled code, explicit art assets and test instructions."""
 import hashlib
 import json
+import argparse
 from pathlib import Path
 import zipfile
 
 root = Path(__file__).resolve().parents[1]
-build = root / "src/BuildingRotation.Smapi/bin/Release/net6.0"
+parser = argparse.ArgumentParser()
+parser.add_argument("--build-dir", type=Path, default=root / "src/BuildingRotation.Smapi/bin/Release/net6.0")
+build = parser.parse_args().build_dir
 manifest_path = build / "manifest.json"
 manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 source_manifest = json.loads((root / "src/BuildingRotation.Smapi/manifest.json").read_text(encoding="utf-8"))
 if manifest != source_manifest:
-    raise SystemExit("Build manifest is stale; rebuild Release before packaging.")
+    raise SystemExit("Build manifest is stale; rebuild before packaging.")
 if manifest["UniqueID"] != "quellah.BuildingRotation":
     raise SystemExit("Unexpected package identity.")
 version = manifest["Version"]
@@ -27,10 +30,11 @@ files = {
 }
 if prototype:
     files["BuildingRotation.Data.dll"] = build / "BuildingRotation.Data.dll"
-    asset_name = "assets/barn-east-v2.png"
-    files[asset_name] = build / asset_name
-    if files[asset_name].read_bytes() != (root / "src/BuildingRotation.Smapi" / asset_name).read_bytes():
-        raise SystemExit("Build sprite is stale; rebuild Release before packaging.")
+    for facing in ("east", "west", "north"):
+        asset_name = f"assets/barn-{facing}-white-trim.png"
+        files[asset_name] = build / asset_name
+        if files[asset_name].read_bytes() != (root / "src/BuildingRotation.Smapi" / asset_name).read_bytes():
+            raise SystemExit(f"Build sprite is stale: {asset_name}; rebuild before packaging.")
 # Resolve the complete allowlist before creating the output archive.
 contents = {name: path.read_bytes() for name, path in files.items()}
 output = root / "artifacts" / f"{package_name}-{version}.zip"

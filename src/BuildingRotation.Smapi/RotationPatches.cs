@@ -96,7 +96,7 @@ internal static class RotationPatches
         // Render the held instance only through DrawPreview, including its original south sprite.
         if (ReferenceEquals(controller?.ActiveBuilding, __instance) && controller?.Preview != null) return false;
         BuildingLayout? layout = Layout(__instance);
-        if (layout == null || __instance.isMoving || __instance.isUnderConstruction()) return true;
+        if (layout == null || layout.Pose.Direction == Facing.South || __instance.isMoving || __instance.isUnderConstruction()) return true;
         controller!.DrawBuilding(b, layout, Color.SandyBrown, false, __instance);
         return false;
     }
