@@ -36,7 +36,8 @@ internal sealed class NorthRevealState
         Amount = 0;
     }
 
-    public void Update(Facing facing, TileRectangle worldDoor, PixelPoint feet, double elapsedSeconds)
+    public void Update(Facing facing, TileRectangle worldDoor, PixelPoint feet, double elapsedSeconds,
+        TileRectangle? passage = null)
     {
         if (facing != Facing.North) { Reset(); return; }
         if (!worldDoor.Equals(previousDoor)) Reset();
@@ -47,6 +48,13 @@ internal sealed class NorthRevealState
         double top = worldDoor.Y * TileSize - OutwardReach - margin;
         double bottom = worldDoor.Y * TileSize + InnerReach + margin;
         IsTriggered = feet.X >= left && feet.X <= right && feet.Y >= top && feet.Y <= bottom;
+        // Reveal the whole rear walk-through lane, including an approach from the
+        // left. Otherwise a player walks under an opaque roof before reaching the door.
+        if (passage != null)
+            IsTriggered |= feet.X >= passage.X * TileSize - TileSize / 2 - margin
+                && feet.X <= passage.Right * TileSize + TileSize / 2 + margin
+                && feet.Y >= passage.Y * TileSize - OutwardReach - margin
+                && feet.Y <= passage.Bottom * TileSize + InnerReach + margin;
 
         // Cap a long frame so a pause/window switch cannot skip the whole transition.
         double elapsed = Math.Clamp(elapsedSeconds, 0, .1);

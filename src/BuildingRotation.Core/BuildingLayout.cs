@@ -34,7 +34,7 @@ namespace BuildingRotation.Core
 
         // Query the immutable source through an inverse transform, without rebuilding the mask.
         public bool BlocksLocal(TilePoint orientedCell) => Footprint.Contains(orientedCell) &&
-            Definition.Collision.IsBlocked(Definition.Collision.Footprint.InverseTransformCell(orientedCell, Pose.Direction));
+            Definition.BlocksOriented(orientedCell, Pose.Direction);
 
         // A far-away world cell should return false, not overflow during origin subtraction.
         public bool BlocksWorld(TilePoint worldCell)

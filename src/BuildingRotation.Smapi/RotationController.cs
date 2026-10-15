@@ -232,7 +232,8 @@ internal sealed class RotationController
             if (layout?.Pose.Direction != Facing.North) continue;
             if (!reveals.TryGetValue(b, out NorthRevealState? state))
                 reveals.Add(b, state = new NorthRevealState());
-            state.Update(Facing.North, layout.LocalDoors["human"].WorldArea(layout.Pose.Origin), feet, seconds);
+            state.Update(Facing.North, layout.LocalDoors["human"].WorldArea(layout.Pose.Origin), feet, seconds,
+                BarnArtLayout.Passage(layout));
             retained.Add(b);
         }
         foreach (Building b in reveals.Keys.Where(b => !retained.Contains(b)).ToArray()) reveals.Remove(b);
@@ -308,7 +309,10 @@ internal sealed class RotationController
         Vector2 imageTop = ground - sprite.GroundOrigin * 4f;
         float sortOffset = building?.GetData()?.SortTileOffset ?? 0f;
         float depth = preview ? .9997f : (layout.Pose.Origin.Y + layout.Footprint.Height - sortOffset) * 64f / 10000f;
-        Color tint = preview ? Color.White * .8f : (building?.color ?? Color.White) * (building?.alpha ?? 1f);
+        // North owns its opacity per layer. Vanilla UpdateTransparency applies a
+        // second whole-building fade (down to .4), which erased even the foundation.
+        Color tint = preview ? Color.White * .8f : (building?.color ?? Color.White)
+            * (layout.Pose.Direction == Facing.North && revealRenderer.Ready ? 1f : building?.alpha ?? 1f);
         float reveal = !preview && building != null && layout.Pose.Direction == Facing.North
             && reveals.TryGetValue(building, out NorthRevealState? state) ? state.Amount : 0;
         if (reveal > 0 && revealRenderer.Ready)

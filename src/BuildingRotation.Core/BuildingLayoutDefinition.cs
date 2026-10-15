@@ -13,6 +13,7 @@ namespace BuildingRotation.Core
         public IReadOnlyList<PlacementRequirement> SourcePlacementRequirements { get; }
         public int AdditionalTilePropertyRadius { get; }
         private readonly Dictionary<Facing, IReadOnlyDictionary<string, DoorRegion>> doorOverrides;
+        private readonly Dictionary<Facing, CollisionMask> collisionOverrides;
 
         public BuildingLayoutDefinition(CollisionMask collision,
             IReadOnlyDictionary<string, DoorRegion>? sourceDoors = null,
@@ -20,6 +21,18 @@ namespace BuildingRotation.Core
             IReadOnlyDictionary<Facing, IReadOnlyDictionary<string, DoorRegion>>? orientedDoorOverrides = null,
             IEnumerable<PlacementRequirement>? sourcePlacementRequirements = null,
             int additionalTilePropertyRadius = 0)
+            : this(collision, sourceDoors, sourceClearance, orientedDoorOverrides,
+                sourcePlacementRequirements, additionalTilePropertyRadius, null) { }
+
+        // Keep the original constructor for existing adapters. Overrides describe an
+        // explicit art layout, in oriented coordinates, without changing reserved size.
+        public BuildingLayoutDefinition(CollisionMask collision,
+            IReadOnlyDictionary<string, DoorRegion>? sourceDoors,
+            IEnumerable<TileRectangle>? sourceClearance,
+            IReadOnlyDictionary<Facing, IReadOnlyDictionary<string, DoorRegion>>? orientedDoorOverrides,
+            IEnumerable<PlacementRequirement>? sourcePlacementRequirements,
+            int additionalTilePropertyRadius,
+            IReadOnlyDictionary<Facing, CollisionMask>? orientedCollisionOverrides)
         {
             Collision = collision ?? throw new ArgumentNullException(nameof(collision));
             SourceDoors = CopyDoors(sourceDoors ?? new Dictionary<string, DoorRegion>());
@@ -37,6 +50,18 @@ namespace BuildingRotation.Core
                 foreach (var requirement in sourcePlacementRequirements)
                     requirements.Add(requirement ?? throw new ArgumentException("Placement requirements cannot be null.", nameof(sourcePlacementRequirements)));
             SourcePlacementRequirements = requirements.AsReadOnly();
+
+            collisionOverrides = new Dictionary<Facing, CollisionMask>();
+            if (orientedCollisionOverrides != null)
+                foreach (var entry in orientedCollisionOverrides)
+                {
+                    FacingExtensions.Validate(entry.Key);
+                    Footprint size = Collision.Footprint.RotateTo(entry.Key);
+                    if (entry.Value == null || entry.Value.Footprint.Width != size.Width
+                        || entry.Value.Footprint.Height != size.Height)
+                        throw new ArgumentException("An oriented collision mask must match the reserved footprint.", nameof(orientedCollisionOverrides));
+                    collisionOverrides.Add(entry.Key, entry.Value);
+                }
 
             doorOverrides = new Dictionary<Facing, IReadOnlyDictionary<string, DoorRegion>>();
             if (orientedDoorOverrides != null)
@@ -80,5 +105,10 @@ namespace BuildingRotation.Core
         }
 
         public BuildingLayout CreateLayout(PlacementPose pose) => new BuildingLayout(this, pose);
+
+        internal bool BlocksOriented(TilePoint cell, Facing facing)
+            => collisionOverrides.TryGetValue(facing, out CollisionMask? mask)
+                ? mask.IsBlocked(cell)
+                : Collision.IsBlocked(Collision.Footprint.InverseTransformCell(cell, facing));
     }
 }

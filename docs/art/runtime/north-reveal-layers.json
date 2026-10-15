@@ -52,8 +52,8 @@
     ]
   ],
   "base_first_row": 101,
-  "roof_opacity": 0.16,
-  "wall_opacity": 0.3,
+  "roof_opacity": 0.22,
+  "wall_opacity": 0.38,
   "base_opacity": 1,
   "entrance_size": [
     16,
@@ -65,11 +65,21 @@
   ],
   "human_door_north_local_tile": [
     5,
-    0
+    1
   ],
   "approach_local_tile": [
     5,
-    -1
+    0
+  ],
+  "reserved_size": [
+    7,
+    4
+  ],
+  "collision_rows": [
+    "OOOOOOO",
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX"
   ],
   "ground_origin_in_north_sprite": [
     0.5,
@@ -77,6 +87,10 @@
   ],
   "entrance_sill_in_north_sprite": [
     88.5,
-    43
+    59
+  ],
+  "far_wall_size": [
+    112,
+    28
   ]
 }

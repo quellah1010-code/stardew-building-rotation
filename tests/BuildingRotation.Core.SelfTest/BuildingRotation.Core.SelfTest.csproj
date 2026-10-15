@@ -13,5 +13,6 @@
     <EmbeddedResource Include="../../docs/reference/content-building-facts.json" LogicalName="BuildingRotation.ContentFacts.json" />
     <!-- Compile the actual visual state without loading any game/MonoGame DLL. -->
     <Compile Include="../../src/BuildingRotation.Smapi/NorthRevealState.cs" Link="NorthRevealState.cs" />
+    <Compile Include="../../src/BuildingRotation.Smapi/BarnArtLayout.cs" Link="BarnArtLayout.cs" />
   </ItemGroup>
 </Project>

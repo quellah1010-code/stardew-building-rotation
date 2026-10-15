@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>BuildingRotation.Smapi</AssemblyName>
-    <Version>0.1.8</Version>
+    <Version>0.1.9</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -27,6 +27,7 @@
     <None Update="assets/barn-north-wall.png" CopyToOutputDirectory="PreserveNewest" />
     <None Update="assets/barn-north-base.png" CopyToOutputDirectory="PreserveNewest" />
     <None Update="assets/barn-north-entrance.png" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="assets/barn-north-far-wall.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="VerifyGameReferences" BeforeTargets="PrepareForBuild">
     <Error Condition="'$(GamePath)' == ''" Text="Set GamePath to the matching game/SMAPI assembly folder. This diagnostic project cannot be built from Content alone." />

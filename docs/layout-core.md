@@ -77,3 +77,7 @@ bool buildingBlocks = first.BlocksWorld(new TilePoint(10, 20));
 TileRectangle approach = first.LocalDoors["human"].WorldApproach(first.Pose.Origin, 1);
 // first 与 second 共享定义，各自的朝向和位置互不改变。
 ```
+
+## 0.1.9：美术朝向的显式碰撞覆盖
+
+`BuildingLayoutDefinition` 保留原构造函数，并提供第七参数 `orientedCollisionOverrides` 的重载。覆盖图必须匹配该朝向的预留 footprint，输入字典复制、mask 不可变；`BlocksLocal/BlocksWorld/IntersectsWorld` 统一使用覆盖图。未指定的方向沿用逆变换源数据。SMAPI 的 `BarnArtLayout` 只为标准普通 Barn 的 North 首排通路提供此覆盖，并同时覆盖门位；通用数据读取不受影响。

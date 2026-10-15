@@ -57,6 +57,7 @@ internal sealed class GameRotationHost : IRotationHost
                 d.AdditionalPlacementTiles?.Select(p => new PlacementRequirement(TileRect(p.TileArea), p.OnlyNeedsToBePassable)),
                 indoorMap: d.IndoorMap);
             entry.Definition = data.ToLayoutDefinition();
+            if (b.buildingType.Value == "Barn") entry.Definition = BarnArtLayout.Apply(entry.Definition);
             entry.Source = key;
         }
         return entry.Definition;

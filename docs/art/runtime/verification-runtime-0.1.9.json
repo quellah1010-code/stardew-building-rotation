@@ -1,0 +1,51 @@
+{
+  "version": "0.1.9",
+  "date": "2026-10-15",
+  "package": "artifacts/BuildingRotation.Prototype-0.1.9.zip",
+  "sha256": "123da5294e4d33be6a1bbc498678fb39f2c43c15fc823c3e7e124f523d2cf307",
+  "bytes": 156394,
+  "file_count": 14,
+  "build": "Direct Roslyn, matching .NET 6 game / SMAPI references; Core netstandard2.1",
+  "independent_checks": "131/131; 13 new calibrated North path cases",
+  "recompiled": [
+    "Core",
+    "Smapi"
+  ],
+  "unchanged_dlls": [
+    "Runtime",
+    "Data"
+  ],
+  "unchanged_art": [
+    "src/BuildingRotation.Smapi/assets/barn-east-white-trim.png",
+    "src/BuildingRotation.Smapi/assets/barn-west-white-trim.png",
+    "src/BuildingRotation.Smapi/assets/barn-north-white-trim.png",
+    "src/BuildingRotation.Smapi/assets/barn-north-roof.png",
+    "src/BuildingRotation.Smapi/assets/barn-north-wall.png",
+    "src/BuildingRotation.Smapi/assets/barn-north-base.png"
+  ],
+  "north_reserved_size": [
+    7,
+    4
+  ],
+  "north_blocking_rows": [
+    "OOOOOOO",
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX"
+  ],
+  "north_human_door": [
+    5,
+    1
+  ],
+  "north_approach": [
+    5,
+    0
+  ],
+  "alpha_control": "North ignores whole-building alpha, per-layer opacity only",
+  "layers_reconstruct_source": true,
+  "door_leaf_opaque": true,
+  "far_wall_door_gap_matches": true,
+  "game_validation": "Pending: horizontal walk, new door/return, reload, layer visibility and appearance",
+  "user_screenshots_included": false,
+  "game_assemblies_included": false
+}
