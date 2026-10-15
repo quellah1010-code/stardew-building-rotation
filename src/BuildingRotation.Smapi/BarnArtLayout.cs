@@ -33,8 +33,4 @@ internal static class BarnArtLayout
             });
     }
 
-    public static TileRectangle? Passage(BuildingLayout layout)
-        => layout.Pose.Direction == Facing.North && layout.LocalDoors["human"].Area.Y > 0
-            ? new TileRectangle(layout.Pose.Origin.X, layout.Pose.Origin.Y, layout.Footprint.Width,
-                layout.LocalDoors["human"].Area.Y) : null;
 }

@@ -6,12 +6,11 @@ namespace BuildingRotation.Smapi;
 internal sealed class NorthRevealState
 {
     public const double TileSize = 64;
-    public const double SideReach = 1.5 * TileSize;
-    public const double OutwardReach = 3 * TileSize;
-    public const double InnerReach = .25 * TileSize;
+    public const double ProximityReach = 2 * TileSize;
     public const double ExitMargin = .5 * TileSize;
     public const double FadeInSeconds = .18, FadeOutSeconds = .25;
     private TileRectangle? previousDoor;
+    private TileRectangle? previousFootprint;
     public bool IsTriggered { get; private set; }
     public float Amount { get; private set; }
 
@@ -32,29 +31,26 @@ internal sealed class NorthRevealState
     public void Reset()
     {
         previousDoor = null;
+        previousFootprint = null;
         IsTriggered = false;
         Amount = 0;
     }
 
     public void Update(Facing facing, TileRectangle worldDoor, PixelPoint feet, double elapsedSeconds,
-        TileRectangle? passage = null)
+        TileRectangle worldFootprint)
     {
         if (facing != Facing.North) { Reset(); return; }
-        if (!worldDoor.Equals(previousDoor)) Reset();
+        if (!worldDoor.Equals(previousDoor) || !worldFootprint.Equals(previousFootprint)) Reset();
         previousDoor = worldDoor;
+        previousFootprint = worldFootprint;
         double margin = IsTriggered ? ExitMargin : 0;
-        double left = worldDoor.X * TileSize - SideReach - margin;
-        double right = worldDoor.Right * TileSize + SideReach + margin;
-        double top = worldDoor.Y * TileSize - OutwardReach - margin;
-        double bottom = worldDoor.Y * TileSize + InnerReach + margin;
+        // One two-tile rectangular ring around the WHOLE building. Neither the
+        // entrance side nor the player's facing restricts proximity visibility.
+        double left = worldFootprint.X * TileSize - ProximityReach - margin;
+        double right = worldFootprint.Right * TileSize + ProximityReach + margin;
+        double top = worldFootprint.Y * TileSize - ProximityReach - margin;
+        double bottom = worldFootprint.Bottom * TileSize + ProximityReach + margin;
         IsTriggered = feet.X >= left && feet.X <= right && feet.Y >= top && feet.Y <= bottom;
-        // Reveal the whole rear walk-through lane, including an approach from the
-        // left. Otherwise a player walks under an opaque roof before reaching the door.
-        if (passage != null)
-            IsTriggered |= feet.X >= passage.X * TileSize - TileSize / 2 - margin
-                && feet.X <= passage.Right * TileSize + TileSize / 2 + margin
-                && feet.Y >= passage.Y * TileSize - OutwardReach - margin
-                && feet.Y <= passage.Bottom * TileSize + InnerReach + margin;
 
         // Cap a long frame so a pause/window switch cannot skip the whole transition.
         double elapsed = Math.Clamp(elapsedSeconds, 0, .1);

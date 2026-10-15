@@ -141,7 +141,8 @@ var tests = new (string Name, Action Run)[]
     })
 };
 
-tests = tests.Concat(EditingTests.Cases()).Concat(MoveModeTests.Cases())
+if (!args.Contains("--reveal-only"))
+    tests = tests.Concat(EditingTests.Cases()).Concat(MoveModeTests.Cases())
     .Concat(LayoutTests.Cases()).Concat(DoorRegionTests.Cases())
     .Concat(ContentDataTests.Cases(args)).Concat(ArtTemplateTests.Cases())
     .Concat(RuntimeTests.Cases()).ToArray();

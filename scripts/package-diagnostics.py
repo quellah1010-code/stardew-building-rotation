@@ -31,7 +31,8 @@ files = {
 if prototype:
     files["BuildingRotation.Data.dll"] = build / "BuildingRotation.Data.dll"
     art_files = [f"barn-{facing}-white-trim.png" for facing in ("east", "west", "north")]
-    art_files += [f"barn-north-{layer}.png" for layer in ("roof", "wall", "base", "entrance", "far-wall")]
+    art_files += [f"barn-north-{layer}.png" for layer in ("roof", "wall", "base", "entrance")]
+    art_files += ["barn-reveal-stone-floor.png"]
     for filename in art_files:
         asset_name = f"assets/{filename}"
         files[asset_name] = build / asset_name

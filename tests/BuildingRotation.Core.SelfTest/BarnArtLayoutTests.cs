@@ -146,16 +146,16 @@ internal static class BarnArtLayoutTests
         yield return ("North path: left end of passage triggers Reveal before reaching the door", () =>
         {
             var n=North(new TilePoint(10,20));var state=new NorthRevealState();
-            var door=n.LocalDoors["human"].WorldArea(n.Pose.Origin);var path=BarnArtLayout.Passage(n);
+            var door=n.LocalDoors["human"].WorldArea(n.Pose.Origin);var path=new TileRectangle(n.Pose.Origin.X,n.Pose.Origin.Y,n.Footprint.Width,n.Footprint.Height);
             for(int i=0;i<20;i++)state.Update(Facing.North,door,new PixelPoint(10*64,20*64+32),.016,path);
             Check(state.IsTriggered&&state.Amount==1,"Left passage concealed");
-            for(int i=0;i<20;i++)state.Update(Facing.North,door,new PixelPoint(10*64,25*64),.016,path);
+            for(int i=0;i<20;i++)state.Update(Facing.North,door,new PixelPoint(10*64,27*64),.016,path);
             Equal(0f,state.Amount);
         });
         yield return ("North path: roof above the left approach cannot hide the approaching farmer", () =>
         {
             var n=North(new TilePoint(10,20));var state=new NorthRevealState();
-            var door=n.LocalDoors["human"].WorldArea(n.Pose.Origin);var path=BarnArtLayout.Passage(n);
+            var door=n.LocalDoors["human"].WorldArea(n.Pose.Origin);var path=new TileRectangle(n.Pose.Origin.X,n.Pose.Origin.Y,n.Footprint.Width,n.Footprint.Height);
             state.Update(Facing.North,door,new PixelPoint(10.5*64,18*64),.1,path);
             Check(state.IsTriggered,"Roof obscures left approach before Reveal");
             state.Reset();state.Update(Facing.North,door,new PixelPoint(10.5*64,16*64),.1,path);

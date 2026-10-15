@@ -233,7 +233,7 @@ internal sealed class RotationController
             if (!reveals.TryGetValue(b, out NorthRevealState? state))
                 reveals.Add(b, state = new NorthRevealState());
             state.Update(Facing.North, layout.LocalDoors["human"].WorldArea(layout.Pose.Origin), feet, seconds,
-                BarnArtLayout.Passage(layout));
+                new TileRectangle(layout.Pose.Origin.X, layout.Pose.Origin.Y, layout.Footprint.Width, layout.Footprint.Height));
             retained.Add(b);
         }
         foreach (Building b in reveals.Keys.Where(b => !retained.Contains(b)).ToArray()) reveals.Remove(b);

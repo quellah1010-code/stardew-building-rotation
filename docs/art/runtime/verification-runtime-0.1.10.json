@@ -1,0 +1,28 @@
+{
+  "version": "0.1.10",
+  "date": "2026-10-15",
+  "package": "artifacts/BuildingRotation.Prototype-0.1.10.zip",
+  "sha256": "32a63a02654ed98f2d2d88629983035e26f8dd020bb02687983b95fa964a4fbc",
+  "bytes": 153360,
+  "file_count": 14,
+  "build": "Matching-reference direct Roslyn, Smapi recompiled",
+  "unchanged_dlls": [
+    "Core",
+    "Runtime",
+    "Data"
+  ],
+  "focused_checks": "29/29; four edges/corners, exact 2-tile ring, smooth fade, hysteresis, lifecycle, actual-door click limits, existing calibrated walkway",
+  "full_suite": "Not repeated: collision libraries unchanged",
+  "base_and_wall_min_opacity": 0.38,
+  "roof_min_opacity": 0.22,
+  "stone_size": [
+    32,
+    32
+  ],
+  "stone_alpha": "opaque source; runtime fades with Reveal",
+  "stone_placement": "actual blocked cells plus human approach; ground layer below actors",
+  "old_red_wall_loaded_or_packaged": false,
+  "normal_art_door_and_masks_unchanged": true,
+  "game_validation": "Pending user feedback",
+  "private_files_published": false
+}
